@@ -1,69 +1,17 @@
 ---
 /**
- * CountdownTimer block — client-side countdown to an ISO 8601 end_date.
- * Falls back to an expired message when the date has passed.
+ * CountdownTimer block — thin Astro wrapper around CountdownTimerIsland (React).
+ * Uses client:visible so the island only hydrates when scrolled into view,
+ * keeping it a proper client island while other blocks remain static HTML.
  */
+import CountdownTimerIsland from './CountdownTimerIsland';
+
 interface Props {
   end_date: string;
   label?: string;
 }
 
-const { end_date, label = 'Offer ends in' } = Astro.props;
-// Unique ID in case multiple timers appear on one page
-const id = `countdown-${Math.random().toString(36).slice(2, 8)}`;
+const { end_date, label } = Astro.props;
 ---
 
-<section class="campaign-countdown bg-amber-50 border-y border-amber-200 py-8">
-  <div class="max-w-4xl mx-auto px-4 text-center">
-    <p class="text-sm font-semibold uppercase tracking-widest text-amber-700 mb-3">{label}</p>
-    <div id={id} class="flex justify-center gap-4 md:gap-8" aria-live="polite" aria-atomic="true">
-      {['days', 'hours', 'minutes', 'seconds'].map((unit) => (
-        <div class="flex flex-col items-center min-w-[60px]">
-          <span
-            class="text-4xl md:text-5xl font-bold tabular-nums text-[var(--color-brand-charcoal)]"
-            data-unit={unit}
-          >--</span>
-          <span class="text-xs uppercase tracking-wider text-slate-500 mt-1">{unit}</span>
-        </div>
-      ))}
-    </div>
-    <p class="expired-msg hidden mt-4 text-amber-700 font-semibold">This offer has ended.</p>
-  </div>
-</section>
-
-<script define:vars={{ id, end_date }}>
-  (function () {
-    const target = new Date(end_date).getTime();
-    const root = document.getElementById(id);
-    if (!root) return;
-
-    const expiredMsg = root.closest('section')?.querySelector('.expired-msg');
-    const pad = (n) => String(Math.floor(n)).padStart(2, '0');
-
-    function tick() {
-      const now = Date.now();
-      const diff = target - now;
-
-      if (diff <= 0) {
-        root.classList.add('hidden');
-        expiredMsg?.classList.remove('hidden');
-        return;
-      }
-
-      const totalSeconds = diff / 1000;
-      const days    = totalSeconds / 86400;
-      const hours   = (totalSeconds % 86400) / 3600;
-      const minutes = (totalSeconds % 3600) / 60;
-      const seconds = totalSeconds % 60;
-
-      root.querySelector('[data-unit="days"]').textContent    = pad(days);
-      root.querySelector('[data-unit="hours"]').textContent   = pad(hours);
-      root.querySelector('[data-unit="minutes"]').textContent = pad(minutes);
-      root.querySelector('[data-unit="seconds"]').textContent = pad(seconds);
-
-      setTimeout(tick, 1000);
-    }
-
-    tick();
-  })();
-</script>
+<CountdownTimerIsland endDate={end_date} label={label} client:visible />
