@@ -55,6 +55,9 @@ const schemaOffer = {
         },
       }),
 };
+
+// Fall back to Satori-generated OG image when no manual og.image is set
+const ogImage = data.og?.image ?? data.hero_image ?? `/images/og/campaign-${data.page_slug}.png`;
 ---
 
 <Base
@@ -64,7 +67,7 @@ const schemaOffer = {
   og={{
     title: data.og?.title ?? data.title,
     description: data.og?.description ?? data.offer_headline ?? data.title,
-    image: data.og?.image ?? data.hero_image,
+    image: ogImage,
     type: 'website',
   }}
 >
