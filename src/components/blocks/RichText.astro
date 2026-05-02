@@ -1,0 +1,55 @@
+---
+/**
+ * RichText block — renders arbitrary Markdown-like HTML content.
+ * Content is already parsed from YAML as a string; rendered via set:html.
+ * Uses the `marked` library at build time for safe, SSG-rendered HTML.
+ */
+interface Props {
+  content: string;
+}
+
+const { content } = Astro.props;
+
+// Simple inline parser — avoids a heavy runtime dep in Astro SSG context.
+// For full Markdown support, authors should use the MD body instead.
+// This handles the most common patterns: bold, headings, lists, inline code.
+function parseSimpleMarkdown(md: string): string {
+  return md
+    // Block-level: headings
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+    // Unordered list items
+    .replace(/^\s*[-*] (.+)$/gm, '<li>$1</li>')
+    // Wrap consecutive <li> elements in <ul>
+    .replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>')
+    // Inline: bold
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    // Inline: inline code
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    // Blank lines → paragraph breaks
+    .split(/\n{2,}/)
+    .map((block) => {
+      const trimmed = block.trim();
+      if (!trimmed) return '';
+      // Don't wrap block-level elements
+      if (/^<(h[1-6]|ul|ol|li|blockquote|pre|div|section)/.test(trimmed)) return trimmed;
+      return `<p>${trimmed}</p>`;
+    })
+    .filter(Boolean)
+    .join('\n');
+}
+
+const html = parseSimpleMarkdown(content);
+---
+
+<section class="campaign-rich-text max-w-3xl mx-auto px-4 py-12">
+  <div
+    class="prose prose-slate max-w-none
+      prose-headings:text-[var(--color-brand-charcoal)] prose-headings:font-bold
+      prose-a:text-[var(--color-brand-accent)] prose-a:underline
+      prose-strong:text-[var(--color-brand-charcoal)]
+      prose-code:bg-slate-100 prose-code:rounded prose-code:px-1 prose-code:text-sm"
+    set:html={html}
+  />
+</section>

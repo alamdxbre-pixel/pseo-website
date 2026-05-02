@@ -1,0 +1,75 @@
+---
+/**
+ * ProductGrid block — renders a grid of product cards.
+ * Filters by campaign tag (product.campaign array) or explicit featured_slugs.
+ * Falls back to a "coming soon" placeholder when no products match.
+ */
+import { getCollection } from 'astro:content';
+import { formatPrice } from '@/lib/utils';
+
+interface Props {
+  tag?: string;
+  featured_slugs?: string[];
+  columns?: number;
+  max_items?: number;
+}
+
+const { tag, featured_slugs, columns = 3, max_items = 12 } = Astro.props;
+
+const allProducts = await getCollection('products', ({ data }) => data.published);
+
+let products = allProducts;
+
+if (featured_slugs && featured_slugs.length > 0) {
+  const slugSet = new Set(featured_slugs);
+  products = allProducts.filter((p) => slugSet.has(p.data.page_slug));
+} else if (tag) {
+  products = allProducts.filter((p) => p.data.campaign?.includes(tag));
+}
+
+products = products.slice(0, max_items);
+
+const colClass: Record<number, string> = {
+  1: 'grid-cols-1',
+  2: 'grid-cols-1 sm:grid-cols-2',
+  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
+  4: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4',
+};
+const gridClass = colClass[columns] ?? colClass[3];
+---
+
+<section class="campaign-product-grid max-w-6xl mx-auto px-4 py-12">
+  {products.length > 0 ? (
+    <ul class={`grid ${gridClass} gap-6 list-none p-0`} role="list">
+      {products.map((p) => {
+        const href = `/${p.data.category}/${p.data.product}/${p.data.page_slug}/`;
+        return (
+          <li class="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden flex flex-col">
+            <div class="p-6 flex flex-col flex-1">
+              <h3 class="font-semibold text-base text-[var(--color-brand-charcoal)] mb-1 line-clamp-2">
+                {p.data.hero.headline}
+              </h3>
+              {p.data.product_details.variant && (
+                <p class="text-xs text-slate-500 mb-3">{p.data.product_details.variant}</p>
+              )}
+              <p class="text-sm text-slate-600 line-clamp-2 mb-4 flex-1">{p.data.description}</p>
+              <div class="flex items-center justify-between mt-auto">
+                <span class="text-sm font-bold text-[var(--color-brand-accent)]">
+                  From {formatPrice(p.data.product_details.price_from)}
+                </span>
+                <a
+                  href={href}
+                  class="text-xs font-semibold text-white bg-[var(--color-brand-accent)] px-3 py-1.5 rounded-lg hover:opacity-90 transition-opacity"
+                >
+                  View details
+                </a>
+              </div>
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+  ) : (
+    <p class="text-center text-slate-500 py-8">Products coming soon.</p>
+  )}
+</section>
