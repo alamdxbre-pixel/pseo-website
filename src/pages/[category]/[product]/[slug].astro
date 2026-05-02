@@ -30,6 +30,10 @@ const whatsappHref = buildProductWhatsAppLink({
   variant: data.product_details.variant,
   phoneNumber: phone,
 });
+
+// Fall back to Satori-generated OG image when no manual og.image is set
+const ogImage = data.og.image ?? `/images/og/${data.page_slug}.png`;
+const og = { ...data.og, image: ogImage };
 ---
 
 <Base
@@ -39,7 +43,7 @@ const whatsappHref = buildProductWhatsAppLink({
   canonical={data.canonical}
   robots={data.robots}
   geo={data.geo}
-  og={data.og}
+  og={og}
   date_published={data.date_published}
   date_modified={data.date_modified}
   waProduct={data.hero.headline}
