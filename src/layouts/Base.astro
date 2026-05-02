@@ -64,6 +64,7 @@ const {
 const isRTL = lang === 'ar';
 const siteUrl = import.meta.env.SITE ?? '';
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined;
+const clarityId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID as string | undefined;
 ---
 
 <!doctype html>
@@ -96,6 +97,12 @@ const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined;
           set:html={`<script type="text/partytown">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{page_path:location.pathname});</script>`}
         />
       </>
+    )}
+    <!-- Microsoft Clarity via Partytown (off main thread) -->
+    {clarityId && (
+      <Fragment
+        set:html={`<script type="text/partytown">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","${clarityId}");</script>`}
+      />
     )}
     <!-- Extra head content (JSON-LD, fonts, analytics) -->
     <slot name="head" />

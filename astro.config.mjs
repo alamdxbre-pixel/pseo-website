@@ -75,7 +75,7 @@ export default defineConfig({
 
     partytown({
       config: {
-        forward: ['dataLayer.push', 'gtag'],
+        forward: ['dataLayer.push', 'gtag', 'clarity'],
       },
     }),
 
