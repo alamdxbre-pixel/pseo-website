@@ -17,8 +17,8 @@ export function formatPrice(amount: number, currency = 'AED'): string {
 }
 
 /**
- * Build a pre-filled WhatsApp wa.me deep link.
- * Moved to dedicated utility in Step 8 — this is the base version.
+ * Build a pre-filled WhatsApp wa.me deep link from raw message text.
+ * Handles all special characters via encodeURIComponent.
  */
 export function buildWhatsAppLink(
   phoneNumber: string,
@@ -26,4 +26,36 @@ export function buildWhatsAppLink(
 ): string {
   const encoded = encodeURIComponent(message);
   return `https://wa.me/${phoneNumber}?text=${encoded}`;
+}
+
+/**
+ * Build a product-specific WhatsApp quote request deep link.
+ *
+ * @example
+ * buildProductWhatsAppLink({
+ *   product: "Visiting Cards 300GSM Gloss",
+ *   variant: "Gloss",
+ *   city: "Dubai",
+ *   phoneNumber: "971500000000",
+ * })
+ * // => "https://wa.me/971500000000?text=Hi%2C%20I%27d%20like%20..."
+ */
+export interface ProductWhatsAppParams {
+  product: string;
+  city: string;
+  phoneNumber: string;
+  variant?: string;
+}
+
+export function buildProductWhatsAppLink({
+  product,
+  city,
+  phoneNumber,
+  variant,
+}: ProductWhatsAppParams): string {
+  const variantPart = variant ? ` (${variant})` : '';
+  const message =
+    `Hi, I'd like to get a quote for: ${product}${variantPart} — ${city}. ` +
+    `Please share pricing and turnaround time. Thank you!`;
+  return buildWhatsAppLink(phoneNumber, message);
 }

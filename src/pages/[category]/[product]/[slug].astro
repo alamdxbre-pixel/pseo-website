@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import SchemaOrg from '@/components/SchemaOrg.astro';
+import { buildProductWhatsAppLink } from '@/lib/utils';
 
 export async function getStaticPaths() {
   const allProducts = await getCollection('products', ({ data }) => data.published);
@@ -21,6 +22,14 @@ const { data } = entry;
 const { Content } = await entry.render();
 
 const siteUrl = import.meta.env.SITE ?? '';
+const phone = import.meta.env.WHATSAPP_NUMBER ?? '971500000000';
+
+const whatsappHref = buildProductWhatsAppLink({
+  product: data.hero.headline,
+  city: data.product_details.city,
+  variant: data.product_details.variant,
+  phoneNumber: phone,
+});
 ---
 
 <Base
@@ -33,6 +42,9 @@ const siteUrl = import.meta.env.SITE ?? '';
   og={data.og}
   date_published={data.date_published}
   date_modified={data.date_modified}
+  waProduct={data.hero.headline}
+  waVariant={data.product_details.variant}
+  waCity={data.product_details.city}
 >
   <Fragment slot="head">
     <SchemaOrg
@@ -94,7 +106,9 @@ const siteUrl = import.meta.env.SITE ?? '';
       <!-- CTAs -->
       <div class="flex flex-wrap gap-3">
         <a
-          href="/contact"
+          href={whatsappHref}
+          target="_blank"
+          rel="noopener noreferrer"
           class="inline-flex items-center px-6 py-3 bg-[var(--color-brand-accent)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
         >
           {data.hero.cta_primary}
