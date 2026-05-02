@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import { buildWhatsAppLink } from '@/lib/utils';
-import { CATEGORY_PHOTO_CARDS, STATS_TYPEWRITER, HOW_IT_WORKS_FLOW, TECH_SHOWCASE, HERO_BADGE_HIGHLIGHT } from '@/lib/flags';
+import { CATEGORY_PHOTO_CARDS, STATS_TYPEWRITER, HOW_IT_WORKS_FLOW, TECH_SHOWCASE, HERO_BADGE_HIGHLIGHT, HERO_CITY_CYCLE } from '@/lib/flags';
 
 // Pull a handful of featured products for the homepage grid
 const allProducts = await getCollection('products', ({ data }) => data.published);
@@ -113,7 +113,17 @@ const testimonials = [
         </h1>
         <p class="text-lg md:text-xl text-white/75 max-w-2xl mb-10 leading-relaxed">
           Visiting cards, apparel, branded merchandise, stationery and digital services.
-          Fast turnaround, bulk pricing and expert design support — across Dubai, Abu Dhabi, Sharjah and all seven emirates.
+          Fast turnaround, bulk pricing and expert design support — across
+          {HERO_CITY_CYCLE ? (
+            <span class="city-cycle-wrap" aria-label="Dubai, Abu Dhabi, Sharjah" role="text">
+              <span class="city-cycle-item city-c1">Dubai</span>
+              <span class="city-cycle-item city-c2">Abu Dhabi</span>
+              <span class="city-cycle-item city-c3">Sharjah</span>
+            </span>
+          ) : (
+            <> Dubai, Abu Dhabi, Sharjah</>
+          )}
+          {' '}and all seven emirates.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a
@@ -615,6 +625,46 @@ const testimonials = [
   @media (prefers-reduced-motion: reduce) {
     .ticker-item { animation: none; transform: none; }
     .ticker-item:nth-child(1) { opacity: 1; position: static; }
+  }
+
+  /* ── Hero city cycling ── */
+  .city-cycle-wrap {
+    display: inline-block;
+    position: relative;
+    min-width: 7.5ch;
+    height: 1.3em;
+    vertical-align: text-bottom;
+  }
+  .city-cycle-item {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    color: white;
+    font-weight: 600;
+    opacity: 0;
+    animation: city-fade 9s ease-in-out infinite;
+  }
+  .city-c1 { animation-delay: 0s; }
+  .city-c2 { animation-delay: 3s; }
+  .city-c3 { animation-delay: 6s; }
+
+  @keyframes city-fade {
+    /*
+      3 cities, 3 s each = 9 s cycle.
+      Fade in over 0.6 s, hold for 1.8 s, fade out over 0.6 s.
+    */
+    0%      { opacity: 0; }
+    6.67%   { opacity: 1; }   /* 0.6 s in  */
+    26.67%  { opacity: 1; }   /* hold until 2.4 s */
+    33.33%  { opacity: 0; }   /* 3 s mark  */
+    100%    { opacity: 0; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .city-cycle-item { animation: none; opacity: 0; }
+    .city-c1 { opacity: 1; position: static; }
   }
 </style>
 

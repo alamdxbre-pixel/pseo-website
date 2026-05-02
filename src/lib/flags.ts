@@ -16,3 +16,6 @@ export const TECH_SHOWCASE = true;
 
 /** true → "UAE's Trusted" highlighted white+bold in hero badge  |  false → uniform teal */
 export const HERO_BADGE_HIGHLIGHT = true;
+
+/** true → city name cycles (Dubai → Abu Dhabi → Sharjah) in hero sub-copy  |  false → static list */
+export const HERO_CITY_CYCLE = true;
