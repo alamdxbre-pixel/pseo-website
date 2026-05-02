@@ -1,11 +1,25 @@
 ---
 /**
  * WhatsAppBar — sticky mobile-only bar fixed at the bottom of the viewport.
- * Hidden on md+ breakpoints via Tailwind. Body padding applied in global.css.
+ * Hidden on md+ breakpoints via Tailwind. Body padding applied in Base layout.
+ *
+ * When product context props are passed, generates a pre-filled product quote link.
+ * Falls back to a generic enquiry link when used on non-product pages.
  */
+import { buildProductWhatsAppLink, buildWhatsAppLink } from '@/lib/utils';
+
+interface Props {
+  product?: string;
+  variant?: string;
+  city?: string;
+}
+
+const { product, variant, city } = Astro.props;
 const phone = import.meta.env.WHATSAPP_NUMBER ?? '971500000000';
-const message = encodeURIComponent('Hi, I would like to get a quote for my order.');
-const href = `https://wa.me/${phone}?text=${message}`;
+
+const href = product && city
+  ? buildProductWhatsAppLink({ product, variant, city, phoneNumber: phone })
+  : buildWhatsAppLink(phone, "Hi, I'd like to get a quote for my order.");
 ---
 
 <!-- Sticky WhatsApp bar — mobile only (md:hidden) -->

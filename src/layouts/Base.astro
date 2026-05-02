@@ -40,6 +40,10 @@ interface Props {
   og?: OgMeta;
   date_modified?: string;
   date_published?: string;
+  /** Product context for pre-filled WhatsApp bar link */
+  waProduct?: string;
+  waVariant?: string;
+  waCity?: string;
 }
 
 const {
@@ -52,6 +56,9 @@ const {
   og,
   date_modified,
   date_published,
+  waProduct,
+  waVariant,
+  waCity,
 } = Astro.props;
 
 const isRTL = lang === 'ar';
@@ -90,6 +97,6 @@ const siteUrl = import.meta.env.SITE ?? '';
     </main>
 
     <Footer />
-    <WhatsAppBar />
+    <WhatsAppBar product={waProduct} variant={waVariant} city={waCity} />
   </body>
 </html>
