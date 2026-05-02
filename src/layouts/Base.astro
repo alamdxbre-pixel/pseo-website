@@ -1,21 +1,58 @@
 ---
 // Base layout — used by all pages.
-// SEO Head, analytics, and navigation added in subsequent steps.
 import '../styles/global.css';
+import SeoHead from '@/components/SeoHead.astro';
+
+interface RobotsMeta {
+  index?: boolean;
+  follow?: boolean;
+  max_snippet?: number;
+  max_image_preview?: 'none' | 'standard' | 'large';
+  max_video_preview?: number;
+}
+
+interface GeoMeta {
+  region: string;
+  placename: string;
+  position: string;
+  icbm: string;
+}
+
+interface OgMeta {
+  title: string;
+  description: string;
+  image?: string;
+  image_width?: number;
+  image_height?: number;
+  type?: string;
+}
 
 interface Props {
   title?: string;
   description?: string;
   lang?: 'en' | 'ar';
+  canonical?: string;
+  robots?: RobotsMeta;
+  geo?: GeoMeta;
+  og?: OgMeta;
+  date_modified?: string;
+  date_published?: string;
 }
 
 const {
   title = 'Marketing Products UAE | Visiting Cards, Apparel & Merchandise',
   description = 'Premium customised marketing products in UAE — visiting cards, T-shirts, caps, office stationery and digital services. Fast delivery across Dubai, Abu Dhabi and GCC.',
   lang = 'en',
+  canonical = '/',
+  robots,
+  geo,
+  og,
+  date_modified,
+  date_published,
 } = Astro.props;
 
 const isRTL = lang === 'ar';
+const siteUrl = import.meta.env.SITE ?? '';
 ---
 
 <!doctype html>
@@ -25,9 +62,19 @@ const isRTL = lang === 'ar';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <!-- SEO Head component injected in Step 4 -->
+    <SeoHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      robots={robots}
+      geo={geo}
+      og={og}
+      lang={lang}
+      siteUrl={siteUrl}
+      date_modified={date_modified}
+      date_published={date_published}
+    />
+    <!-- Extra head content (JSON-LD, fonts, analytics) -->
     <slot name="head" />
   </head>
   <body class="min-h-screen flex flex-col bg-white text-[var(--color-brand-charcoal)]">
