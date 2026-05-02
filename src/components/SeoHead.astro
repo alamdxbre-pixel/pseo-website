@@ -45,6 +45,11 @@ interface Props {
   date_modified?: string;
   /** ISO 8601 date for article:published_time */
   date_published?: string;
+  /**
+   * Full URL of the paired alternate-language page.
+   * When ENABLE_ARABIC=true and this is set, hreflang alternate links are emitted.
+   */
+  hreflangPairUrl?: string;
 }
 
 const {
@@ -58,7 +63,13 @@ const {
   siteUrl = '',
   date_modified,
   date_published,
+  hreflangPairUrl,
 } = Astro.props;
+
+// ── ENABLE_ARABIC feature flag ───────────────────────────────────────────────
+const arabicEnabled = import.meta.env.ENABLE_ARABIC === 'true';
+// Hreflang is only emitted when the flag is on AND a pair URL is provided.
+const emitHreflang = arabicEnabled && !!hreflangPairUrl;
 
 // ── robots content string ────────────────────────────────────────────────────
 const robotsParts: string[] = [
@@ -82,6 +93,22 @@ const canonicalHref = canonical.startsWith('http')
 <link rel="canonical" href={canonicalHref} />
 <meta name="robots" content={robotsContent} />
 <meta name="language" content={lang} />
+
+<!-- Hreflang alternate links (only when ENABLE_ARABIC=true) -->
+{emitHreflang && lang === 'en' && (
+  <>
+    <link rel="alternate" hreflang="en-AE" href={canonicalHref} />
+    <link rel="alternate" hreflang="ar-AE" href={hreflangPairUrl} />
+    <link rel="alternate" hreflang="x-default" href={canonicalHref} />
+  </>
+)}
+{emitHreflang && lang === 'ar' && (
+  <>
+    <link rel="alternate" hreflang="ar-AE" href={canonicalHref} />
+    <link rel="alternate" hreflang="en-AE" href={hreflangPairUrl} />
+    <link rel="alternate" hreflang="x-default" href={hreflangPairUrl} />
+  </>
+)}
 
 <!-- Geo targeting -->
 {geo && (
