@@ -1,33 +1,324 @@
 ---
-import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import { buildWhatsAppLink } from '@/lib/utils';
+
+// Pull a handful of featured products for the homepage grid
+const allProducts = await getCollection('products', ({ data }) => data.published);
+// Show Dubai products first (city-variant diversity), up to 6
+const featured = allProducts
+  .filter((p) => p.data.product_details.city === 'Dubai')
+  .slice(0, 6);
+
+const phone = import.meta.env.WHATSAPP_NUMBER ?? '971500000000';
+const waHref = buildWhatsAppLink(phone, "Hi, I'd like to get a quote for marketing products.");
+
+const siteUrl = import.meta.env.SITE ?? '';
+
+const categories = [
+  {
+    slug: 'print',
+    label: 'Print & Stationery',
+    desc: 'Visiting cards, flyers, brochures, letterheads and more.',
+    icon: '🖨️',
+    href: '/print',
+  },
+  {
+    slug: 'apparel',
+    label: 'Apparel & Uniforms',
+    desc: 'Custom T-shirts, polos, caps and branded workwear.',
+    icon: '👕',
+    href: '/apparel',
+  },
+  {
+    slug: 'merchandise',
+    label: 'Branded Merchandise',
+    desc: 'Pens, mugs, bags, USB drives and corporate gifts.',
+    icon: '🎁',
+    href: '/merchandise',
+  },
+  {
+    slug: 'digital',
+    label: 'Digital Services',
+    desc: 'Social media graphics, email signatures and digital ads.',
+    icon: '💻',
+    href: '/digital',
+  },
+];
+
+const stats = [
+  { value: '10+', label: 'Years in UAE' },
+  { value: '2,500+', label: 'Happy Clients' },
+  { value: '24 hrs', label: 'Avg. Turnaround' },
+  { value: '7', label: 'Emirates Covered' },
+];
+
+const testimonials = [
+  {
+    body: 'Ordered 500 gloss visiting cards on Tuesday — received them Wednesday morning. Quality was exceptional.',
+    author: 'Ahmed Al Mansoori',
+    role: 'CEO, Al Mansoori Ventures',
+    city: 'Dubai',
+  },
+  {
+    body: 'BrandName printed our entire corporate identity kit. Consistent quality across every piece.',
+    author: 'Sara Khalifa',
+    role: 'Brand Manager, Gulf Holdings',
+    city: 'Abu Dhabi',
+  },
+  {
+    body: "Fast, responsive team. We've been using them for trade show materials for 5 years straight.",
+    author: 'James O\'Brien',
+    role: 'Marketing Director, EMEA Corp',
+    city: 'Dubai',
+  },
+];
 ---
 
-<Base>
-  <section class="min-h-screen flex flex-col items-center justify-center gap-6 px-4 text-center">
-    <h1 class="text-5xl font-bold text-[var(--color-brand-charcoal)] tracking-tight">
-      Premium Marketing Products<br />
-      <span class="text-[var(--color-brand-accent)]">Across UAE & GCC</span>
-    </h1>
-    <p class="text-xl text-[var(--color-brand-charcoal-light)] max-w-2xl">
-      Visiting cards, T-shirts, caps, merchandise, office stationery and digital
-      services — delivered fast across Dubai, Abu Dhabi, Sharjah and beyond.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-4 mt-4">
+<Base
+  title="Premium Marketing Products UAE | Visiting Cards, Apparel & Merchandise"
+  description="Premium customised marketing products in UAE — visiting cards, T-shirts, caps, office stationery and digital services. Fast delivery across Dubai, Abu Dhabi and GCC."
+  canonical="/"
+  og={{
+    title: 'Marketing Products UAE | BrandName',
+    description: 'Visiting cards, apparel, merchandise & digital services delivered fast across UAE.',
+    type: 'website',
+    image_width: 1200,
+    image_height: 630,
+  }}
+>
+  <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+  <section class="relative overflow-hidden bg-[var(--color-brand-charcoal)] text-white">
+    <!-- Background pattern -->
+    <div class="absolute inset-0 opacity-5 pointer-events-none" aria-hidden="true">
+      <div class="absolute inset-0" style="background-image: repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 0, transparent 50%); background-size: 24px 24px;"></div>
+    </div>
+    <!-- Accent bar left -->
+    <div class="absolute left-0 inset-y-0 w-1.5 bg-[var(--color-brand-accent)]"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 py-20 md:py-28 lg:py-36">
+      <div class="max-w-3xl">
+        <p class="inline-flex items-center gap-2 text-[var(--color-brand-accent)] text-sm font-semibold tracking-widest uppercase mb-6">
+          <span class="w-6 h-px bg-[var(--color-brand-accent)] block"></span>
+          UAE's Trusted Print & Branding Partner
+        </p>
+        <h1 class="text-4xl md:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
+          Premium Marketing Products,<br />
+          <span class="text-[var(--color-brand-accent)]">Delivered Across UAE</span>
+        </h1>
+        <p class="text-lg md:text-xl text-white/75 max-w-2xl mb-10 leading-relaxed">
+          Visiting cards, apparel, branded merchandise, stationery and digital services.
+          Fast turnaround, bulk pricing and expert design support — across Dubai, Abu Dhabi, Sharjah and all seven emirates.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a
+            href={waHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[var(--color-brand-accent)] text-white font-bold rounded-lg text-base hover:bg-[var(--color-brand-accent-dark)] transition-colors"
+          >
+            <!-- WhatsApp icon -->
+            <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.336-1.51A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.002-1.366l-.358-.213-3.762.896.952-3.665-.234-.377A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z"/>
+            </svg>
+            Get an Instant Quote
+          </a>
+          <a
+            href="/print/visiting-cards/dubai-300gsm-gloss"
+            class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg text-base hover:border-white/60 hover:bg-white/5 transition-colors"
+          >
+            Browse Products
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Stats / Trust bar ─────────────────────────────────────────────────── -->
+  <section class="bg-[var(--color-brand-accent)] text-white" aria-label="Company statistics">
+    <div class="max-w-6xl mx-auto px-4 py-8">
+      <dl class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        {stats.map((s) => (
+          <div>
+            <dt class="text-3xl font-bold tracking-tight">{s.value}</dt>
+            <dd class="text-sm text-white/80 mt-1">{s.label}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── Categories ────────────────────────────────────────────────────────── -->
+  <section class="bg-[var(--color-brand-cream)] py-16 px-4" aria-labelledby="categories-heading">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-10">
+        <h2 id="categories-heading" class="text-3xl md:text-4xl font-bold mb-3">What We Make</h2>
+        <p class="text-[var(--color-brand-charcoal-light)] max-w-xl mx-auto">
+          From a single business card to a full trade-show kit — we handle every print and branding need.
+        </p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {categories.map((cat) => (
+          <a
+            href={cat.href}
+            class="group bg-white rounded-xl p-6 border border-slate-100 hover:border-[var(--color-brand-accent)] hover:shadow-[var(--shadow-card-hover)] transition-all"
+          >
+            <span class="text-4xl mb-4 block" aria-hidden="true">{cat.icon}</span>
+            <h3 class="font-bold text-lg mb-2 group-hover:text-[var(--color-brand-accent)] transition-colors">{cat.label}</h3>
+            <p class="text-sm text-[var(--color-brand-charcoal-light)] leading-relaxed">{cat.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Featured products ─────────────────────────────────────────────────── -->
+  {featured.length > 0 && (
+    <section class="py-16 px-4 bg-white" aria-labelledby="featured-heading">
+      <div class="max-w-6xl mx-auto">
+        <div class="flex items-end justify-between mb-10 gap-4 flex-wrap">
+          <div>
+            <h2 id="featured-heading" class="text-3xl md:text-4xl font-bold mb-2">Popular in Dubai</h2>
+            <p class="text-[var(--color-brand-charcoal-light)]">Our most-ordered products — ready for fast dispatch.</p>
+          </div>
+          <a
+            href="/print"
+            class="shrink-0 text-sm font-semibold text-[var(--color-brand-accent)] hover:underline"
+          >
+            View all products →
+          </a>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featured.map((p) => {
+            const href = `/${p.data.category}/${p.data.product}/${p.data.page_slug}`;
+            return (
+              <a
+                href={href}
+                class="group bg-white rounded-xl border border-slate-100 hover:border-[var(--color-brand-accent)] hover:shadow-[var(--shadow-card-hover)] transition-all overflow-hidden"
+              >
+                <!-- Colour band -->
+                <div class="h-2 bg-[var(--color-brand-accent)]"></div>
+                <div class="p-5">
+                  <p class="text-xs font-semibold text-[var(--color-brand-accent)] uppercase tracking-wider mb-2">
+                    {p.data.product_details.city} · {p.data.product_details.variant}
+                  </p>
+                  <h3 class="font-bold text-base mb-1 group-hover:text-[var(--color-brand-accent)] transition-colors leading-snug">
+                    {p.data.hero.headline}
+                  </h3>
+                  <p class="text-sm text-[var(--color-brand-charcoal-light)] mb-4 line-clamp-2">
+                    {p.data.hero.subline}
+                  </p>
+                  <div class="flex items-center justify-between">
+                    <span class="text-[var(--color-brand-accent)] font-bold text-lg">
+                      From {p.data.product_details.currency} {p.data.product_details.price_from}
+                    </span>
+                    <span class="text-xs bg-green-50 text-green-700 border border-green-200 rounded-full px-2 py-0.5 font-medium">
+                      {p.data.product_details.turnaround}
+                    </span>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Process strip ─────────────────────────────────────────────────────── -->
+  <section class="bg-[var(--color-brand-cream-dark)] py-14 px-4" aria-labelledby="process-heading">
+    <div class="max-w-6xl mx-auto">
+      <h2 id="process-heading" class="text-2xl font-bold text-center mb-10">How It Works</h2>
+      <ol class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 list-none">
+        {[
+          { n: '01', title: 'Request a Quote', desc: 'Chat with us on WhatsApp or fill in our form — we respond in minutes.' },
+          { n: '02', title: 'Send Your Artwork', desc: 'Share your design files (AI, PDF, PNG). Our team checks and preps for print.' },
+          { n: '03', title: 'Approve a Proof', desc: 'We send a digital proof within hours. Approve, revise, or request changes.' },
+          { n: '04', title: 'Receive Your Order', desc: 'Print begins on approval. Most orders ship within 24–48 hours.' },
+        ].map((step) => (
+          <li class="relative bg-white rounded-xl p-6 border border-slate-100">
+            <span class="text-5xl font-black text-[var(--color-brand-accent)]/10 leading-none block mb-3">{step.n}</span>
+            <h3 class="font-bold text-base mb-2">{step.title}</h3>
+            <p class="text-sm text-[var(--color-brand-charcoal-light)] leading-relaxed">{step.desc}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── Testimonials ───────────────────────────────────────────────────────── -->
+  <section class="py-16 px-4 bg-white" aria-labelledby="testimonials-heading">
+    <div class="max-w-6xl mx-auto">
+      <h2 id="testimonials-heading" class="text-3xl font-bold text-center mb-10">What Our Clients Say</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        {testimonials.map((t) => (
+          <figure class="bg-[var(--color-brand-cream)] rounded-xl p-6 border border-slate-100">
+            <!-- Stars -->
+            <div class="flex gap-0.5 mb-4" aria-label="5 out of 5 stars" role="img">
+              {[1,2,3,4,5].map(() => (
+                <svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+                </svg>
+              ))}
+            </div>
+            <blockquote class="text-[var(--color-brand-charcoal)] text-sm leading-relaxed mb-4">
+              "{t.body}"
+            </blockquote>
+            <figcaption class="text-xs text-[var(--color-brand-charcoal-light)]">
+              <span class="font-semibold text-[var(--color-brand-charcoal)]">{t.author}</span>
+              <br />{t.role} · {t.city}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ──────────────────────────────────────────────────────────── -->
+  <section class="bg-[var(--color-brand-charcoal)] text-white py-20 px-4 text-center" aria-labelledby="cta-heading">
+    <div class="max-w-2xl mx-auto">
+      <h2 id="cta-heading" class="text-3xl md:text-4xl font-bold mb-4">
+        Ready to Order? Let's Talk.
+      </h2>
+      <p class="text-white/70 text-lg mb-8 leading-relaxed">
+        Message us on WhatsApp and get a quote in minutes.
+        We deliver to Dubai, Abu Dhabi, Sharjah, Ajman and beyond.
+      </p>
       <a
-        href="/contact"
-        class="inline-flex items-center justify-center px-8 py-3 rounded-lg bg-[var(--color-brand-accent)] text-white font-semibold hover:bg-[var(--color-brand-accent-dark)] transition-colors"
+        href={waHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center gap-2 px-10 py-4 bg-[var(--color-brand-accent)] text-white font-bold rounded-lg text-lg hover:bg-[var(--color-brand-accent-dark)] transition-colors"
       >
-        Get an Instant Quote
-      </a>
-      <a
-        href="/print"
-        class="inline-flex items-center justify-center px-8 py-3 rounded-lg border-2 border-[var(--color-brand-accent)] text-[var(--color-brand-accent)] font-semibold hover:bg-[var(--color-brand-cream)] transition-colors"
-      >
-        View Products
+        <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.336-1.51A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.002-1.366l-.358-.213-3.762.896.952-3.665-.234-.377A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z"/>
+        </svg>
+        Get an Instant Quote on WhatsApp
       </a>
     </div>
-    <p class="text-sm text-[var(--color-brand-charcoal-light)] mt-8">
-      Full site launching soon — built with Astro + Cloudflare Pages
-    </p>
   </section>
+
+  <!-- ── LocalBusiness JSON-LD ──────────────────────────────────────────────── -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "BrandName",
+    "description": "Premium customised marketing products in UAE — visiting cards, T-shirts, caps, office stationery and digital services.",
+    "url": siteUrl,
+    "areaServed": ["Dubai", "Abu Dhabi", "Sharjah", "Ajman", "UAE"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "AE",
+      "addressRegion": "Dubai"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "availableLanguage": ["English", "Arabic"]
+    },
+    "sameAs": []
+  })} />
 </Base>
+
