@@ -32,6 +32,10 @@ const href = product && city
     href={href}
     target="_blank"
     rel="noopener noreferrer"
+    data-wa-product={product}
+    data-wa-variant={variant}
+    data-wa-city={city}
+    data-wa-link
     class="flex items-center justify-center gap-3 w-full py-4 bg-green-500 text-white font-semibold text-sm shadow-[0_-4px_20px_rgba(0,0,0,0.15)] hover:bg-green-600 transition-colors"
     aria-label="Chat with us on WhatsApp to get an instant quote"
   >
@@ -43,3 +47,15 @@ const href = product && city
     <span>Chat on WhatsApp — Get an Instant Quote</span>
   </a>
 </div>
+
+<script>
+  import { trackWhatsAppClick } from '@/lib/analytics';
+  document.querySelector('[data-wa-link]')?.addEventListener('click', (e) => {
+    const el = e.currentTarget as HTMLAnchorElement;
+    trackWhatsAppClick({
+      product: el.dataset.waProduct,
+      variant: el.dataset.waVariant,
+      city: el.dataset.waCity,
+    });
+  });
+</script>

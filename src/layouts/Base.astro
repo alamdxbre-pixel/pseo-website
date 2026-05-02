@@ -63,6 +63,7 @@ const {
 
 const isRTL = lang === 'ar';
 const siteUrl = import.meta.env.SITE ?? '';
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined;
 ---
 
 <!doctype html>
@@ -84,6 +85,18 @@ const siteUrl = import.meta.env.SITE ?? '';
       date_modified={date_modified}
       date_published={date_published}
     />
+    <!-- Google Analytics 4 via Partytown (off main thread) -->
+    {gaId && (
+      <>
+        <script
+          type="text/partytown"
+          src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
+        />
+        <Fragment
+          set:html={`<script type="text/partytown">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{page_path:location.pathname});</script>`}
+        />
+      </>
+    )}
     <!-- Extra head content (JSON-LD, fonts, analytics) -->
     <slot name="head" />
   </head>
