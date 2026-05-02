@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '@/layouts/Base.astro';
+import SchemaOrg from '@/components/SchemaOrg.astro';
 
 export async function getStaticPaths() {
   const allProducts = await getCollection('products', ({ data }) => data.published);
@@ -20,61 +21,6 @@ const { data } = entry;
 const { Content } = await entry.render();
 
 const siteUrl = import.meta.env.SITE ?? '';
-
-// ── Schema.org JSON-LD ────────────────────────────────────────────────────────
-const schemaJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': data.schema.type,
-  name: data.title,
-  description: data.description,
-  sku: data.product_details.sku,
-  brand: { '@type': 'Brand', name: 'BrandName' },
-  offers: data.schema.offers
-    ? {
-        '@type': 'Offer',
-        price: data.schema.offers.price,
-        priceCurrency: data.schema.offers.price_currency,
-        availability: data.schema.offers.availability,
-        ...(data.schema.offers.valid_through
-          ? { priceValidUntil: data.schema.offers.valid_through }
-          : {}),
-        seller: { '@type': 'Organization', name: 'BrandName' },
-      }
-    : undefined,
-  ...(data.schema.aggregate_rating
-    ? {
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: data.schema.aggregate_rating.rating_value,
-          reviewCount: data.schema.aggregate_rating.review_count,
-          bestRating: data.schema.aggregate_rating.best_rating,
-        },
-      }
-    : {}),
-};
-
-// ── BreadcrumbList JSON-LD ────────────────────────────────────────────────────
-const breadcrumbJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'BreadcrumbList',
-  itemListElement: data.breadcrumb.map((item, idx) => ({
-    '@type': 'ListItem',
-    position: idx + 1,
-    name: item.label,
-    item: `${siteUrl}${item.url}`,
-  })),
-};
-
-// ── FAQPage JSON-LD ───────────────────────────────────────────────────────────
-const faqJsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: data.faq.map((item) => ({
-    '@type': 'Question',
-    name: item.q,
-    acceptedAnswer: { '@type': 'Answer', text: item.a },
-  })),
-};
 ---
 
 <Base
@@ -89,28 +35,17 @@ const faqJsonLd = {
   date_modified={data.date_modified}
 >
   <Fragment slot="head">
-    <!-- Speakable -->
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'WebPage',
-        speakable: {
-          '@type': 'SpeakableSpecification',
-          cssSelector: data.speakable_css_selectors,
-        },
-        url: `${siteUrl}${data.canonical}`,
-      })}
+    <SchemaOrg
+      title={data.title}
+      description={data.description}
+      canonical={data.canonical}
+      sku={data.product_details.sku}
+      schema={data.schema}
+      breadcrumb={data.breadcrumb}
+      faq={data.faq}
+      speakable_css_selectors={data.speakable_css_selectors}
+      siteUrl={siteUrl}
     />
-
-    <!-- Product / Schema.org -->
-    <script type="application/ld+json" set:html={JSON.stringify(schemaJsonLd)} />
-
-    <!-- Breadcrumb -->
-    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
-
-    <!-- FAQ -->
-    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
   </Fragment>
 
   <!-- ── Hero ──────────────────────────────────────────────────────────────── -->

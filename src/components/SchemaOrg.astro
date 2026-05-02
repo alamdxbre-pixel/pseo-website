@@ -1,0 +1,142 @@
+---
+/**
+ * SchemaOrg — injects all JSON-LD structured data blocks for a product page.
+ *
+ * Emits four <script type="application/ld+json"> tags:
+ *   1. Product | Service | LocalBusiness (with AggregateRating + Offer)
+ *   2. BreadcrumbList
+ *   3. FAQPage
+ *   4. WebPage > SpeakableSpecification
+ *
+ * Usage (in a page's <Fragment slot="head">):
+ *   import SchemaOrg from '@/components/SchemaOrg.astro';
+ *   <SchemaOrg {...data} siteUrl={siteUrl} />
+ */
+
+interface AggregateRating {
+  rating_value: number;
+  review_count: number;
+  best_rating?: number;
+}
+
+interface Offer {
+  price: number;
+  price_currency?: string;
+  availability?: string;
+  valid_through?: string;
+}
+
+interface SchemaData {
+  type?: 'Product' | 'Service' | 'LocalBusiness';
+  aggregate_rating?: AggregateRating;
+  offers?: Offer;
+}
+
+interface BreadcrumbItem {
+  label: string;
+  url: string;
+}
+
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  /** Page title — used as schema name */
+  title: string;
+  description: string;
+  canonical: string;
+  sku?: string;
+  schema?: SchemaData;
+  breadcrumb: BreadcrumbItem[];
+  faq: FaqItem[];
+  speakable_css_selectors?: string[];
+  /** Fully-qualified site origin e.g. "https://example.com" — no trailing slash */
+  siteUrl?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  sku,
+  schema = {},
+  breadcrumb,
+  faq,
+  speakable_css_selectors = ['.hero-headline', '.product-summary', '.faq-section'],
+  siteUrl = '',
+} = Astro.props;
+
+const schemaType = schema.type ?? 'Product';
+const canonicalUrl = canonical.startsWith('http') ? canonical : `${siteUrl}${canonical}`;
+
+// ── 1. Product / Service / LocalBusiness ────────────────────────────────────
+const productJsonLd: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': schemaType,
+  name: title,
+  description,
+  ...(sku ? { sku } : {}),
+  brand: { '@type': 'Brand', name: 'BrandName' },
+};
+
+if (schema.aggregate_rating) {
+  productJsonLd.aggregateRating = {
+    '@type': 'AggregateRating',
+    ratingValue: schema.aggregate_rating.rating_value,
+    reviewCount: schema.aggregate_rating.review_count,
+    bestRating: schema.aggregate_rating.best_rating ?? 5,
+  };
+}
+
+if (schema.offers) {
+  productJsonLd.offers = {
+    '@type': 'Offer',
+    price: schema.offers.price,
+    priceCurrency: schema.offers.price_currency ?? 'AED',
+    availability: schema.offers.availability ?? 'https://schema.org/InStock',
+    seller: { '@type': 'Organization', name: 'BrandName' },
+    ...(schema.offers.valid_through ? { priceValidUntil: schema.offers.valid_through } : {}),
+  };
+}
+
+// ── 2. BreadcrumbList ────────────────────────────────────────────────────────
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: breadcrumb.map((item, idx) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    name: item.label,
+    item: item.url.startsWith('http') ? item.url : `${siteUrl}${item.url}`,
+  })),
+};
+
+// ── 3. FAQPage ───────────────────────────────────────────────────────────────
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+// ── 4. Speakable (WebPage) ───────────────────────────────────────────────────
+const speakableJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  url: canonicalUrl,
+  speakable: {
+    '@type': 'SpeakableSpecification',
+    cssSelector: speakable_css_selectors,
+  },
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(productJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+<script type="application/ld+json" set:html={JSON.stringify(speakableJsonLd)} />
