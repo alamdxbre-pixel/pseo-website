@@ -1,0 +1,7 @@
+# Placeholder — configured in Step 11 with full AI bot allowlist
+# See issue #12 for production configuration
+
+User-agent: *
+Allow: /
+
+Sitemap: https://yoursite.com/sitemap-index.xml

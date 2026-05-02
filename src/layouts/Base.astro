@@ -1,0 +1,44 @@
+---
+// Base layout — used by all pages.
+// SEO Head, analytics, and navigation added in subsequent steps.
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'en' | 'ar';
+}
+
+const {
+  title = 'Marketing Products UAE | Visiting Cards, Apparel & Merchandise',
+  description = 'Premium customised marketing products in UAE — visiting cards, T-shirts, caps, office stationery and digital services. Fast delivery across Dubai, Abu Dhabi and GCC.',
+  lang = 'en',
+} = Astro.props;
+
+const isRTL = lang === 'ar';
+---
+
+<!doctype html>
+<html lang={lang} dir={isRTL ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <!-- SEO Head component injected in Step 4 -->
+    <slot name="head" />
+  </head>
+  <body class="min-h-screen flex flex-col bg-white text-[var(--color-brand-charcoal)]">
+    <!-- Header injected in Step 6 -->
+    <slot name="header" />
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Footer injected in Step 7 -->
+    <slot name="footer" />
+  </body>
+</html>

@@ -1,0 +1,2 @@
+// generate-pages.mjs — bulk MD page generator added in Step 17
+// Usage: node scripts/generate-pages.mjs --input data/pages.csv

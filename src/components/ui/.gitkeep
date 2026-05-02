@@ -1,0 +1,3 @@
+// shadcn/ui components are added here in Steps 4–10.
+// Each component is copied from shadcn and owned outright — no runtime library dependency.
+// See components.json in the root for the configuration.
