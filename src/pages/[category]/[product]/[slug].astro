@@ -1,0 +1,252 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const allProducts = await getCollection('products', ({ data }) => data.published);
+
+  return allProducts.map((entry) => ({
+    params: {
+      category: entry.data.category,
+      product: entry.data.product,
+      slug: entry.data.page_slug,
+    },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await entry.render();
+
+// ── Robots meta string ────────────────────────────────────────────────────────
+const robotsMeta = [
+  data.robots.index ? 'index' : 'noindex',
+  data.robots.follow ? 'follow' : 'nofollow',
+  `max-snippet:${data.robots.max_snippet}`,
+  `max-image-preview:${data.robots.max_image_preview}`,
+  `max-video-preview:${data.robots.max_video_preview}`,
+].join(', ');
+
+// ── Schema.org JSON-LD ────────────────────────────────────────────────────────
+const schemaJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': data.schema.type,
+  name: data.title,
+  description: data.description,
+  sku: data.product_details.sku,
+  brand: { '@type': 'Brand', name: 'BrandName' },
+  offers: data.schema.offers
+    ? {
+        '@type': 'Offer',
+        price: data.schema.offers.price,
+        priceCurrency: data.schema.offers.price_currency,
+        availability: data.schema.offers.availability,
+        ...(data.schema.offers.valid_through
+          ? { priceValidUntil: data.schema.offers.valid_through }
+          : {}),
+        seller: { '@type': 'Organization', name: 'BrandName' },
+      }
+    : undefined,
+  ...(data.schema.aggregate_rating
+    ? {
+        aggregateRating: {
+          '@type': 'AggregateRating',
+          ratingValue: data.schema.aggregate_rating.rating_value,
+          reviewCount: data.schema.aggregate_rating.review_count,
+          bestRating: data.schema.aggregate_rating.best_rating,
+        },
+      }
+    : {}),
+};
+
+// ── BreadcrumbList JSON-LD ────────────────────────────────────────────────────
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: data.breadcrumb.map((item, idx) => ({
+    '@type': 'ListItem',
+    position: idx + 1,
+    name: item.label,
+    item: `${import.meta.env.SITE ?? 'https://example.com'}${item.url}`,
+  })),
+};
+
+// ── FAQPage JSON-LD ───────────────────────────────────────────────────────────
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: data.faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<Base title={data.title} description={data.description} lang={data.lang}>
+  <Fragment slot="head">
+    <!-- SEO meta -->
+    <meta name="robots" content={robotsMeta} />
+    <link rel="canonical" href={`${import.meta.env.SITE ?? ''}${data.canonical}`} />
+
+    <!-- Geo meta -->
+    <meta name="geo.region" content={data.geo.region} />
+    <meta name="geo.placename" content={data.geo.placename} />
+    <meta name="geo.position" content={data.geo.position} />
+    <meta name="ICBM" content={data.geo.icbm} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content={data.og.type} />
+    <meta property="og:title" content={data.og.title} />
+    <meta property="og:description" content={data.og.description} />
+    {data.og.image && <meta property="og:image" content={data.og.image} />}
+    {data.og.image && <meta property="og:image:width" content={String(data.og.image_width)} />}
+    {data.og.image && <meta property="og:image:height" content={String(data.og.image_height)} />}
+
+    <!-- Speakable -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        speakable: {
+          '@type': 'SpeakableSpecification',
+          cssSelector: data.speakable_css_selectors,
+        },
+        url: `${import.meta.env.SITE ?? ''}${data.canonical}`,
+      })}
+    />
+
+    <!-- Product / Schema.org -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaJsonLd)} />
+
+    <!-- Breadcrumb -->
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+
+    <!-- FAQ -->
+    <script type="application/ld+json" set:html={JSON.stringify(faqJsonLd)} />
+  </Fragment>
+
+  <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
+  <section class="hero-section bg-[var(--color-brand-charcoal)] text-white py-16 px-4">
+    <div class="max-w-4xl mx-auto">
+      <!-- Breadcrumb nav -->
+      <nav aria-label="Breadcrumb" class="mb-6 text-sm text-white/60">
+        <ol class="flex flex-wrap gap-1 items-center">
+          {data.breadcrumb.map((item, idx) => (
+            <li class="flex items-center gap-1">
+              {idx < data.breadcrumb.length - 1 ? (
+                <a href={item.url} class="hover:text-white transition-colors">{item.label}</a>
+              ) : (
+                <span aria-current="page" class="text-white">{item.label}</span>
+              )}
+              {idx < data.breadcrumb.length - 1 && (
+                <span aria-hidden="true" class="text-white/40">/</span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </nav>
+
+      <h1 class="hero-headline text-3xl md:text-5xl font-bold leading-tight mb-4">
+        {data.hero.headline}
+      </h1>
+      <p class="text-lg md:text-xl text-white/80 mb-8 max-w-2xl">
+        {data.hero.subline}
+      </p>
+
+      <!-- Price callout -->
+      <div class="flex flex-wrap items-center gap-3 mb-8">
+        <span class="text-2xl font-bold text-[var(--color-brand-accent)]">
+          From {data.product_details.currency} {data.product_details.price_from}
+        </span>
+        {data.product_details.min_quantity && (
+          <span class="text-white/60 text-sm">
+            Min. {data.product_details.min_quantity} units
+          </span>
+        )}
+        <span class="bg-green-500/20 text-green-300 text-xs font-medium px-2 py-1 rounded-full border border-green-500/30">
+          {data.product_details.turnaround}
+        </span>
+      </div>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-3">
+        <a
+          href="/contact"
+          class="inline-flex items-center px-6 py-3 bg-[var(--color-brand-accent)] text-white font-semibold rounded-lg hover:opacity-90 transition-opacity"
+        >
+          {data.hero.cta_primary}
+        </a>
+        <a
+          href="/samples"
+          class="inline-flex items-center px-6 py-3 border border-white/30 text-white font-semibold rounded-lg hover:border-white/60 transition-colors"
+        >
+          {data.hero.cta_secondary}
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Product summary ───────────────────────────────────────────────────── -->
+  <section class="product-summary max-w-4xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
+        <dt class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">City</dt>
+        <dd class="text-lg font-semibold">{data.product_details.city}</dd>
+      </div>
+      {data.product_details.variant && (
+        <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
+          <dt class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Finish</dt>
+          <dd class="text-lg font-semibold">{data.product_details.variant}</dd>
+        </div>
+      )}
+      {data.product_details.sku && (
+        <div class="bg-slate-50 rounded-xl p-5 border border-slate-100">
+          <dt class="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">SKU</dt>
+          <dd class="text-lg font-semibold font-mono">{data.product_details.sku}</dd>
+        </div>
+      )}
+    </div>
+
+    <!-- MD body content -->
+    <div class="prose prose-slate max-w-none">
+      <Content />
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────────────────────── -->
+  <section class="faq-section bg-slate-50 py-12 px-4">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl font-bold mb-8">Frequently Asked Questions</h2>
+      <dl class="space-y-6">
+        {data.faq.map((item) => (
+          <div class="bg-white rounded-xl p-6 border border-slate-100">
+            <dt class="font-semibold text-[var(--color-brand-charcoal)] mb-2">{item.q}</dt>
+            <dd class="text-slate-600 leading-relaxed">{item.a}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── Related products ──────────────────────────────────────────────────── -->
+  {data.related.length > 0 && (
+    <section class="max-w-4xl mx-auto px-4 py-10">
+      <h2 class="text-xl font-bold mb-4">Related Products</h2>
+      <ul class="flex flex-wrap gap-2">
+        {data.related.map((rel) => (
+          <li>
+            <a
+              href={`/${rel}`}
+              class="inline-block px-4 py-2 bg-white border border-slate-200 rounded-lg text-sm font-medium hover:border-[var(--color-brand-accent)] hover:text-[var(--color-brand-accent)] transition-colors"
+            >
+              {rel.split('/').pop()?.replace(/-/g, ' ')}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</Base>
