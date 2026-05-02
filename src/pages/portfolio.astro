@@ -1,0 +1,205 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+
+const siteUrl = import.meta.env.SITE ?? '';
+const canonical = `${siteUrl}/portfolio`;
+
+// Pull all published products for the portfolio grid
+const allProducts = await getCollection('products', ({ data }) => data.published);
+
+// Group by category
+const byCategory: Record<string, typeof allProducts> = {};
+for (const p of allProducts) {
+  const cat = p.data.category ?? 'print';
+  if (!byCategory[cat]) byCategory[cat] = [];
+  byCategory[cat].push(p);
+}
+
+const categoryMeta: Record<string, { label: string; icon: string; description: string }> = {
+  print: {
+    label: 'Print & Stationery',
+    icon: '🖨️',
+    description: 'Visiting cards, flyers, brochures, letterheads and more — printed to the highest standard.',
+  },
+  apparel: {
+    label: 'Apparel & Uniforms',
+    icon: '👕',
+    description: 'Custom embroidered and printed T-shirts, polos, caps and branded workwear.',
+  },
+  merchandise: {
+    label: 'Branded Merchandise',
+    icon: '🎁',
+    description: 'Corporate gifts, promotional giveaways, pens, mugs, tech accessories and event items.',
+  },
+  digital: {
+    label: 'Digital Services',
+    icon: '💻',
+    description: 'Social media graphics, email signatures, digital display ads and brand templates.',
+  },
+};
+
+// Precompute sections (deduplicated) for template — avoids const inside JSX
+type ProductEntry = typeof allProducts[number];
+type Section = { cat: string; meta: { label: string; icon: string; description: string }; products: ProductEntry[] };
+
+const sections: Section[] = Object.entries(byCategory)
+  .map(([cat, products]) => {
+    const meta = categoryMeta[cat];
+    if (!meta) return null;
+    const seen = new Set<string>();
+    const deduped = products.filter((p) => {
+      if (seen.has(p.data.title)) return false;
+      seen.add(p.data.title);
+      return true;
+    });
+    return { cat, meta, products: deduped.slice(0, 6) };
+  })
+  .filter(Boolean) as Section[];
+
+// Featured case studies — static highlights per category
+const caseStudies = [
+  {
+    client: 'Regional Bank — UAE National Day Campaign',
+    category: 'print',
+    description: '50,000 branded folders, 30,000 visiting cards and 5,000 custom notebooks delivered across 7 emirates in 4 days.',
+    stat: '50,000+ units',
+    icon: '🏦',
+  },
+  {
+    client: 'Hospitality Group — Staff Uniform Rollout',
+    category: 'apparel',
+    description: 'Full uniform programme for 800 staff across 12 hotel properties — embroidered polos, caps and aprons in three colourways.',
+    stat: '800 staff',
+    icon: '🏨',
+  },
+  {
+    client: 'Tech Startup — GITEX Giveaway Pack',
+    category: 'merchandise',
+    description: 'Custom-branded power banks, tote bags and stickers for a GITEX launch stand. Designed, produced and delivered in 10 days.',
+    stat: '3,000 packs',
+    icon: '💡',
+  },
+  {
+    client: 'Real Estate Developer — Digital Brand Refresh',
+    category: 'digital',
+    description: 'Full suite of editable social media templates, email signatures and digital brochures aligned to new brand guidelines.',
+    stat: '120+ assets',
+    icon: '🏢',
+  },
+];
+---
+
+<Base
+  title="Portfolio — Marketing Products UAE"
+  description="Browse our portfolio of print, apparel, merchandise and digital work delivered to UAE clients. Case studies and product samples from Dubai, Abu Dhabi and GCC."
+  canonical={canonical}
+  og={{
+    title: 'Portfolio — Marketing Products UAE',
+    description: 'Real work for real UAE clients — from 50,000-unit National Day campaigns to GITEX giveaway packs.',
+    image: '/images/og/portfolio.png',
+    type: 'website',
+  }}
+>
+
+  <!-- Hero -->
+  <section class="bg-[var(--color-brand-charcoal)] text-white">
+    <div class="max-w-5xl mx-auto px-4 py-20 sm:py-28">
+      <div class="border-l-4 border-[var(--color-brand-accent)] pl-6">
+        <p class="text-sm uppercase tracking-widest text-[var(--color-brand-accent)] mb-3 font-semibold">Our Work</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-6">
+          Products We've Made<br />
+          <span class="text-[var(--color-brand-accent)]">for UAE Businesses</span>
+        </h1>
+        <p class="text-lg text-gray-300 max-w-2xl">
+          Over 50,000 orders delivered since 2014. Here is a sample of what we create — across print, apparel, merchandise and digital.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product categories overview -->
+  <section class="max-w-5xl mx-auto px-4 py-16 sm:py-20">
+    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12">What We Produce</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {Object.entries(categoryMeta).map(([slug, meta]) => (
+        <div class="bg-white rounded-xl border border-gray-200 p-6 hover:border-[var(--color-brand-accent)] hover:shadow-md transition-all text-center">
+          <p class="text-4xl mb-4">{meta.icon}</p>
+          <h3 class="font-bold text-base mb-2">{meta.label}</h3>
+          <p class="text-gray-600 text-sm leading-relaxed">{meta.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Live products from content collection -->
+  {sections.map(({ cat: _cat, meta, products }) => (
+    <section class="bg-[var(--color-brand-cream)] py-14">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="flex items-center gap-3 mb-8">
+          <span class="text-3xl">{meta.icon}</span>
+          <h2 class="text-2xl font-bold">{meta.label}</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {products.map((p) => (
+            <a
+              href={`/${p.data.category}/${p.id.split('/').slice(-2, -1)[0]}/${p.data.page_slug}`}
+              class="block bg-white rounded-xl border border-gray-200 hover:border-[var(--color-brand-accent)] hover:shadow-md transition-all overflow-hidden group"
+            >
+              <div class="h-36 bg-gradient-to-br from-[var(--color-brand-accent)]/10 to-[var(--color-brand-accent)]/5 flex items-center justify-center">
+                <span class="text-5xl">{meta.icon}</span>
+              </div>
+              <div class="p-5">
+                <h3 class="font-bold text-base mb-1 group-hover:text-[var(--color-brand-accent)] transition-colors">
+                  {p.data.title}
+                </h3>
+                <p class="text-xs text-gray-500 mb-3">{p.data.product_details.city} · from AED {p.data.product_details.price_from}</p>
+                <span class="text-xs font-semibold text-[var(--color-brand-accent)]">View details →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- Case studies -->
+  <section class="max-w-5xl mx-auto px-4 py-16 sm:py-20">
+    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-4">Client Highlights</h2>
+    <p class="text-center text-gray-600 mb-12 max-w-xl mx-auto">
+      A selection of projects we're proud of — from large-scale campaigns to boutique brand launches.
+    </p>
+    <div class="grid sm:grid-cols-2 gap-8">
+      {caseStudies.map((cs) => (
+        <div class="rounded-xl border border-gray-200 p-8 hover:border-[var(--color-brand-accent)] hover:shadow-md transition-all">
+          <div class="flex items-start gap-4 mb-4">
+            <span class="text-4xl">{cs.icon}</span>
+            <div>
+              <p class="font-bold text-base leading-snug">{cs.client}</p>
+              <span class="inline-block mt-1 text-xs font-semibold uppercase tracking-wide bg-[var(--color-brand-accent)]/10 text-[var(--color-brand-accent)] px-2 py-0.5 rounded">
+                {categoryMeta[cs.category]?.label ?? cs.category}
+              </span>
+            </div>
+          </div>
+          <p class="text-gray-700 text-sm leading-relaxed mb-4">{cs.description}</p>
+          <p class="text-xl font-extrabold text-[var(--color-brand-accent)]">{cs.stat}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[var(--color-brand-charcoal)] text-white py-16">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">Have a Project in Mind?</h2>
+      <p class="text-gray-300 mb-8">Tell us what you need and we'll send a tailored quote within the hour.</p>
+      <a
+        href="/contact"
+        class="inline-block bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-dark)] text-white font-semibold px-8 py-4 rounded-lg transition-colors text-lg"
+      >
+        Get a Quote →
+      </a>
+    </div>
+  </section>
+
+</Base>

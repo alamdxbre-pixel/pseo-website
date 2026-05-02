@@ -1,0 +1,199 @@
+---
+import Base from '@/layouts/Base.astro';
+
+const siteUrl = import.meta.env.SITE ?? '';
+const canonical = `${siteUrl}/contact`;
+
+const phone = import.meta.env.WHATSAPP_NUMBER ?? '971500000000';
+const waHref = `https://wa.me/${phone}?text=${encodeURIComponent("Hi, I'd like to get a quote for marketing products.")}`;
+
+const offices = [
+  {
+    city: 'Dubai',
+    address: 'Unit 7, Al Quoz Industrial Area 1, Dubai, UAE',
+    phone: '+971 50 000 0000',
+    hours: 'Sun–Thu 8:00 AM – 6:00 PM',
+  },
+  {
+    city: 'Abu Dhabi',
+    address: 'Mussafah Industrial Area, Abu Dhabi, UAE',
+    phone: '+971 50 000 0001',
+    hours: 'Sun–Thu 9:00 AM – 5:00 PM',
+  },
+];
+---
+
+<Base
+  title="Contact Us — Marketing Products UAE"
+  description="Get in touch for a quote on visiting cards, apparel, merchandise and more. WhatsApp, phone or email — we respond within the hour during business hours."
+  canonical={canonical}
+  og={{
+    title: 'Contact Us — Marketing Products UAE',
+    description: 'Reach our team in Dubai and Abu Dhabi for fast quotes on all marketing products. WhatsApp preferred.',
+    image: '/images/og/contact.png',
+    type: 'website',
+  }}
+>
+
+  <!-- Hero -->
+  <section class="bg-[var(--color-brand-charcoal)] text-white">
+    <div class="max-w-5xl mx-auto px-4 py-20 sm:py-28">
+      <div class="border-l-4 border-[var(--color-brand-accent)] pl-6">
+        <p class="text-sm uppercase tracking-widest text-[var(--color-brand-accent)] mb-3 font-semibold">Get in Touch</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-6">
+          Let's Talk<br />
+          <span class="text-[var(--color-brand-accent)]">Marketing Products</span>
+        </h1>
+        <p class="text-lg text-gray-300 max-w-2xl">
+          Tell us what you need and we'll come back with a no-obligation quote — usually within the hour. WhatsApp is the fastest way to reach us.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact cards + form -->
+  <section class="max-w-5xl mx-auto px-4 py-16 sm:py-20">
+    <div class="grid md:grid-cols-2 gap-12">
+
+      <!-- Left: contact methods -->
+      <div class="space-y-8">
+        <div>
+          <h2 class="text-xl font-bold mb-6">How to Reach Us</h2>
+
+          <!-- WhatsApp -->
+          <a
+            href={waHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-4 p-5 rounded-xl bg-green-50 border border-green-200 hover:border-green-400 transition-colors mb-4"
+          >
+            <span class="text-3xl">💬</span>
+            <div>
+              <p class="font-semibold text-green-800">WhatsApp (Fastest)</p>
+              <p class="text-sm text-green-700">+971 50 000 0000 · Typical reply &lt; 30 mins</p>
+            </div>
+          </a>
+
+          <!-- Email -->
+          <a
+            href="mailto:hello@example.ae"
+            class="flex items-center gap-4 p-5 rounded-xl bg-gray-50 border border-gray-200 hover:border-[var(--color-brand-accent)] transition-colors mb-4"
+          >
+            <span class="text-3xl">✉️</span>
+            <div>
+              <p class="font-semibold">Email</p>
+              <p class="text-sm text-gray-600">hello@example.ae · Response within 2 hours</p>
+            </div>
+          </a>
+
+          <!-- Phone -->
+          <a
+            href="tel:+97150000000"
+            class="flex items-center gap-4 p-5 rounded-xl bg-gray-50 border border-gray-200 hover:border-[var(--color-brand-accent)] transition-colors"
+          >
+            <span class="text-3xl">📞</span>
+            <div>
+              <p class="font-semibold">Phone</p>
+              <p class="text-sm text-gray-600">+971 50 000 0000 · Sun–Thu 8 AM–6 PM</p>
+            </div>
+          </a>
+        </div>
+
+        <!-- Office locations -->
+        <div>
+          <h2 class="text-xl font-bold mb-4">Our Offices</h2>
+          <div class="space-y-4">
+            {offices.map((o) => (
+              <div class="p-5 rounded-xl border border-gray-200 bg-white shadow-sm">
+                <p class="font-bold text-[var(--color-brand-accent)] mb-1">{o.city}</p>
+                <p class="text-sm text-gray-700">{o.address}</p>
+                <p class="text-sm text-gray-600 mt-1">{o.phone}</p>
+                <p class="text-xs text-gray-500 mt-1">{o.hours}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: enquiry form -->
+      <div>
+        <h2 class="text-xl font-bold mb-6">Send an Enquiry</h2>
+        <!-- Static HTML form — action target set via env var or Netlify/CF Pages forms -->
+        <form
+          method="POST"
+          action="/api/contact"
+          class="space-y-5"
+          novalidate
+        >
+          <div>
+            <label for="name" class="block text-sm font-semibold mb-1">Full Name <span class="text-red-500">*</span></label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              autocomplete="name"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-accent)] focus:ring-2 focus:ring-[var(--color-brand-accent)]/20"
+              placeholder="Ahmed Al Mansoori"
+            />
+          </div>
+
+          <div>
+            <label for="email" class="block text-sm font-semibold mb-1">Email <span class="text-red-500">*</span></label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="email"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-accent)] focus:ring-2 focus:ring-[var(--color-brand-accent)]/20"
+              placeholder="ahmed@company.ae"
+            />
+          </div>
+
+          <div>
+            <label for="product" class="block text-sm font-semibold mb-1">Product / Service</label>
+            <select
+              id="product"
+              name="product"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-accent)] focus:ring-2 focus:ring-[var(--color-brand-accent)]/20 bg-white"
+            >
+              <option value="">Select a category…</option>
+              <option value="visiting-cards">Visiting Cards</option>
+              <option value="flyers">Flyers &amp; Brochures</option>
+              <option value="apparel">Apparel &amp; Uniforms</option>
+              <option value="merchandise">Branded Merchandise</option>
+              <option value="signage">Signage &amp; Banners</option>
+              <option value="digital">Digital Services</option>
+              <option value="other">Other / Not Sure</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-semibold mb-1">Message <span class="text-red-500">*</span></label>
+            <textarea
+              id="message"
+              name="message"
+              required
+              rows="5"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-accent)] focus:ring-2 focus:ring-[var(--color-brand-accent)]/20 resize-none"
+              placeholder="Tell us about your project — quantity, size, deadline, special requirements…"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-dark)] text-white font-semibold py-4 rounded-lg transition-colors text-base"
+          >
+            Send Enquiry →
+          </button>
+
+          <p class="text-xs text-gray-500 text-center">
+            We'll reply within 2 business hours. For urgent orders, WhatsApp is faster.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</Base>
