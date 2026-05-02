@@ -19,3 +19,11 @@ export const HERO_BADGE_HIGHLIGHT = true;
 
 /** true → city name cycles (Dubai → Abu Dhabi → Sharjah) in hero sub-copy  |  false → static list */
 export const HERO_CITY_CYCLE = true;
+
+/**
+ * true  → "Browse Products" CTA moves from hero into the ticker/stats band
+ *          (hero keeps only the primary WhatsApp CTA; ticker band gets a
+ *           "Browse all products →" pill on the trailing edge)
+ * false → original layout: both CTAs side-by-side in the hero
+ */
+export const BROWSE_IN_TICKER = true;

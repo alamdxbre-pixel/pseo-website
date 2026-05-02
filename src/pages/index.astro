@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import Base from '@/layouts/Base.astro';
 import { buildWhatsAppLink } from '@/lib/utils';
-import { CATEGORY_PHOTO_CARDS, STATS_TYPEWRITER, HOW_IT_WORKS_FLOW, TECH_SHOWCASE, HERO_BADGE_HIGHLIGHT, HERO_CITY_CYCLE } from '@/lib/flags';
+import { CATEGORY_PHOTO_CARDS, STATS_TYPEWRITER, HOW_IT_WORKS_FLOW, TECH_SHOWCASE, HERO_BADGE_HIGHLIGHT, HERO_CITY_CYCLE, BROWSE_IN_TICKER } from '@/lib/flags';
 
 // Pull a handful of featured products for the homepage grid
 const allProducts = await getCollection('products', ({ data }) => data.published);
@@ -138,12 +138,14 @@ const testimonials = [
             </svg>
             Get an Instant Quote
           </a>
-          <a
-            href="/print/visiting-cards/dubai-300gsm-gloss"
-            class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg text-base hover:border-white/60 hover:bg-white/5 transition-colors"
-          >
-            Browse Products
-          </a>
+          {!BROWSE_IN_TICKER && (
+            <a
+              href="/print/visiting-cards/dubai-300gsm-gloss"
+              class="inline-flex items-center justify-center px-8 py-4 border-2 border-white/30 text-white font-semibold rounded-lg text-base hover:border-white/60 hover:bg-white/5 transition-colors"
+            >
+              Browse Products
+            </a>
+          )}
         </div>
       </div>
     </div>
@@ -154,8 +156,8 @@ const testimonials = [
     <div class="max-w-6xl mx-auto px-4 py-8">
 
       {STATS_TYPEWRITER ? (
-        <div class="text-center" aria-live="polite" aria-atomic="true">
-          <div class="ticker-wrap" aria-hidden="true">
+        <div class={BROWSE_IN_TICKER ? 'flex items-center gap-6' : 'text-center'} aria-live="polite" aria-atomic="true">
+          <div class={BROWSE_IN_TICKER ? 'ticker-wrap flex-1 min-w-0' : 'ticker-wrap'} aria-hidden="true">
             <span class="ticker-item">Customised Visiting Cards</span>
             <span class="ticker-item">Logo-Printed T-Shirts</span>
             <span class="ticker-item">Branded Polo Uniforms</span>
@@ -169,6 +171,15 @@ const testimonials = [
             <span class="ticker-item">Custom Tote Bags</span>
             <span class="ticker-item">Office Stationery Kits</span>
           </div>
+          {BROWSE_IN_TICKER && (
+            <a
+              href="/print/visiting-cards/dubai-300gsm-gloss"
+              class="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 border-2 border-white/50 text-white font-semibold rounded-full text-sm hover:border-white hover:bg-white/10 transition-colors whitespace-nowrap"
+            >
+              Browse Products
+              <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 10h12M11 5l5 5-5 5"/></svg>
+            </a>
+          )}
         </div>
       ) : (
         <dl class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
