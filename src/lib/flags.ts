@@ -27,3 +27,11 @@ export const HERO_CITY_CYCLE = true;
  * false → original layout: both CTAs side-by-side in the hero
  */
 export const BROWSE_IN_TICKER = true;
+
+/**
+ * true  → hero background is a large commercial printer photo (right-side),
+ *          blended seamlessly into the dark charcoal via luminosity blend-mode
+ *          + a left-to-right dark gradient. All text/CTAs unchanged.
+ * false → original geometric diagonal-line pattern background
+ */
+export const HERO_PRINTER_BG = true;
