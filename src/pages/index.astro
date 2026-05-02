@@ -115,15 +115,14 @@ const testimonials = [
           Visiting cards, apparel, branded merchandise, stationery and digital services.
           Fast turnaround, bulk pricing and expert design support — across
           {HERO_CITY_CYCLE ? (
-            <span class="city-cycle-wrap" aria-label="Dubai, Abu Dhabi, Sharjah" role="text">
-              <span class="city-cycle-item city-c1">Dubai</span>
-              <span class="city-cycle-item city-c2">Abu Dhabi</span>
-              <span class="city-cycle-item city-c3">Sharjah</span>
+            <span class="city-cycle-wrap" aria-label="Dubai, Abu Dhabi, Sharjah and all seven emirates" role="text">
+              <span class="city-cycle-item city-c1">Dubai and all&nbsp;seven emirates.</span>
+              <span class="city-cycle-item city-c2">Abu Dhabi and all&nbsp;seven emirates.</span>
+              <span class="city-cycle-item city-c3">Sharjah and all&nbsp;seven emirates.</span>
             </span>
           ) : (
-            <> Dubai, Abu Dhabi, Sharjah</>
+            <> Dubai, Abu Dhabi, Sharjah and all seven emirates.</>
           )}
-          {' '}and all seven emirates.
         </p>
         <div class="flex flex-col sm:flex-row gap-4">
           <a
@@ -628,18 +627,19 @@ const testimonials = [
   }
 
   /* ── Hero city cycling ── */
+  /*
+    inline-grid stacks all three city items in the same grid cell.
+    The wrapper width = widest item ("Abu Dhabi and all seven emirates.").
+    City names are left-aligned; trailing copy is inside each item so
+    there is no gap between the city name and "and all seven emirates".
+  */
   .city-cycle-wrap {
-    display: inline-block;
-    position: relative;
-    min-width: 7.5ch;
-    height: 1.3em;
-    vertical-align: text-bottom;
+    display: inline-grid;
+    vertical-align: bottom;
   }
   .city-cycle-item {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
+    grid-column: 1;
+    grid-row: 1;
     white-space: nowrap;
     color: white;
     font-weight: 600;
@@ -652,8 +652,8 @@ const testimonials = [
 
   @keyframes city-fade {
     /*
-      3 cities, 3 s each = 9 s cycle.
-      Fade in over 0.6 s, hold for 1.8 s, fade out over 0.6 s.
+      3 cities × 3 s each = 9 s cycle.
+      Fade in 0.6 s → hold 1.8 s → fade out 0.6 s.
     */
     0%      { opacity: 0; }
     6.67%   { opacity: 1; }   /* 0.6 s in  */
