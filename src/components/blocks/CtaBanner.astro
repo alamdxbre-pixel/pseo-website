@@ -1,0 +1,30 @@
+---
+/**
+ * CtaBanner block — full-width call-to-action bar with configurable background colour.
+ */
+interface Props {
+  headline: string;
+  button: string;
+  url: string;
+  background_color?: string;
+}
+
+const { headline, button, url, background_color } = Astro.props;
+const isExternal = url.startsWith('http');
+---
+
+<section
+  class="campaign-cta-banner py-14 text-white text-center"
+  style={background_color ? `background-color: ${background_color};` : 'background-color: var(--color-brand-charcoal);'}
+>
+  <div class="max-w-3xl mx-auto px-4">
+    <p class="text-xl md:text-2xl font-semibold mb-6">{headline}</p>
+    <a
+      href={url}
+      {...isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+      class="inline-flex items-center px-8 py-4 bg-white text-[var(--color-brand-charcoal)] font-bold rounded-lg text-base hover:bg-white/90 transition-colors"
+    >
+      {button}
+    </a>
+  </div>
+</section>

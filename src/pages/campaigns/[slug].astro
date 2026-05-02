@@ -1,0 +1,126 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '@/layouts/Base.astro';
+import HeroBanner from '@/components/blocks/HeroBanner.astro';
+import CountdownTimer from '@/components/blocks/CountdownTimer.astro';
+import ProductGrid from '@/components/blocks/ProductGrid.astro';
+import RichText from '@/components/blocks/RichText.astro';
+import CtaBanner from '@/components/blocks/CtaBanner.astro';
+
+export async function getStaticPaths() {
+  const allCampaigns = await getCollection('campaigns', ({ data }) => data.published);
+
+  return allCampaigns.map((entry) => ({
+    params: { slug: entry.data.page_slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await entry.render();
+
+const siteUrl = import.meta.env.SITE ?? '';
+const canonical = `/campaigns/${data.page_slug}/`;
+
+// ── Schema.org JSON-LD ────────────────────────────────────────────────────────
+const schemaType = data.schema_type; // 'Offer' | 'Event'
+
+const schemaOffer = {
+  '@context': 'https://schema.org',
+  '@type': schemaType,
+  ...(schemaType === 'Offer'
+    ? {
+        name: data.title,
+        description: data.offer_headline ?? data.title,
+        url: `${siteUrl}${canonical}`,
+        validFrom: data.valid_from,
+        validThrough: data.valid_through,
+        seller: {
+          '@type': 'LocalBusiness',
+          name: 'Pixel Print UAE',
+          url: siteUrl,
+        },
+      }
+    : {
+        name: data.title,
+        description: data.offer_headline ?? data.title,
+        url: `${siteUrl}${canonical}`,
+        startDate: data.valid_from,
+        endDate: data.valid_through,
+        organizer: {
+          '@type': 'LocalBusiness',
+          name: 'Pixel Print UAE',
+          url: siteUrl,
+        },
+      }),
+};
+---
+
+<Base
+  title={data.og?.title ?? data.title}
+  description={data.og?.description ?? data.offer_headline ?? data.title}
+  canonical={canonical}
+  og={{
+    title: data.og?.title ?? data.title,
+    description: data.og?.description ?? data.offer_headline ?? data.title,
+    image: data.og?.image ?? data.hero_image,
+    type: 'website',
+  }}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOffer)} />
+  </Fragment>
+
+  <!-- ── Block renderer ──────────────────────────────────────────────────────── -->
+  {data.blocks.map((block) => {
+    switch (block.type) {
+      case 'hero_banner':
+        return (
+          <HeroBanner
+            headline={block.headline}
+            subline={block.subline}
+            image={block.image}
+            cta={block.cta}
+            cta_url={block.cta_url}
+          />
+        );
+      case 'countdown_timer':
+        return (
+          <CountdownTimer
+            end_date={block.end_date}
+            label={block.label}
+          />
+        );
+      case 'product_grid':
+        return (
+          <ProductGrid
+            tag={block.tag}
+            featured_slugs={block.featured_slugs}
+            columns={block.columns}
+            max_items={block.max_items}
+          />
+        );
+      case 'rich_text':
+        return <RichText content={block.content} />;
+      case 'cta_banner':
+        return (
+          <CtaBanner
+            headline={block.headline}
+            button={block.button}
+            url={block.url}
+            background_color={block.background_color}
+          />
+        );
+      default:
+        return null;
+    }
+  })}
+
+  <!-- ── MD body (optional editorial copy below blocks) ─────────────────────── -->
+  {Content && (
+    <section class="campaign-body max-w-3xl mx-auto px-4 py-10 prose prose-slate">
+      <Content />
+    </section>
+  )}
+</Base>
