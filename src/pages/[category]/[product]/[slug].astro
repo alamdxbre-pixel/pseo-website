@@ -19,14 +19,7 @@ const { entry } = Astro.props;
 const { data } = entry;
 const { Content } = await entry.render();
 
-// ── Robots meta string ────────────────────────────────────────────────────────
-const robotsMeta = [
-  data.robots.index ? 'index' : 'noindex',
-  data.robots.follow ? 'follow' : 'nofollow',
-  `max-snippet:${data.robots.max_snippet}`,
-  `max-image-preview:${data.robots.max_image_preview}`,
-  `max-video-preview:${data.robots.max_video_preview}`,
-].join(', ');
+const siteUrl = import.meta.env.SITE ?? '';
 
 // ── Schema.org JSON-LD ────────────────────────────────────────────────────────
 const schemaJsonLd = {
@@ -68,7 +61,7 @@ const breadcrumbJsonLd = {
     '@type': 'ListItem',
     position: idx + 1,
     name: item.label,
-    item: `${import.meta.env.SITE ?? 'https://example.com'}${item.url}`,
+    item: `${siteUrl}${item.url}`,
   })),
 };
 
@@ -84,26 +77,18 @@ const faqJsonLd = {
 };
 ---
 
-<Base title={data.title} description={data.description} lang={data.lang}>
+<Base
+  title={data.title}
+  description={data.description}
+  lang={data.lang}
+  canonical={data.canonical}
+  robots={data.robots}
+  geo={data.geo}
+  og={data.og}
+  date_published={data.date_published}
+  date_modified={data.date_modified}
+>
   <Fragment slot="head">
-    <!-- SEO meta -->
-    <meta name="robots" content={robotsMeta} />
-    <link rel="canonical" href={`${import.meta.env.SITE ?? ''}${data.canonical}`} />
-
-    <!-- Geo meta -->
-    <meta name="geo.region" content={data.geo.region} />
-    <meta name="geo.placename" content={data.geo.placename} />
-    <meta name="geo.position" content={data.geo.position} />
-    <meta name="ICBM" content={data.geo.icbm} />
-
-    <!-- Open Graph -->
-    <meta property="og:type" content={data.og.type} />
-    <meta property="og:title" content={data.og.title} />
-    <meta property="og:description" content={data.og.description} />
-    {data.og.image && <meta property="og:image" content={data.og.image} />}
-    {data.og.image && <meta property="og:image:width" content={String(data.og.image_width)} />}
-    {data.og.image && <meta property="og:image:height" content={String(data.og.image_height)} />}
-
     <!-- Speakable -->
     <script
       type="application/ld+json"
@@ -114,7 +99,7 @@ const faqJsonLd = {
           '@type': 'SpeakableSpecification',
           cssSelector: data.speakable_css_selectors,
         },
-        url: `${import.meta.env.SITE ?? ''}${data.canonical}`,
+        url: `${siteUrl}${data.canonical}`,
       })}
     />
 
