@@ -62,6 +62,13 @@ const og = { ...data.og, image: ogImage };
       speakable_css_selectors={data.speakable_css_selectors}
       siteUrl={siteUrl}
     />
+    <!-- GA4 item metadata for view_item event -->
+    <meta name="ga-item-id" content={data.product_details.sku ?? data.page_slug} />
+    <meta name="ga-item-name" content={data.hero.headline} />
+    <meta name="ga-item-category" content={data.category} />
+    {data.product_details.price_from && (
+      <meta name="ga-item-price" content={String(data.product_details.price_from)} />
+    )}
   </Fragment>
 
   <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
@@ -188,3 +195,23 @@ const og = { ...data.og, image: ogImage };
     </section>
   )}
 </Base>
+
+<script>
+  import { trackViewItem } from '@/lib/analytics';
+
+  // Fire GA4 view_item once when the page first becomes visible
+  if (typeof document !== 'undefined') {
+    const meta = document.querySelector<HTMLMetaElement>('meta[name="ga-item-id"]');
+    const nameEl = document.querySelector<HTMLMetaElement>('meta[name="ga-item-name"]');
+    const catEl = document.querySelector<HTMLMetaElement>('meta[name="ga-item-category"]');
+    const priceEl = document.querySelector<HTMLMetaElement>('meta[name="ga-item-price"]');
+    if (meta && nameEl) {
+      trackViewItem({
+        item_id: meta.content,
+        item_name: nameEl.content,
+        item_category: catEl?.content,
+        price: priceEl ? parseFloat(priceEl.content) : undefined,
+      });
+    }
+  }
+</script>

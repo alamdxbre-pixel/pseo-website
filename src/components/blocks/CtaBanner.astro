@@ -21,6 +21,8 @@ const isExternal = url.startsWith('http');
     <p class="text-xl md:text-2xl font-semibold mb-6">{headline}</p>
     <a
       href={url}
+      data-cta-link
+      data-cta-label={button}
       {...isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
       class="inline-flex items-center px-8 py-4 bg-white text-[var(--color-brand-charcoal)] font-bold rounded-lg text-base hover:bg-white/90 transition-colors"
     >
@@ -28,3 +30,16 @@ const isExternal = url.startsWith('http');
     </a>
   </div>
 </section>
+
+<script>
+  import { trackCtaClick } from '@/lib/analytics';
+  document.querySelectorAll('[data-cta-link]').forEach((el) => {
+    el.addEventListener('click', () => {
+      const anchor = el as HTMLAnchorElement;
+      trackCtaClick({
+        label: anchor.dataset.ctaLabel ?? '',
+        destination: anchor.getAttribute('href') ?? '',
+      });
+    });
+  });
+</script>
