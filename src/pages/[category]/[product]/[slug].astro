@@ -34,6 +34,12 @@ const whatsappHref = buildProductWhatsAppLink({
 // Fall back to Satori-generated OG image when no manual og.image is set
 const ogImage = data.og.image ?? `/images/og/${data.page_slug}.png`;
 const og = { ...data.og, image: ogImage };
+
+// Hreflang pair URL — computed from the same category/product path, different page_slug
+const hreflangPairUrl =
+  data.arabic_ready && data.hreflang_pair
+    ? `${siteUrl}/${data.category}/${data.product}/${data.hreflang_pair}/`
+    : undefined;
 ---
 
 <Base
@@ -49,6 +55,7 @@ const og = { ...data.og, image: ogImage };
   waProduct={data.hero.headline}
   waVariant={data.product_details.variant}
   waCity={data.product_details.city}
+  hreflangPairUrl={hreflangPairUrl}
 >
   <Fragment slot="head">
     <SchemaOrg

@@ -44,6 +44,8 @@ interface Props {
   waProduct?: string;
   waVariant?: string;
   waCity?: string;
+  /** Full URL of the alternate-language paired page. Passed to SeoHead for hreflang. */
+  hreflangPairUrl?: string;
 }
 
 const {
@@ -59,6 +61,7 @@ const {
   waProduct,
   waVariant,
   waCity,
+  hreflangPairUrl,
 } = Astro.props;
 
 const isRTL = lang === 'ar';
@@ -85,6 +88,7 @@ const clarityId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID as string | undefine
       siteUrl={siteUrl}
       date_modified={date_modified}
       date_published={date_published}
+      hreflangPairUrl={hreflangPairUrl}
     />
     <!-- Google Analytics 4 via Partytown (off main thread) -->
     {gaId && (
