@@ -1,0 +1,149 @@
+---
+import Base from '@/layouts/Base.astro';
+
+const siteUrl = import.meta.env.SITE ?? '';
+const canonical = `${siteUrl}/about`;
+
+const stats = [
+  { value: '10+', label: 'Years in UAE' },
+  { value: '2,500+', label: 'Happy Clients' },
+  { value: '50,000+', label: 'Orders Delivered' },
+  { value: '7', label: 'Emirates Served' },
+];
+
+const values = [
+  {
+    title: 'Quality First',
+    body: 'Every product leaves our facility only after passing a multi-point quality check — from colour accuracy to material finish.',
+    icon: '✔',
+  },
+  {
+    title: 'Fast Turnaround',
+    body: 'We know deadlines matter. Our 24-hour standard turnaround and same-day express option keep your campaigns on track.',
+    icon: '⚡',
+  },
+  {
+    title: 'UAE-Rooted Expertise',
+    body: 'Over a decade serving Dubai, Abu Dhabi, Sharjah and beyond. We understand local markets, languages and event calendars.',
+    icon: '📍',
+  },
+  {
+    title: 'Full-Range Partner',
+    body: 'One supplier for print, apparel, merchandise and digital — simplifying procurement for marketing teams and agencies.',
+    icon: '🤝',
+  },
+];
+
+const team = [
+  { name: 'Ahmed Al Mansoori', role: 'Founder & CEO', bio: "Built the business from a single print machine in Dubai's Al Quoz to a full-service marketing products hub." },
+  { name: 'Priya Sharma', role: 'Head of Production', bio: 'Oversees quality control and production scheduling across all product lines.' },
+  { name: 'James Okafor', role: 'Client Success Manager', bio: 'Ensures every client — from SMEs to enterprise — gets a smooth, on-time experience.' },
+];
+---
+
+<Base
+  title="About Us — Marketing Products UAE"
+  description="Learn about our 10+ year journey supplying premium customised marketing products across the UAE and GCC. Meet the team behind the quality."
+  canonical={canonical}
+  og={{
+    title: 'About Us — Marketing Products UAE',
+    description: 'Over a decade of delivering premium customised marketing products across Dubai, Abu Dhabi, Sharjah and the wider GCC.',
+    image: '/images/og/about.png',
+    type: 'website',
+  }}
+>
+
+  <!-- Hero -->
+  <section class="bg-[var(--color-brand-charcoal)] text-white">
+    <div class="max-w-5xl mx-auto px-4 py-20 sm:py-28">
+      <div class="border-l-4 border-[var(--color-brand-accent)] pl-6">
+        <p class="text-sm uppercase tracking-widest text-[var(--color-brand-accent)] mb-3 font-semibold">Our Story</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-6">
+          UAE's Trusted Partner for<br />
+          <span class="text-[var(--color-brand-accent)]">Marketing Products</span>
+        </h1>
+        <p class="text-lg text-gray-300 max-w-2xl">
+          Since 2014 we have been helping businesses across the UAE stand out — from startup visiting cards to large-scale trade show giveaways for Fortune 500 brands.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats bar -->
+  <section class="bg-[var(--color-brand-accent)] text-white">
+    <div class="max-w-5xl mx-auto px-4 py-8">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
+        {stats.map((s) => (
+          <div>
+            <p class="text-3xl font-extrabold">{s.value}</p>
+            <p class="text-sm mt-1 opacity-90">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Story prose -->
+  <section class="max-w-3xl mx-auto px-4 py-16 sm:py-20">
+    <h2 class="text-2xl sm:text-3xl font-bold mb-6">From One Machine to a Full-Service Hub</h2>
+    <div class="prose prose-lg max-w-none text-gray-700 space-y-5">
+      <p>
+        It started in 2014 with a single digital press in Al Quoz, Dubai and a simple promise: deliver quality marketing materials faster than anyone else in the city. Within a year, word spread across the business community and we outgrew our first unit.
+      </p>
+      <p>
+        Today we operate a 12,000 sq ft production facility equipped with UV flatbed, large-format, embroidery, laser engraving and sublimation lines. Our clients include local SMEs, regional agencies, government entities and multinational corporations with offices across the GCC.
+      </p>
+      <p>
+        What has not changed is our commitment to the UAE business community. Every order — whether it is 50 visiting cards or 10,000 branded T-shirts — gets the same attention to detail we built our reputation on.
+      </p>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="bg-[var(--color-brand-cream)] py-16 sm:py-20">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12">What Drives Us</h2>
+      <div class="grid sm:grid-cols-2 gap-8">
+        {values.map((v) => (
+          <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:border-[var(--color-brand-accent)] transition-colors">
+            <p class="text-3xl mb-4">{v.icon}</p>
+            <h3 class="text-lg font-bold mb-2">{v.title}</h3>
+            <p class="text-gray-600 text-sm leading-relaxed">{v.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="max-w-5xl mx-auto px-4 py-16 sm:py-20">
+    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12">Meet the Team</h2>
+    <div class="grid sm:grid-cols-3 gap-8">
+      {team.map((m) => (
+        <div class="text-center">
+          <div class="w-20 h-20 rounded-full bg-[var(--color-brand-accent)] text-white flex items-center justify-center text-2xl font-extrabold mx-auto mb-4">
+            {m.name.charAt(0)}
+          </div>
+          <h3 class="font-bold text-lg">{m.name}</h3>
+          <p class="text-[var(--color-brand-accent)] text-sm font-semibold mb-2">{m.role}</p>
+          <p class="text-gray-600 text-sm leading-relaxed">{m.bio}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[var(--color-brand-charcoal)] text-white py-16">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">Ready to Work Together?</h2>
+      <p class="text-gray-300 mb-8">Get in touch for a free consultation and quote. We respond within the hour during business hours.</p>
+      <a
+        href="/contact"
+        class="inline-block bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-dark)] text-white font-semibold px-8 py-4 rounded-lg transition-colors text-lg"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+
+</Base>
