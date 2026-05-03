@@ -6,10 +6,10 @@
 
 /* ── Design Tokens ─────────────────────────────────────── */
 @theme {
-  /* Brand colours — Navy + Refined Gold (Print Company) */
-  --color-brand-accent:         #C49A2A;   /* Refined Gold — CTAs, headlines, foil feel */
-  --color-brand-accent-light:   #DDB84A;   /* Light Gold — hover fills, tints */
-  --color-brand-accent-dark:    #9A7518;   /* Deep Gold — pressed/active states */
+  /* Brand colours — Navy + Sandy Gold (Print Company) */
+  --color-brand-accent:         #C9A66B;   /* Sandy Gold — CTAs, headlines */
+  --color-brand-accent-light:   #DFC08A;   /* Warm Sand — hover fills, tints */
+  --color-brand-accent-dark:    #A0804A;   /* Deep Tan — pressed/active states */
   --color-brand-charcoal:       #0B1F3B;   /* Deep Navy — text, dark sections */
   --color-brand-charcoal-light: #1A3A5C;   /* Mid Navy — secondary dark */
   --color-brand-cream:          #FBF8F0;   /* Gold-tinted ivory — alt section bg */
@@ -66,19 +66,19 @@
     --card-foreground: 215 69% 14%;
     --popover: 0 0% 100%;
     --popover-foreground: 215 69% 14%;
-    --primary: 43 65% 47%;
+    --primary: 38 47% 60%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 43 30% 95%;
+    --secondary: 38 25% 95%;
     --secondary-foreground: 215 69% 14%;
-    --muted: 43 30% 95%;
+    --muted: 38 25% 95%;
     --muted-foreground: 215 20% 38%;
-    --accent: 43 65% 47%;
+    --accent: 38 47% 60%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 43 20% 88%;
-    --input: 43 20% 88%;
-    --ring: 43 65% 47%;
+    --border: 38 20% 88%;
+    --input: 38 20% 88%;
+    --ring: 38 47% 60%;
     --radius: 0.5rem;
   }
 }
