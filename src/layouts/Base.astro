@@ -5,6 +5,7 @@ import SeoHead from '@/components/SeoHead.astro';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer.astro';
 import WhatsAppBar from '@/components/WhatsAppBar.astro';
+import { ACTIVE_THEME } from '@/lib/flags';
 
 interface RobotsMeta {
   index?: boolean;
@@ -71,7 +72,7 @@ const clarityId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID as string | undefine
 ---
 
 <!doctype html>
-<html lang={lang} dir={isRTL ? 'rtl' : 'ltr'}>
+<html lang={lang} dir={isRTL ? 'rtl' : 'ltr'} data-theme={ACTIVE_THEME}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />

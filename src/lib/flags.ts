@@ -2,6 +2,20 @@
  * Feature flags — flip these to switch UI variants at build time.
  */
 
+/**
+ * Active colour theme — change this number to switch the entire site palette.
+ *
+ *  0 → Original Teal      (#0D7377)  — main branch baseline
+ *  1 → Bold Orange        (#E07020)  — feature/theme-update
+ *  2 → Forest Green       (#3A7D40)  — feature/theme-update-2
+ *  3 → Burnt Amber        (#C8693A)  — feature/theme-update-3
+ *  4 → Sandy Gold         (#C9A66B)  — feature/theme-update-4  ← current
+ *
+ * All themes share Deep Navy (#0B1F3B) as the dark structural colour (themes 1-4).
+ * Theme 0 uses the original Charcoal (#1C2028) as dark colour.
+ */
+export const ACTIVE_THEME = 4 as 0 | 1 | 2 | 3 | 4;
+
 /** true → photo background cards  |  false → SVG icon cards */
 export const CATEGORY_PHOTO_CARDS = true;
 
