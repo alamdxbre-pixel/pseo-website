@@ -6,14 +6,14 @@
 
 /* ── Design Tokens ─────────────────────────────────────── */
 @theme {
-  /* Brand colours */
-  --color-brand-accent:         #0D7377;
-  --color-brand-accent-light:   #14A085;
-  --color-brand-accent-dark:    #0A5A5E;
-  --color-brand-charcoal:       #1C2028;
-  --color-brand-charcoal-light: #3D4451;
-  --color-brand-cream:          #F8F9FA;
-  --color-brand-cream-dark:     #EDF0F2;
+  /* Brand colours — Navy + Forest Green (Print Company) */
+  --color-brand-accent:         #3A7D40;   /* Forest Green — CTAs, actions, highlights */
+  --color-brand-accent-light:   #65A167;   /* Sage Green — light tints, hover states */
+  --color-brand-accent-dark:    #2A5C2E;   /* Deep Forest — pressed/hover dark */
+  --color-brand-charcoal:       #0B1F3B;   /* Deep Navy — text, dark sections, structure */
+  --color-brand-charcoal-light: #1A3A5C;   /* Mid Navy — secondary dark */
+  --color-brand-cream:          #F4F6F2;   /* Barely green-tinted cream — alt section bg */
+  --color-brand-cream-dark:     #E6EDE4;   /* Light sage — stronger alt section bg */
 
   /* Typography */
   --font-family-sans:    "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
@@ -61,24 +61,24 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222 15% 13%;
+    --foreground: 215 69% 14%;
     --card: 0 0% 100%;
-    --card-foreground: 222 15% 13%;
+    --card-foreground: 215 69% 14%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222 15% 13%;
-    --primary: 183 82% 26%;
+    --popover-foreground: 215 69% 14%;
+    --primary: 125 37% 36%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 210 11% 96%;
-    --secondary-foreground: 222 15% 13%;
-    --muted: 210 11% 96%;
-    --muted-foreground: 215 14% 34%;
-    --accent: 183 82% 26%;
+    --secondary: 120 8% 95%;
+    --secondary-foreground: 215 69% 14%;
+    --muted: 120 8% 95%;
+    --muted-foreground: 215 20% 38%;
+    --accent: 125 37% 36%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 214 12% 89%;
-    --input: 214 12% 89%;
-    --ring: 183 82% 26%;
+    --border: 120 8% 88%;
+    --input: 120 8% 88%;
+    --ring: 125 37% 36%;
     --radius: 0.5rem;
   }
 }

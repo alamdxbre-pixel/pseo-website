@@ -21,8 +21,8 @@ const OUT_DIR   = join(ROOT, 'public', 'images', 'og');
 mkdirSync(OUT_DIR, { recursive: true });
 
 // ── Brand tokens ─────────────────────────────────────────────────────────────
-const BRAND_CHARCOAL = '#1C2028';
-const BRAND_ACCENT   = '#0D7377';
+const BRAND_CHARCOAL = '#0B1F3B';
+const BRAND_ACCENT   = '#3A7D40';
 const WHITE          = '#FFFFFF';
 const WHITE_60       = 'rgba(255,255,255,0.60)';
 const WHITE_30       = 'rgba(255,255,255,0.30)';

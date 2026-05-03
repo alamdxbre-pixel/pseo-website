@@ -116,19 +116,19 @@ const testimonials = [
         {/* Left-to-right dark gradient — protects text, reveals printer on right */}
         <div
           class="absolute inset-0"
-          style="background:linear-gradient(to right, #1C2028 0%, #1C2028 38%, rgba(28,32,40,0.75) 56%, rgba(28,32,40,0.18) 82%, rgba(28,32,40,0.04) 100%);"
+          style="background:linear-gradient(to right, #0B1F3B 0%, #0B1F3B 38%, rgba(11,31,59,0.75) 56%, rgba(11,31,59,0.18) 82%, rgba(11,31,59,0.04) 100%);"
           aria-hidden="true"
         />
         {/* Top vignette — blends into navbar */}
         <div
           class="absolute top-0 inset-x-0 h-20"
-          style="background:linear-gradient(to bottom,#1C2028 0%,transparent 100%);"
+          style="background:linear-gradient(to bottom,#0B1F3B 0%,transparent 100%);"
           aria-hidden="true"
         />
         {/* Bottom vignette — blends into ticker strip */}
         <div
           class="absolute bottom-0 inset-x-0 h-28"
-          style="background:linear-gradient(to top,#1C2028 0%,transparent 100%);"
+          style="background:linear-gradient(to top,#0B1F3B 0%,transparent 100%);"
           aria-hidden="true"
         />
         {/* Teal accent bar — left edge, same as original */}
@@ -314,7 +314,7 @@ const testimonials = [
               href={cat.href}
               class="group bg-white rounded-xl p-6 border border-slate-100 hover:border-[var(--color-brand-accent)] hover:shadow-[var(--shadow-card-hover)] transition-all"
             >
-              <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-[var(--color-brand-accent)]" style="background-color: rgba(13, 115, 119, 0.10);" set:html={cat.icon} />
+              <div class="w-12 h-12 rounded-xl flex items-center justify-center mb-4 text-[var(--color-brand-accent)]" style="background-color: rgba(58, 125, 64, 0.10);" set:html={cat.icon} />
               <h3 class="font-bold text-lg mb-2 group-hover:text-[var(--color-brand-accent)] transition-colors">{cat.label}</h3>
               <p class="text-sm text-[var(--color-brand-charcoal-light)] leading-relaxed">{cat.desc}</p>
             </a>
