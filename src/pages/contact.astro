@@ -38,11 +38,11 @@ const offices = [
   <!-- Hero -->
   <section class="bg-[var(--color-brand-charcoal)] text-white">
     <div class="max-w-5xl mx-auto px-4 py-20 sm:py-28">
-      <div class="border-l-4 border-[var(--color-brand-accent)] pl-6">
-        <p class="text-sm uppercase tracking-widest text-[var(--color-brand-accent)] mb-3 font-semibold">Get in Touch</p>
+      <div class="border-l-4 border-[var(--color-brand-charcoal)] pl-6">
+        <p class="text-sm uppercase tracking-widest text-[var(--color-brand-charcoal)] mb-3 font-semibold">Get in Touch</p>
         <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-6">
           Let's Talk<br />
-          <span class="text-[var(--color-brand-accent)]">Marketing Products</span>
+          <span class="text-[var(--color-brand-charcoal)]">Marketing Products</span>
         </h1>
         <p class="text-lg text-gray-300 max-w-2xl">
           Tell us what you need and we'll come back with a no-obligation quote — usually within the hour. WhatsApp is the fastest way to reach us.
@@ -77,7 +77,7 @@ const offices = [
           <!-- Email -->
           <a
             href="mailto:hello@example.ae"
-            class="flex items-center gap-4 p-5 rounded-xl bg-gray-50 border border-gray-200 hover:border-[var(--color-brand-accent)] transition-colors mb-4"
+            class="flex items-center gap-4 p-5 rounded-xl bg-gray-50 border border-gray-200 hover:border-[var(--color-brand-charcoal)] transition-colors mb-4"
           >
             <span class="text-3xl">✉️</span>
             <div>
@@ -89,7 +89,7 @@ const offices = [
           <!-- Phone -->
           <a
             href="tel:+97150000000"
-            class="flex items-center gap-4 p-5 rounded-xl bg-gray-50 border border-gray-200 hover:border-[var(--color-brand-accent)] transition-colors"
+            class="flex items-center gap-4 p-5 rounded-xl bg-gray-50 border border-gray-200 hover:border-[var(--color-brand-charcoal)] transition-colors"
           >
             <span class="text-3xl">📞</span>
             <div>
@@ -105,7 +105,7 @@ const offices = [
           <div class="space-y-4">
             {offices.map((o) => (
               <div class="p-5 rounded-xl border border-gray-200 bg-white shadow-sm">
-                <p class="font-bold text-[var(--color-brand-accent)] mb-1">{o.city}</p>
+                <p class="font-bold text-[var(--color-brand-charcoal)] mb-1">{o.city}</p>
                 <p class="text-sm text-gray-700">{o.address}</p>
                 <p class="text-sm text-gray-600 mt-1">{o.phone}</p>
                 <p class="text-xs text-gray-500 mt-1">{o.hours}</p>
@@ -133,7 +133,7 @@ const offices = [
               name="name"
               required
               autocomplete="name"
-              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-accent)] focus:ring-2 focus:ring-[var(--color-brand-accent)]/20"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-charcoal)] focus:ring-2 focus:ring-[var(--color-brand-charcoal)]/15"
               placeholder="Ahmed Al Mansoori"
             />
           </div>
@@ -146,7 +146,7 @@ const offices = [
               name="email"
               required
               autocomplete="email"
-              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-accent)] focus:ring-2 focus:ring-[var(--color-brand-accent)]/20"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-charcoal)] focus:ring-2 focus:ring-[var(--color-brand-charcoal)]/15"
               placeholder="ahmed@company.ae"
             />
           </div>
@@ -156,7 +156,7 @@ const offices = [
             <select
               id="product"
               name="product"
-              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-accent)] focus:ring-2 focus:ring-[var(--color-brand-accent)]/20 bg-white"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-charcoal)] focus:ring-2 focus:ring-[var(--color-brand-charcoal)]/15 bg-white"
             >
               <option value="">Select a category…</option>
               <option value="visiting-cards">Visiting Cards</option>
@@ -176,14 +176,14 @@ const offices = [
               name="message"
               required
               rows="5"
-              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-accent)] focus:ring-2 focus:ring-[var(--color-brand-accent)]/20 resize-none"
+              class="w-full border border-gray-300 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-[var(--color-brand-charcoal)] focus:ring-2 focus:ring-[var(--color-brand-charcoal)]/15 resize-none"
               placeholder="Tell us about your project — quantity, size, deadline, special requirements…"
             ></textarea>
           </div>
 
           <button
             type="submit"
-            class="w-full bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-dark)] text-white font-semibold py-4 rounded-lg transition-colors text-base"
+            class="w-full bg-[var(--color-brand-charcoal)] hover:bg-[var(--color-brand-charcoal-light)] text-white font-semibold py-4 rounded-lg transition-colors text-base"
           >
             Send Enquiry →
           </button>

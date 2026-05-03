@@ -105,11 +105,11 @@ const caseStudies = [
   <!-- Hero -->
   <section class="bg-[var(--color-brand-charcoal)] text-white">
     <div class="max-w-5xl mx-auto px-4 py-20 sm:py-28">
-      <div class="border-l-4 border-[var(--color-brand-accent)] pl-6">
-        <p class="text-sm uppercase tracking-widest text-[var(--color-brand-accent)] mb-3 font-semibold">Our Work</p>
+      <div class="border-l-4 border-[var(--color-brand-charcoal)] pl-6">
+        <p class="text-sm uppercase tracking-widest text-[var(--color-brand-charcoal)] mb-3 font-semibold">Our Work</p>
         <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-6">
           Products We've Made<br />
-          <span class="text-[var(--color-brand-accent)]">for UAE Businesses</span>
+          <span class="text-[var(--color-brand-charcoal)]">for UAE Businesses</span>
         </h1>
         <p class="text-lg text-gray-300 max-w-2xl">
           Over 50,000 orders delivered since 2014. Here is a sample of what we create — across print, apparel, merchandise and digital.
@@ -123,7 +123,7 @@ const caseStudies = [
     <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12">What We Produce</h2>
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {Object.entries(categoryMeta).map(([slug, meta]) => (
-        <div class="bg-white rounded-xl border border-gray-200 p-6 hover:border-[var(--color-brand-accent)] hover:shadow-md transition-all text-center">
+        <div class="bg-white rounded-xl border border-gray-200 p-6 hover:border-[var(--color-brand-charcoal)] hover:shadow-md transition-all text-center">
           <p class="text-4xl mb-4">{meta.icon}</p>
           <h3 class="font-bold text-base mb-2">{meta.label}</h3>
           <p class="text-gray-600 text-sm leading-relaxed">{meta.description}</p>
@@ -144,17 +144,17 @@ const caseStudies = [
           {products.map((p) => (
             <a
               href={`/${p.data.category}/${p.id.split('/').slice(-2, -1)[0]}/${p.data.page_slug}`}
-              class="block bg-white rounded-xl border border-gray-200 hover:border-[var(--color-brand-accent)] hover:shadow-md transition-all overflow-hidden group"
+              class="block bg-white rounded-xl border border-gray-200 hover:border-[var(--color-brand-charcoal)] hover:shadow-md transition-all overflow-hidden group"
             >
-              <div class="h-36 bg-gradient-to-br from-[var(--color-brand-accent)]/10 to-[var(--color-brand-accent)]/5 flex items-center justify-center">
+              <div class="h-36 bg-gradient-to-br from-[var(--color-brand-charcoal)]/10 to-[var(--color-brand-charcoal)]/10 flex items-center justify-center">
                 <span class="text-5xl">{meta.icon}</span>
               </div>
               <div class="p-5">
-                <h3 class="font-bold text-base mb-1 group-hover:text-[var(--color-brand-accent)] transition-colors">
+                <h3 class="font-bold text-base mb-1 group-hover:text-[var(--color-brand-charcoal)] transition-colors">
                   {p.data.title}
                 </h3>
                 <p class="text-xs text-gray-500 mb-3">{p.data.product_details.city} · from AED {p.data.product_details.price_from}</p>
-                <span class="text-xs font-semibold text-[var(--color-brand-accent)]">View details →</span>
+                <span class="text-xs font-semibold text-[var(--color-brand-charcoal)]">View details →</span>
               </div>
             </a>
           ))}
@@ -171,18 +171,18 @@ const caseStudies = [
     </p>
     <div class="grid sm:grid-cols-2 gap-8">
       {caseStudies.map((cs) => (
-        <div class="rounded-xl border border-gray-200 p-8 hover:border-[var(--color-brand-accent)] hover:shadow-md transition-all">
+        <div class="rounded-xl border border-gray-200 p-8 hover:border-[var(--color-brand-charcoal)] hover:shadow-md transition-all">
           <div class="flex items-start gap-4 mb-4">
             <span class="text-4xl">{cs.icon}</span>
             <div>
               <p class="font-bold text-base leading-snug">{cs.client}</p>
-              <span class="inline-block mt-1 text-xs font-semibold uppercase tracking-wide bg-[var(--color-brand-accent)]/10 text-[var(--color-brand-accent)] px-2 py-0.5 rounded">
+              <span class="inline-block mt-1 text-xs font-semibold uppercase tracking-wide bg-[var(--color-brand-charcoal)]/10 text-[var(--color-brand-charcoal)] px-2 py-0.5 rounded">
                 {categoryMeta[cs.category]?.label ?? cs.category}
               </span>
             </div>
           </div>
           <p class="text-gray-700 text-sm leading-relaxed mb-4">{cs.description}</p>
-          <p class="text-xl font-extrabold text-[var(--color-brand-accent)]">{cs.stat}</p>
+          <p class="text-xl font-extrabold text-[var(--color-brand-charcoal)]">{cs.stat}</p>
         </div>
       ))}
     </div>
@@ -195,7 +195,7 @@ const caseStudies = [
       <p class="text-gray-300 mb-8">Tell us what you need and we'll send a tailored quote within the hour.</p>
       <a
         href="/contact"
-        class="inline-block bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-dark)] text-white font-semibold px-8 py-4 rounded-lg transition-colors text-lg"
+        class="inline-block bg-[var(--color-brand-charcoal)] hover:bg-[var(--color-brand-charcoal-light)] text-white font-semibold px-8 py-4 rounded-lg transition-colors text-lg"
       >
         Get a Quote →
       </a>
