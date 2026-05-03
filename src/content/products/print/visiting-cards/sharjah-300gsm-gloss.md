@@ -10,7 +10,7 @@ date_published: "2026-05-02"
 date_modified: "2026-05-02"
 
 # ── SEO Core ─────────────────────────────────────────────────────────────────
-title: "300GSM Gloss Visiting Cards Sharjah | Fast Delivery | BrandName"
+title: "300GSM Gloss Visiting Cards Sharjah | Fast Delivery | Upshot Solutions"
 description: "Order 300gsm gloss visiting cards in Sharjah. 48–72 hours delivery, from 100 units. Bulk pricing available. Get an instant quote today."
 canonical: "/print/visiting-cards/sharjah-300gsm-gloss"
 
@@ -132,7 +132,7 @@ related:
 
 300GSM stock · Full-colour CMYK · Same-day dispatch available. Order online and get fast delivery to Sharjah and across the UAE.
 
-### Why Choose BrandName for Visiting Cards in Sharjah?
+### Why Choose Upshot Solutions for Visiting Cards in Sharjah?
 
 - **48–72 hours turnaround** — order before 12pm for same-day dispatch
 - **Premium 300GSM Gloss quality** — gloss finish gives a shiny, vibrant surface that makes colours pop.

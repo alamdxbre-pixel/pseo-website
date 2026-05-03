@@ -10,7 +10,7 @@ date_published: "2026-05-02"
 date_modified: "2026-05-02"
 
 # ── SEO Core ─────────────────────────────────────────────────────────────────
-title: "300GSM Matt Visiting Cards Sharjah | Fast Delivery | BrandName"
+title: "300GSM Matt Visiting Cards Sharjah | Fast Delivery | Upshot Solutions"
 description: "Order 300gsm matt visiting cards in Sharjah. 48–72 hours delivery, from 100 units. Bulk pricing available. Get an instant quote today."
 canonical: "/print/visiting-cards/sharjah-300gsm-matt"
 
@@ -132,7 +132,7 @@ related:
 
 300GSM stock · Full-colour CMYK · Elegant matte finish. Order online and get fast delivery to Sharjah and across the UAE.
 
-### Why Choose BrandName for Visiting Cards in Sharjah?
+### Why Choose Upshot Solutions for Visiting Cards in Sharjah?
 
 - **48–72 hours turnaround** — order before 12pm for same-day dispatch
 - **Premium 300GSM Matt quality** — matt finish offers a premium, non-reflective surface with a soft feel.

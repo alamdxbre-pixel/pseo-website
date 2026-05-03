@@ -10,7 +10,7 @@ date_published: "2026-05-01"
 date_modified: "2026-05-01"
 
 # ── SEO Core ─────────────────────────────────────────────────────────────────
-title: "300GSM Matt Visiting Cards Dubai | Premium Soft-Touch | BrandName"
+title: "300GSM Matt Visiting Cards Dubai | Upshot Solutions"
 description: "Elegant 300GSM matt finish visiting cards in Dubai. Soft-touch texture for a sophisticated corporate look. Delivered in 24–48hrs. Order from 100 cards."
 canonical: "/print/visiting-cards/dubai-300gsm-matt"
 

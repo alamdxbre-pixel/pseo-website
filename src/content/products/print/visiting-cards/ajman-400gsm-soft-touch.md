@@ -10,7 +10,7 @@ date_published: "2026-05-02"
 date_modified: "2026-05-02"
 
 # ── SEO Core ─────────────────────────────────────────────────────────────────
-title: "400GSM Soft Touch Visiting Cards Ajman | Fast Delivery | BrandName"
+title: "400GSM Soft Touch Cards Ajman | Upshot Solutions"
 description: "Order 400gsm soft touch visiting cards in Ajman. 48–72 hours delivery, from 100 units. Bulk pricing available. Get an instant quote today."
 canonical: "/print/visiting-cards/ajman-400gsm-soft-touch"
 
@@ -132,7 +132,7 @@ related:
 
 400GSM ultra-thick · Soft-touch lamination · Premium executive cards. Order online and get fast delivery to Ajman and across the UAE.
 
-### Why Choose BrandName for Visiting Cards in Ajman?
+### Why Choose Upshot Solutions for Visiting Cards in Ajman?
 
 - **48–72 hours turnaround** — order before 12pm for same-day dispatch
 - **Premium 400GSM Soft Touch quality** — soft-touch lamination creates a velvety, luxurious feel.

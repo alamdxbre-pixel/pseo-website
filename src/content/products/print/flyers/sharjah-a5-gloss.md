@@ -10,7 +10,7 @@ date_published: "2026-05-02"
 date_modified: "2026-05-02"
 
 # ── SEO Core ─────────────────────────────────────────────────────────────────
-title: "A5 Gloss Flyers Sharjah | Fast Delivery | BrandName"
+title: "A5 Gloss Flyers Sharjah | Fast Delivery | Upshot Solutions"
 description: "Order a5 gloss flyers in Sharjah. 48–72 hours delivery, from 250 units. Bulk pricing available. Get an instant quote today."
 canonical: "/print/flyers/sharjah-a5-gloss"
 
@@ -132,7 +132,7 @@ related:
 
 A5 size · 150GSM gloss paper · Vivid full-colour print. Order online and get fast delivery to Sharjah and across the UAE.
 
-### Why Choose BrandName for Flyers in Sharjah?
+### Why Choose Upshot Solutions for Flyers in Sharjah?
 
 - **48–72 hours turnaround** — order before 12pm for same-day dispatch
 - **Premium A5 Gloss quality** — gloss coating enhances colour vibrancy for eye-catching promotions.

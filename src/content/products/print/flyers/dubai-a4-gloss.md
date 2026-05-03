@@ -10,7 +10,7 @@ date_published: "2026-05-02"
 date_modified: "2026-05-02"
 
 # ── SEO Core ─────────────────────────────────────────────────────────────────
-title: "A4 Gloss Flyers Dubai | Fast Delivery | BrandName"
+title: "A4 Gloss Flyers Dubai | Fast Delivery | Upshot Solutions"
 description: "Order a4 gloss flyers in Dubai. 24–48 hours delivery, from 250 units. Bulk pricing available. Get an instant quote today."
 canonical: "/print/flyers/dubai-a4-gloss"
 
@@ -132,7 +132,7 @@ related:
 
 A4 size · 150GSM gloss paper · Vivid full-colour print. Order online and get fast delivery to Dubai and across the UAE.
 
-### Why Choose BrandName for Flyers in Dubai?
+### Why Choose Upshot Solutions for Flyers in Dubai?
 
 - **24–48 hours turnaround** — order before 12pm for same-day dispatch
 - **Premium A4 Gloss quality** — larger format for maximum visual impact at exhibitions and events.

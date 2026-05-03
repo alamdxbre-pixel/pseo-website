@@ -78,7 +78,7 @@ const productJsonLd: Record<string, unknown> = {
   name: title,
   description,
   ...(sku ? { sku } : {}),
-  brand: { '@type': 'Brand', name: 'BrandName' },
+  brand: { '@type': 'Brand', name: 'Upshot Solutions' },
 };
 
 if (schema.aggregate_rating) {
@@ -96,7 +96,7 @@ if (schema.offers) {
     price: schema.offers.price,
     priceCurrency: schema.offers.price_currency ?? 'AED',
     availability: schema.offers.availability ?? 'https://schema.org/InStock',
-    seller: { '@type': 'Organization', name: 'BrandName' },
+    seller: { '@type': 'Organization', name: 'Upshot Solutions' },
     ...(schema.offers.valid_through ? { priceValidUntil: schema.offers.valid_through } : {}),
   };
 }

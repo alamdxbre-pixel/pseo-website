@@ -105,12 +105,12 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
           <a
             href="/"
             className="flex items-center gap-2 font-bold text-xl text-[var(--color-brand-charcoal)] hover:text-[var(--color-brand-accent)] transition-colors"
-            aria-label="BrandName — home"
+            aria-label="Upshot Solutions — home"
           >
             <span className="w-8 h-8 rounded-lg bg-[var(--color-brand-accent)] text-white flex items-center justify-center text-sm font-bold">
-              B
+              U
             </span>
-            BrandName
+            Upshot Solutions
           </a>
 
           {/* ── Desktop nav ──────────────────────────────────────────────── */}
@@ -123,7 +123,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               className={cn(
                 'px-3 py-2 rounded-md text-sm font-medium transition-colors',
                 isActive('/')
-                  ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                  ? 'text-[var(--color-brand-accent)] bg-orange-50'
                   : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
               )}
               aria-current={isActive('/') ? 'page' : undefined}
@@ -142,7 +142,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 className={cn(
                   'flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-colors',
                   isProductsActive || productsOpen
-                    ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                    ? 'text-[var(--color-brand-accent)] bg-orange-50'
                     : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
                 )}
               >
@@ -184,8 +184,8 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                         className={cn(
                           'flex items-start gap-3 p-4 rounded-xl border transition-all',
                           currentPath.startsWith(cat.href)
-                            ? 'border-[var(--color-brand-accent)] bg-teal-50'
-                            : 'border-slate-100 hover:border-[var(--color-brand-accent)] hover:bg-teal-50'
+                            ? 'border-[var(--color-brand-accent)] bg-orange-50'
+                            : 'border-slate-100 hover:border-[var(--color-brand-accent)] hover:bg-orange-50'
                         )}
                       >
                         <span className="text-2xl" aria-hidden="true">
@@ -222,7 +222,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 className={cn(
                   'px-3 py-2 rounded-md text-sm font-medium transition-colors',
                   isActive(link.href)
-                    ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                    ? 'text-[var(--color-brand-accent)] bg-orange-50'
                     : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
                 )}
                 aria-current={isActive(link.href) ? 'page' : undefined}
@@ -285,7 +285,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
       >
         <div className="flex items-center justify-between p-4 border-b border-slate-100">
           <a href="/" className="font-bold text-lg text-[var(--color-brand-charcoal)]">
-            BrandName
+            Upshot Solutions
           </a>
           <button
             onClick={() => setMobileOpen(false)}
@@ -305,7 +305,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             className={cn(
               'flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-colors',
               isActive('/')
-                ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                ? 'text-[var(--color-brand-accent)] bg-orange-50'
                 : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
             )}
             aria-current={isActive('/') ? 'page' : undefined}
@@ -321,7 +321,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               className={cn(
                 'flex items-center justify-between w-full px-3 py-3 rounded-lg text-sm font-medium transition-colors',
                 isProductsActive
-                  ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                  ? 'text-[var(--color-brand-accent)] bg-orange-50'
                   : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
               )}
             >
@@ -373,7 +373,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               className={cn(
                 'flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-colors',
                 isActive(link.href)
-                  ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                  ? 'text-[var(--color-brand-accent)] bg-orange-50'
                   : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
               )}
               aria-current={isActive(link.href) ? 'page' : undefined}

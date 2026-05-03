@@ -10,7 +10,7 @@ date_published: "2026-05-01"
 date_modified: "2026-05-01"
 
 # ── SEO Core ─────────────────────────────────────────────────────────────────
-title: "300GSM Gloss Visiting Cards Dubai | 24hr Delivery | BrandName"
+title: "300GSM Gloss Visiting Cards Dubai | 24hr Delivery | Upshot Solutions"
 description: "Premium 300GSM gloss visiting cards in Dubai. 24–48hr delivery, bulk from 100 cards. Same-day dispatch available. Request a quote today."
 canonical: "/print/visiting-cards/dubai-300gsm-gloss"
 

@@ -6,14 +6,14 @@
 
 /* ── Design Tokens ─────────────────────────────────────── */
 @theme {
-  /* Brand colours */
-  --color-brand-accent:         #0D7377;
-  --color-brand-accent-light:   #14A085;
-  --color-brand-accent-dark:    #0A5A5E;
-  --color-brand-charcoal:       #1C2028;
-  --color-brand-charcoal-light: #3D4451;
-  --color-brand-cream:          #F8F9FA;
-  --color-brand-cream-dark:     #EDF0F2;
+  /* Brand colours — Upshot Solutions */
+  --color-brand-accent:         #FF6A00;
+  --color-brand-accent-light:   #FF8533;
+  --color-brand-accent-dark:    #D95700;
+  --color-brand-charcoal:       #0B1F3B;
+  --color-brand-charcoal-light: #222831;
+  --color-brand-cream:          #F2F4F7;
+  --color-brand-cream-dark:     #E4E8EE;
 
   /* Typography */
   --font-family-sans:    "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
@@ -61,24 +61,24 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222 15% 13%;
+    --foreground: 213 57% 13%;
     --card: 0 0% 100%;
-    --card-foreground: 222 15% 13%;
+    --card-foreground: 213 57% 13%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222 15% 13%;
-    --primary: 183 82% 26%;
+    --popover-foreground: 213 57% 13%;
+    --primary: 25 100% 50%;
     --primary-foreground: 0 0% 100%;
     --secondary: 210 11% 96%;
-    --secondary-foreground: 222 15% 13%;
+    --secondary-foreground: 213 57% 13%;
     --muted: 210 11% 96%;
     --muted-foreground: 215 14% 34%;
-    --accent: 183 82% 26%;
+    --accent: 25 100% 50%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     --border: 214 12% 89%;
     --input: 214 12% 89%;
-    --ring: 183 82% 26%;
+    --ring: 25 100% 50%;
     --radius: 0.5rem;
   }
 }
