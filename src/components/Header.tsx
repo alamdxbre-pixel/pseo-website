@@ -123,7 +123,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               className={cn(
                 'px-3 py-2 rounded-md text-sm font-medium transition-colors',
                 isActive('/')
-                  ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                  ? 'text-[var(--color-brand-accent)] bg-amber-50'
                   : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
               )}
               aria-current={isActive('/') ? 'page' : undefined}
@@ -142,7 +142,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 className={cn(
                   'flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium transition-colors',
                   isProductsActive || productsOpen
-                    ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                    ? 'text-[var(--color-brand-accent)] bg-amber-50'
                     : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
                 )}
               >
@@ -184,8 +184,8 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                         className={cn(
                           'flex items-start gap-3 p-4 rounded-xl border transition-all',
                           currentPath.startsWith(cat.href)
-                            ? 'border-[var(--color-brand-accent)] bg-teal-50'
-                            : 'border-slate-100 hover:border-[var(--color-brand-accent)] hover:bg-teal-50'
+                            ? 'border-[var(--color-brand-accent)] bg-amber-50'
+                            : 'border-slate-100 hover:border-[var(--color-brand-accent)] hover:bg-amber-50'
                         )}
                       >
                         <span className="text-2xl" aria-hidden="true">
@@ -222,7 +222,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                 className={cn(
                   'px-3 py-2 rounded-md text-sm font-medium transition-colors',
                   isActive(link.href)
-                    ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                    ? 'text-[var(--color-brand-accent)] bg-amber-50'
                     : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
                 )}
                 aria-current={isActive(link.href) ? 'page' : undefined}
@@ -305,7 +305,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             className={cn(
               'flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-colors',
               isActive('/')
-                ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                ? 'text-[var(--color-brand-accent)] bg-amber-50'
                 : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
             )}
             aria-current={isActive('/') ? 'page' : undefined}
@@ -321,7 +321,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               className={cn(
                 'flex items-center justify-between w-full px-3 py-3 rounded-lg text-sm font-medium transition-colors',
                 isProductsActive
-                  ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                  ? 'text-[var(--color-brand-accent)] bg-amber-50'
                   : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
               )}
             >
@@ -344,7 +344,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             </button>
 
             {mobileProductsOpen && (
-              <div className="mt-1 ml-3 space-y-1 border-l-2 border-teal-100 pl-3">
+              <div className="mt-1 ml-3 space-y-1 border-l-2 border-amber-100 pl-3">
                 {categories.map((cat) => (
                   <a
                     key={cat.href}
@@ -373,7 +373,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               className={cn(
                 'flex items-center px-3 py-3 rounded-lg text-sm font-medium transition-colors',
                 isActive(link.href)
-                  ? 'text-[var(--color-brand-accent)] bg-teal-50'
+                  ? 'text-[var(--color-brand-accent)] bg-amber-50'
                   : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
               )}
               aria-current={isActive(link.href) ? 'page' : undefined}

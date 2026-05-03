@@ -44,7 +44,7 @@ blocks:
     headline: "Last chance — offer expires 5 December 2025"
     button: "Claim 30% Off Now"
     url: "https://wa.me/971500000000?text=Hi%2C+I%27d+like+the+National+Day+discount+on+visiting+cards."
-    background_color: "#0D7377"
+    background_color: "#C49A2A"
 ---
 
 Stock up before the holidays. Our team is available 7 days a week to assist with artwork, proofing, and bulk orders.
