@@ -84,7 +84,7 @@ function buildFrontmatter(product, city, variant, relatedSlugs) {
   const displayCity = city.name;
 
   // Title: keep under 70 chars — product + variant + city + brand hint
-  const title = `${displayVariant} ${displayProduct} ${displayCity} | Fast Delivery | BrandName`;
+  const title = `${displayVariant} ${displayProduct} ${displayCity} | Fast Delivery | BuoyantSolutions`;
   const description = `Order ${displayVariant.toLowerCase()} ${displayProduct.toLowerCase()} in ${displayCity}. ${city.turnaround} delivery, from ${product.minQuantity} units. Bulk pricing available. Get an instant quote today.`;
 
   const heroHeadline = `Premium ${displayVariant} ${displayProduct}, Delivered Across ${displayCity}`;
@@ -222,7 +222,7 @@ ${relatedYaml}
 
 ${variant.description}. Order online and get fast delivery to ${displayCity} and across the UAE.
 
-### Why Choose BrandName for ${displayProduct} in ${displayCity}?
+### Why Choose BuoyantSolutions for ${displayProduct} in ${displayCity}?
 
 - **${city.turnaround} turnaround** — order before 12pm for same-day dispatch
 - **Premium ${displayVariant} quality** — ${variant.finish.toLowerCase()}

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { cn } from '@/lib/utils';
+import { SHOW_CAMPAIGNS, SHOW_SERVICES } from '@/lib/flags';
 
 const categories = [
   {
@@ -28,14 +29,16 @@ const categories = [
   },
 ];
 
-const navLinks = [
+const allNavLinks = [
   { label: 'Home', href: '/' },
   // Products handled separately (mega-menu)
-  { label: 'Campaigns', href: '/campaigns' },
-  { label: 'Portfolio', href: '/portfolio' },
+  ...(SHOW_CAMPAIGNS ? [{ label: 'Campaigns', href: '/campaigns' }] : []),
+  ...(SHOW_SERVICES ? [{ label: 'Services', href: '/services' }] : []),
   { label: 'About Us', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];
+
+const navLinks = allNavLinks;
 
 interface HeaderProps {
   currentPath?: string;
@@ -104,13 +107,13 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
           {/* ── Logo ─────────────────────────────────────────────────────── */}
           <a
             href="/"
-            className="flex items-center gap-2 font-bold text-xl text-[var(--color-brand-charcoal)] hover:text-[var(--color-brand-accent)] transition-colors"
-            aria-label="BrandName — home"
+            className="flex items-center gap-2 text-xl text-[var(--color-brand-charcoal)] hover:text-[var(--color-brand-accent)] transition-colors"
+            aria-label="BuoyantSolutions — home"
           >
             <span className="w-8 h-8 rounded-lg bg-[var(--color-brand-accent)] text-white flex items-center justify-center text-sm font-bold">
               B
             </span>
-            BrandName
+            <span className="font-light">Buoyant<span className="font-bold">Solutions</span></span>
           </a>
 
           {/* ── Desktop nav ──────────────────────────────────────────────── */}
@@ -146,7 +149,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
                     : 'text-slate-700 hover:text-[var(--color-brand-accent)] hover:bg-slate-50'
                 )}
               >
-                Products
+                Services
                 <svg
                   className={cn(
                     'w-4 h-4 transition-transform duration-200',

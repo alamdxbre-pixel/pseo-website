@@ -206,7 +206,7 @@ const categoriesCollection = defineCollection({
   }),
 });
 
-// ── Pages collection (static pages: home, about, contact, portfolio) ──────────
+// ── Pages collection (static pages: home, about, contact, services) ──────────
 
 const pagesCollection = defineCollection({
   type: 'content',

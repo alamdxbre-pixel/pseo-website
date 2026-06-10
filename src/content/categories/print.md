@@ -1,5 +1,5 @@
 ---
-title: "Print Services Dubai | Visiting Cards, Stationery & Banners | BrandName"
+title: "Print Services Dubai | Visiting Cards, Stationery & Banners | BuoyantSolutions"
 description: "Premium print services in Dubai — visiting cards, office stationery, banners, flyers and more. Fast delivery across UAE. Order from 100 units."
 slug: "print"
 nav_label: "Print"

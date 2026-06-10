@@ -5,6 +5,8 @@
  * so it can be conditionally included without JS.
  */
 
+import { SHOW_CAMPAIGNS, SHOW_SERVICES } from '@/lib/flags';
+
 const currentYear = new Date().getFullYear();
 
 const cities = [
@@ -25,8 +27,8 @@ const categories = [
 
 const company = [
   { label: 'About Us', href: '/about' },
-  { label: 'Portfolio', href: '/portfolio' },
-  { label: 'Campaigns & Offers', href: '/campaigns' },
+  ...(SHOW_SERVICES ? [{ label: 'Services', href: '/services' }] : []),
+  ...(SHOW_CAMPAIGNS ? [{ label: 'Campaigns & Offers', href: '/campaigns' }] : []),
   { label: 'Contact', href: '/contact' },
 ];
 
@@ -63,11 +65,11 @@ const trustBadges = [
 
       <!-- Brand column -->
       <div class="lg:col-span-1">
-        <a href="/" class="flex items-center gap-2 font-bold text-xl mb-4 hover:text-[var(--color-brand-accent)] transition-colors">
+        <a href="/" class="flex items-center gap-2 text-xl mb-4 hover:text-[var(--color-brand-accent)] transition-colors" aria-label="BuoyantSolutions — home">
           <span class="w-8 h-8 rounded-lg bg-[var(--color-brand-accent)] text-white flex items-center justify-center text-sm font-bold">
             B
           </span>
-          BrandName
+          <span class="font-light">Buoyant<span class="font-bold">Solutions</span></span>
         </a>
         <p class="text-sm text-white/60 leading-relaxed mb-6">
           Premium marketing products across UAE. Fast delivery, competitive pricing, and outstanding quality for every budget.
@@ -143,7 +145,7 @@ const trustBadges = [
   <!-- ── Bottom bar ─────────────────────────────────────────────────────────── -->
   <div class="border-t border-white/10">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
-      <p>© {currentYear} BrandName. All rights reserved.</p>
+      <p>© {currentYear} Buoyant Solutions L.L.C FZ</p>
       <div class="flex items-center gap-4">
         <a href="/privacy" class="hover:text-white transition-colors">Privacy Policy</a>
         <a href="/terms" class="hover:text-white transition-colors">Terms of Use</a>

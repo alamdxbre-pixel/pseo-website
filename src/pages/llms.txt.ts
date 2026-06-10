@@ -67,7 +67,7 @@ export async function GET() {
     `${siteUrl}/campaigns/{slug}/             — Time-limited campaign offers`,
     `${siteUrl}/about/                        — Company, team, certifications`,
     `${siteUrl}/contact/                      — WhatsApp, email, address`,
-    `${siteUrl}/portfolio/                    — Work samples and case studies`,
+    `${siteUrl}/services/                    — Work samples and case studies`,
     `${siteUrl}/sitemap-index.xml             — XML sitemap`,
     `${siteUrl}/robots.txt                    — Crawler directives`,
     '',

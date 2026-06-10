@@ -14,7 +14,7 @@
  * All themes share Deep Navy (#0B1F3B) as the dark structural colour (themes 1-4).
  * Theme 0 uses the original Charcoal (#1C2028) as dark colour.
  */
-export const ACTIVE_THEME = 4 as 0 | 1 | 2 | 3 | 4;
+export const ACTIVE_THEME = 1 as 0 | 1 | 2 | 3 | 4;
 
 /** true → photo background cards  |  false → SVG icon cards */
 export const CATEGORY_PHOTO_CARDS = true;
@@ -49,3 +49,9 @@ export const BROWSE_IN_TICKER = true;
  * false → original geometric diagonal-line pattern background
  */
 export const HERO_PRINTER_BG = true;
+
+/** true → show Campaigns section in navigation  |  false → hide Campaigns */
+export const SHOW_CAMPAIGNS = false;
+
+/** true → show Services section in navigation  |  false → hide Services */
+export const SHOW_SERVICES = false;
