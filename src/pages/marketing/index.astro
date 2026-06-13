@@ -1,0 +1,565 @@
+---
+import MarketingBase from '@/layouts/MarketingBase.astro';
+import { MARKETING_SERVICES } from '@/lib/marketing-services';
+
+const siteUrl  = import.meta.env.SITE ?? '';
+const waNumber = import.meta.env.WHATSAPP_NUMBER ?? '97152895506';
+const waHref   = `https://wa.me/${waNumber}?text=${encodeURIComponent("Hi, I'd like to get a proposal for my marketing project.")}`;
+
+const industries = [
+  'Restaurants and Cafes',
+  'Retail and Hospitality',
+  'Construction and Contracting',
+  'Logistics and Transport',
+  'Corporate and B2B Services',
+  'Events and Exhibitions',
+];
+
+const monthlyPlans = [
+  {
+    name: 'Essential Growth',
+    price: 'AED 3,500',
+    period: '/month',
+    tag: 'Regular',
+    featured: false,
+    items: [
+      'Monthly campaign management (Meta or Google)',
+      '4–6 creative updates/month',
+      'Basic optimisation and audience refinement',
+      'Monthly report and action plan',
+      'Email/WhatsApp support during business hours',
+    ],
+  },
+  {
+    name: 'Performance Growth',
+    price: 'AED 6,500',
+    period: '/month',
+    tag: 'Most Popular',
+    featured: true,
+    items: [
+      'Meta + Google active management',
+      'Retargeting and offer testing',
+      '8–12 creative updates/month',
+      'Landing page update support',
+      'Bi-weekly optimisation review',
+      'Monthly strategy call',
+    ],
+  },
+  {
+    name: 'Scale Growth',
+    price: 'AED 10,500',
+    period: '/month',
+    tag: 'Advanced',
+    featured: false,
+    items: [
+      'Full-funnel strategy and multi-audience testing',
+      'Higher frequency optimisation cycles',
+      'Cross-channel campaign coordination',
+      'Priority creative queue',
+      'Weekly performance pulse',
+      'Monthly leadership report',
+    ],
+  },
+];
+
+const categoryPackages = [
+  {
+    industry: 'Retail & Hospitality',
+    price: 'AED 18,000',
+    retainer: 'AED 4,500/month',
+    desc: 'Campaign concept, brochure/leaflet assets, banner and poster designs, in-store signage concepts, outdoor advertising artwork, and digital launch setup.',
+  },
+  {
+    industry: 'Construction & Contracting',
+    price: 'AED 20,000',
+    retainer: 'AED 5,500/month',
+    desc: 'Company profile/brochure design, service leaflet set, hoarding and banner concepts, outdoor signage artwork, project branding templates, and lead-gen campaign setup.',
+  },
+  {
+    industry: 'Logistics & Transport',
+    price: 'AED 19,000',
+    retainer: 'AED 5,000/month',
+    desc: 'Brochure/leaflet collateral, fleet branding concept visuals, branch signage and banner concepts, outdoor advertising artwork, route-area direct marketing plan, and digital campaign setup.',
+  },
+  {
+    industry: 'Corporate & B2B',
+    price: 'AED 22,000',
+    retainer: 'AED 6,500/month',
+    desc: 'Positioning campaign concept, company profile/collateral suite, banner and signage concepts, direct marketing support assets, and digital lead generation setup.',
+  },
+  {
+    industry: 'Events & Exhibitions',
+    price: 'AED 17,500',
+    retainer: 'Available for organiser teams',
+    desc: 'Pre-event campaign concept, brochure/leaflet set, banners, posters, and pull-up stand designs, event signage concepts, remarketing setup, and post-event campaign summary.',
+    perEvent: true,
+  },
+];
+
+const addOns = [
+  'Extra brochure pages', 'Extra packaging SKUs', 'Additional signage concepts',
+  'Additional banner units', 'Additional website pages', 'Content writing support',
+  'Product photo/video shoot coordination', 'Printing & fabrication management',
+  'Outdoor media planning & booking support', 'Direct marketing distribution support',
+];
+
+const howWeWork = [
+  { step: '01', title: 'Discovery & Brief Collection', desc: 'We start by understanding your business, goals, audience, and budget — no assumptions, no templates.' },
+  { step: '02', title: 'Strategy & Deliverables Map', desc: 'A clear plan covering what will be produced, by when, and through which channels.' },
+  { step: '03', title: 'Design & Approvals', desc: 'All creative work presented for your approval before any production begins. Up to 2 revision rounds per deliverable.' },
+  { step: '04', title: 'Production & Launch Coordination', desc: 'We coordinate all suppliers, production, and launch activities — you focus on your business.' },
+  { step: '05', title: 'Reporting & Optimisation', desc: 'Clear completion and performance reports with actionable recommendations for what comes next.' },
+];
+
+const whyUs = [
+  { title: 'One Point of Contact', desc: 'All campaign activities — creative, print, digital, distribution — managed through a single dedicated account lead.' },
+  { title: 'Hybrid Physical + Digital', desc: 'We execute both physical campaigns (print, signage, direct marketing) and digital growth (Meta, Google) under one roof.' },
+  { title: 'Dubai Market Experience', desc: 'Practical knowledge of Dubai supplier networks, market behaviour, and campaign execution timelines.' },
+  { title: 'Clear Scope, Clear Costs', desc: 'Every project starts with a defined scope and transparent pricing. No hidden fees, no vague deliverables.' },
+  { title: 'Flexible Engagement', desc: 'Begin with a one-time launch package. Monthly management is available to add at any point if ongoing support is needed.' },
+];
+
+const faqs = [
+  { q: 'Is ad spend included in package prices?', a: 'No. Ad spend for Meta, Google, or any media placement is always separate from our service fees and billed directly or transparently passed through.' },
+  { q: 'Are printing and signage fabrication included?', a: 'No. Production, fabrication, installation, and media booking are billed separately at cost. We coordinate and manage these on your behalf.' },
+  { q: 'Is monthly commitment required?', a: 'No. Monthly plans are completely optional and only start if you request ongoing support after a one-time package or independently.' },
+  { q: 'Can I start with one package and upgrade later?', a: 'Yes. You can start with a one-time startup package and move to a monthly growth plan at any point. There is no obligation and no penalty for choosing to continue.' },
+  { q: 'Do you support construction and logistics businesses?', a: 'Yes. We have tailored launch packages for construction, contracting, logistics, and transport businesses — see the category packages section above.' },
+];
+
+const startupInclusions = [
+  'Brand starter kit (basic visual direction)',
+  'Business stamp design and production coordination',
+  'Brochure design (up to 4 pages)',
+  'Menu/catalog design (up to 8 pages)',
+  'Packaging branding concept (box, bag, cup style direction)',
+  'Cup branding artwork (1 size)',
+  'Main storefront signage concept (1 design)',
+  'Roll-up banner design (1 unit artwork)',
+  'Outdoor advertising artwork concept (1 format)',
+  'One-page website or landing page setup',
+  'Digital launch setup (Meta + Google basic setup)',
+  'Launch creatives (up to 5 social post designs)',
+];
+
+const startupExclusions = [
+  'Printing, fabrication, and installation costs',
+  'Media booking costs (outdoor, portals, third-party media)',
+  'Ad spend for Meta/Google',
+  'Government approvals, permits, and authority fees',
+  'Product photography/video production (quoted separately)',
+];
+
+const schemaJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Buoyant Marketing',
+  description: 'Full-service advertising and marketing agency in Dubai offering advertising management, campaign creation, brochures and leaflets, direct marketing, and digital marketing services.',
+  url: `${siteUrl}/marketing`,
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'AE',
+    addressRegion: 'Dubai',
+    addressLocality: 'Dubai',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: 25.204849, longitude: 55.270783 },
+  areaServed: ['Dubai', 'Abu Dhabi', 'Sharjah', 'UAE'],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Marketing Services Dubai',
+    itemListElement: MARKETING_SERVICES.map((s, i) => ({
+      '@type': 'Offer',
+      position: i + 1,
+      name: s.title,
+      url: `${siteUrl}/marketing/${s.slug}`,
+    })),
+  },
+});
+---
+
+<MarketingBase
+  title="Advertising & Marketing Agency Dubai | Buoyant Marketing"
+  description="One agency. Complete advertising and marketing solutions in Dubai — campaign creation, brochures, direct marketing, and digital performance marketing. Flexible packages, no lock-in."
+  canonical="/marketing"
+  keywords="advertising agency Dubai, marketing agency UAE, campaign creation Dubai, digital marketing UAE, direct marketing Dubai, brochure design Dubai"
+  schemaJson={schemaJson}
+>
+
+  <!-- ── Hero ───────────────────────────────────────────────── -->
+  <section
+    style="
+      position:relative;overflow:hidden;
+      padding:6rem 1.5rem 5rem;
+      background:
+        radial-gradient(ellipse 70% 50% at 15% 50%, rgba(123,47,247,0.18) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 40% at 85% 55%, rgba(247,37,133,0.14) 0%, transparent 60%),
+        #07080F;
+    "
+  >
+    <div style="position:absolute;inset:0;pointer-events:none;" aria-hidden="true">
+      <div style="position:absolute;top:22%;left:-5%;width:55%;height:1px;background:linear-gradient(90deg,transparent,rgba(123,47,247,0.3),transparent);transform:rotate(-8deg);"></div>
+      <div style="position:absolute;top:68%;right:-5%;width:45%;height:1px;background:linear-gradient(90deg,transparent,rgba(247,37,133,0.25),transparent);transform:rotate(6deg);"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto text-center" style="position:relative;z-index:1;">
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-6" style="color:rgba(167,139,250,0.8);">
+        Dubai's Full-Service Advertising & Marketing Agency
+      </p>
+
+      <h1 class="font-bold leading-tight mb-6" style="font-size:clamp(2.25rem,5.5vw,4rem);letter-spacing:-0.03em;">
+        One Agency.<br />Complete Advertising &amp;<br />
+        <span style="background:linear-gradient(90deg,#A78BFA,#F472B6,#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+          Marketing Solutions.
+        </span>
+      </h1>
+
+      <p class="mx-auto mb-10 leading-relaxed" style="max-width:42rem;font-size:1.0625rem;color:rgba(255,255,255,0.5);">
+        From campaign creation and brochure publication to direct marketing, signage coordination, websites, and digital performance marketing.
+      </p>
+
+      <p class="text-sm" style="color:rgba(255,255,255,0.3);font-style:italic;margin-bottom:2.5rem;">
+        One-time packages with optional monthly management — add ongoing support whenever it makes sense for your business.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Core Services ──────────────────────────────────────── -->
+  <section id="services" class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24">
+    <div class="text-center mb-14">
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style="color:rgba(167,139,250,0.7);">Core Services</p>
+      <h2 class="font-bold mb-4" style="font-size:clamp(1.75rem,4vw,2.5rem);letter-spacing:-0.02em;">What We Do</h2>
+      <p style="color:rgba(255,255,255,0.4);max-width:36rem;margin:0 auto;font-size:1rem;line-height:1.7;">
+        Five integrated service areas managed under one accountable team — from first concept to final delivery.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {MARKETING_SERVICES.map((service) => (
+        <a
+          href={`/marketing/${service.slug}`}
+          class="group block rounded-2xl transition-transform duration-300 hover:-translate-y-1"
+          style={`padding:1px;background:linear-gradient(135deg,${service.gradFrom},${service.gradMid},${service.gradTo});`}
+        >
+          <div class="h-full rounded-[calc(1rem-1px)] p-7 flex flex-col" style="background:#0D0F1E;">
+            <div class="w-11 h-11 rounded-xl mb-5 flex items-center justify-center shrink-0" style={`background:${service.gradFrom}18;`}>
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke-width="1.75" aria-hidden="true" style={`stroke:${service.gradFrom};`}>
+                <path stroke-linecap="round" stroke-linejoin="round" d={service.icon} />
+              </svg>
+            </div>
+            <h3 class="font-bold mb-2.5 leading-snug" style="font-size:1.0625rem;color:#fff;">{service.title}</h3>
+            <p class="text-sm leading-relaxed flex-1 mb-5" style="color:rgba(255,255,255,0.4);">{service.tagline}</p>
+            <span class="inline-flex items-center gap-1.5 text-sm font-semibold transition-all group-hover:gap-2.5" style={`color:${service.gradFrom};`}>
+              Learn More
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </span>
+          </div>
+        </a>
+      ))}
+
+      <!-- 5 cards — make last one span 2 cols on lg to balance the grid -->
+      <div class="hidden lg:block" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ── Industries ──────────────────────────────────────────── -->
+  <section style="background:#0D0F1E;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16">
+      <div class="text-center mb-10">
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style="color:rgba(167,139,250,0.7);">Industries We Serve</p>
+        <p class="text-sm" style="color:rgba(255,255,255,0.35);max-width:36rem;margin:0 auto;">
+          Built for Dubai market behaviour with practical, conversion-focused campaign execution.
+        </p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-3">
+        {industries.map(ind => (
+          <span class="px-5 py-2.5 rounded-full text-sm font-medium" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.55);">
+            {ind}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Featured Startup Package ──────────────────────────── -->
+  <section class="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-24">
+    <div class="text-center mb-14">
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style="color:rgba(167,139,250,0.7);">Packages & Pricing</p>
+      <h2 class="font-bold mb-4" style="font-size:clamp(1.75rem,4vw,2.5rem);letter-spacing:-0.02em;">Clear Packages.</h2>
+      <p style="color:rgba(255,255,255,0.4);max-width:36rem;margin:0 auto;font-size:1rem;">
+        Every package is a defined one-time scope with transparent deliverables. Monthly management is available to add at any point.
+      </p>
+    </div>
+
+    <!-- Restaurant & Cafe Startup Package -->
+    <div class="rounded-3xl p-px mb-10" style="background:linear-gradient(135deg,#7B2FF7,#F72585,#E8A030);">
+      <div class="rounded-[calc(1.5rem-1px)]" style="background:#0D0F1E;">
+        <div class="grid lg:grid-cols-[1fr_auto] gap-0">
+
+          <!-- Left: details -->
+          <div class="p-8 sm:p-10 lg:p-12">
+            <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+              <div>
+                <span class="inline-block text-[10px] font-bold uppercase tracking-[0.2em] px-3 py-1 rounded-full mb-3" style="background:rgba(167,139,250,0.15);color:#A78BFA;">Featured Startup Package</span>
+                <h3 class="font-bold text-white" style="font-size:1.5rem;letter-spacing:-0.02em;">Restaurant & Cafe Launch Package</h3>
+              </div>
+              <div class="text-right shrink-0">
+                <p class="font-bold text-white" style="font-size:2rem;letter-spacing:-0.03em;">AED 15,000</p>
+                <p class="text-sm" style="color:rgba(255,255,255,0.35);">One-Time Investment</p>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-x-8 gap-y-2.5 mb-8">
+              {startupInclusions.map(item => (
+                <div class="flex items-start gap-2.5">
+                  <svg class="w-4 h-4 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="color:#A78BFA;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                  </svg>
+                  <span class="text-sm" style="color:rgba(255,255,255,0.65);">{item}</span>
+                </div>
+              ))}
+            </div>
+
+            <div class="flex flex-wrap gap-8 mb-8 text-sm" style="color:rgba(255,255,255,0.4);">
+              <span><strong style="color:rgba(255,255,255,0.7);">Turnaround:</strong> 10–15 working days</span>
+              <span><strong style="color:rgba(255,255,255,0.7);">Revisions:</strong> Up to 2 rounds per deliverable</span>
+            </div>
+
+            <!-- Physical materials note -->
+            <div class="p-5 rounded-xl mb-4" style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.18);">
+              <div class="flex items-start gap-3">
+                <svg class="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" aria-hidden="true" style="color:#A78BFA;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
+                </svg>
+                <p class="text-xs leading-relaxed" style="color:rgba(167,139,250,0.85);">
+                  <strong style="color:#A78BFA;">Package fees cover design, strategy, and campaign management only.</strong> All physical production — printing, banner production, signage fabrication, poster printing, outdoor advertising materials, and installation — is quoted and invoiced separately at cost. We coordinate all suppliers on your behalf.
+                </p>
+              </div>
+            </div>
+
+            <!-- Exclusions -->
+            <div class="p-5 rounded-xl mb-8" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);">
+              <p class="text-[10px] font-bold uppercase tracking-[0.2em] mb-3" style="color:rgba(255,255,255,0.2);">Also Quoted Separately</p>
+              <div class="flex flex-wrap gap-x-6 gap-y-1.5">
+                {startupExclusions.map(ex => (
+                  <span class="text-xs" style="color:rgba(255,255,255,0.3);">— {ex}</span>
+                ))}
+              </div>
+            </div>
+
+            <a
+              href="/marketing/contact"
+              class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-white transition-all hover:opacity-90 hover:scale-105"
+              style="background:linear-gradient(90deg,#7B2FF7,#F72585,#E8A030);font-size:0.9375rem;"
+            >
+              Launch My Brand Package
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Monthly Growth Plans -->
+    <h3 class="font-bold text-center mb-2" style="font-size:1.25rem;letter-spacing:-0.02em;">Optional Monthly Growth Plans</h3>
+    <p class="text-sm text-center mb-8" style="color:rgba(255,255,255,0.3);">Available to add at any point — monthly, 3-month, or 6-month. No obligation after a one-time package.</p>
+
+    <div class="grid sm:grid-cols-3 gap-5 mb-14">
+      {monthlyPlans.map(plan => (
+        <div
+          class="rounded-2xl"
+          style={plan.featured
+            ? `padding:1px;background:linear-gradient(135deg,#7B2FF7,#F72585,#E8A030);`
+            : `border:1px solid rgba(255,255,255,0.07);`}
+        >
+          <div class="h-full rounded-[calc(1rem-1px)] p-7 flex flex-col" style="background:#0D0F1E;">
+            <div class="flex items-start justify-between mb-4">
+              <span
+                class="text-[10px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-full"
+                style={plan.featured
+                  ? `background:rgba(167,139,250,0.15);color:#A78BFA;`
+                  : `background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.35);`}
+              >
+                {plan.tag}
+              </span>
+            </div>
+            <h4 class="font-bold mb-1 text-white" style="font-size:1.0625rem;">{plan.name}</h4>
+            <div class="mb-6">
+              <span class="font-bold" style="font-size:1.75rem;color:#fff;">{plan.price}</span>
+              <span class="text-sm" style="color:rgba(255,255,255,0.3);">{plan.period}</span>
+            </div>
+            <ul class="space-y-2.5 flex-1 mb-7">
+              {plan.items.map(item => (
+                <li class="flex items-start gap-2">
+                  <svg class="w-3.5 h-3.5 shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" style="color:#A78BFA;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+                  </svg>
+                  <span class="text-sm" style="color:rgba(255,255,255,0.55);">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              href="/marketing/contact"
+              class="block text-center py-3 rounded-xl text-sm font-semibold transition-all"
+              style={plan.featured
+                ? `background:linear-gradient(90deg,#7B2FF7,#F72585,#E8A030);color:#fff;`
+                : `border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.6);`}
+            >
+              Get Started
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Category Packages -->
+    <h3 class="font-bold text-center mb-2" style="font-size:1.25rem;letter-spacing:-0.02em;">Industry Launch Packages</h3>
+    <p class="text-sm text-center mb-8" style="color:rgba(255,255,255,0.3);">One-time launch packages tailored for your sector. Monthly continuation is available to add at any point.</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+      {categoryPackages.map(pkg => (
+        <div class="p-6 rounded-2xl" style="background:#0D0F1E;border:1px solid rgba(255,255,255,0.06);">
+          <p class="text-[10px] font-bold uppercase tracking-[0.2em] mb-1" style="color:rgba(167,139,250,0.7);">{pkg.industry}</p>
+          <p class="font-bold text-white mb-0.5" style="font-size:1.25rem;">
+            {pkg.price}
+            {pkg.perEvent && <span class="text-sm font-normal" style="color:rgba(255,255,255,0.35);"> /event</span>}
+            {!pkg.perEvent && <span class="text-sm font-normal" style="color:rgba(255,255,255,0.35);"> one-time</span>}
+          </p>
+          <p class="text-xs mb-4" style="color:rgba(255,255,255,0.25);">+ {pkg.retainer} optional</p>
+          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.45);">{pkg.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Physical production note for category packages -->
+    <div class="mb-10 p-5 rounded-xl" style="background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.18);">
+      <div class="flex items-start gap-3">
+        <svg class="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" aria-hidden="true" style="color:#A78BFA;">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
+        </svg>
+        <p class="text-xs leading-relaxed" style="color:rgba(167,139,250,0.85);">
+          <strong style="color:#A78BFA;">All package fees are for design, strategy, and management only.</strong> Physical production — including brochure and leaflet printing, banner and poster production, signage fabrication, outdoor advertising materials, and installation — is quoted separately and billed at cost. Get a separate production quote when submitting your brief.
+        </p>
+      </div>
+    </div>
+
+    <!-- Add-ons -->
+    <div class="mt-10 p-7 rounded-2xl" style="background:#0D0F1E;border:1px solid rgba(255,255,255,0.05);">
+      <p class="text-[10px] font-bold uppercase tracking-[0.2em] mb-4" style="color:rgba(255,255,255,0.2);">Add-Ons — Quoted Separately</p>
+      <div class="flex flex-wrap gap-2">
+        {addOns.map(a => (
+          <span class="text-xs px-3 py-1.5 rounded-full" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);color:rgba(255,255,255,0.4);">{a}</span>
+        ))}
+      </div>
+      <p class="text-xs mt-4" style="color:rgba(255,255,255,0.25);">All add-ons are quoted separately based on scope, quantity, and timeline.</p>
+    </div>
+  </section>
+
+  <!-- ── How We Work ────────────────────────────────────────── -->
+  <section style="background:#0D0F1E;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+      <div class="text-center mb-14">
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style="color:rgba(167,139,250,0.7);">Our Process</p>
+        <h2 class="font-bold" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">How We Work</h2>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        {howWeWork.map((s, i) => (
+          <div class="relative">
+            {i < howWeWork.length - 1 && (
+              <div class="hidden lg:block absolute top-5 left-full w-full h-px -translate-x-1/2" style="background:linear-gradient(90deg,rgba(167,139,250,0.3),transparent);z-index:0;" aria-hidden="true" />
+            )}
+            <div style="position:relative;z-index:1;">
+              <div class="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-4 font-bold text-sm text-white shrink-0" style="background:linear-gradient(135deg,#7B2FF7,#F72585);">
+                {s.step}
+              </div>
+              <h3 class="font-semibold mb-1.5 text-white" style="font-size:0.875rem;">{s.title}</h3>
+              <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,0.4);">{s.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Why Choose Us ─────────────────────────────────────── -->
+  <section class="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+    <div class="text-center mb-14">
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style="color:rgba(167,139,250,0.7);">Why Us</p>
+      <h2 class="font-bold" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">Why Choose Buoyant Marketing</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {whyUs.map((w, i) => (
+        <div class="p-6 rounded-2xl" style="background:#0D0F1E;border:1px solid rgba(255,255,255,0.05);">
+          <div class="w-1.5 h-1.5 rounded-full mb-4" style="background:linear-gradient(135deg,#A78BFA,#F472B6);"></div>
+          <h3 class="font-semibold mb-2 text-white" style="font-size:0.9375rem;">{w.title}</h3>
+          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.4);">{w.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── FAQ ────────────────────────────────────────────────── -->
+  <section style="border-top:1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-3xl mx-auto px-6 sm:px-10 py-20">
+      <div class="text-center mb-12">
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style="color:rgba(167,139,250,0.7);">FAQs</p>
+        <h2 class="font-bold" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">Common Questions</h2>
+      </div>
+      <div class="space-y-3">
+        {faqs.map(item => (
+          <details class="group rounded-2xl overflow-hidden" style="background:#0D0F1E;border:1px solid rgba(255,255,255,0.06);">
+            <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer select-none list-none font-semibold text-sm hover:text-white transition-colors" style="color:rgba(255,255,255,0.8);">
+              <span>{item.q}</span>
+              <svg class="w-4 h-4 shrink-0 transition-transform duration-200 group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true" style="color:#A78BFA;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+              </svg>
+            </summary>
+            <div class="px-6 pb-5">
+              <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.45);">{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ─────────────────────────────────────────── -->
+  <section style="padding:0 1.5rem 5rem;">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="rounded-3xl p-12 sm:p-16" style="background:linear-gradient(135deg,rgba(123,47,247,0.15),rgba(247,37,133,0.12),rgba(232,160,48,0.08));border:1px solid rgba(255,255,255,0.08);">
+        <h2 class="font-bold mb-4" style="font-size:clamp(1.75rem,4vw,2.25rem);letter-spacing:-0.02em;">
+          Ready to Launch and Grow<br />Your Brand in Dubai?
+        </h2>
+        <p class="mb-8" style="color:rgba(255,255,255,0.45);font-size:1rem;max-width:28rem;margin-left:auto;margin-right:auto;line-height:1.7;">
+          Get a tailored proposal with clear deliverables, timeline, and budget options.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="/marketing/contact"
+            class="px-8 py-3.5 rounded-full font-semibold text-white transition-all hover:opacity-90 hover:scale-105"
+            style="background:linear-gradient(90deg,#7B2FF7,#F72585,#E8A030);font-size:0.9375rem;"
+          >
+            Request Proposal
+          </a>
+          <a
+            href={waHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold transition-all hover:border-white/30"
+            style="border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.65);font-size:0.9375rem;"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.336-1.51A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.002-1.366l-.358-.213-3.762.896.952-3.665-.234-.377A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z"/>
+            </svg>
+            Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MarketingBase>

@@ -1,0 +1,319 @@
+---
+import MarketingBase from '@/layouts/MarketingBase.astro';
+import { MARKETING_SERVICES } from '@/lib/marketing-services';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = () => {
+  return MARKETING_SERVICES.map((service) => ({
+    params:  { service: service.slug },
+    props:   { service },
+  }));
+};
+
+const { service } = Astro.props;
+const siteUrl     = import.meta.env.SITE ?? '';
+
+const schemaJson = JSON.stringify([
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: service.title,
+    description: service.overview,
+    url: `${siteUrl}/marketing/${service.slug}`,
+    provider: {
+      '@type': 'LocalBusiness',
+      name: 'Buoyant Marketing',
+      url: `${siteUrl}/marketing`,
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'AE',
+        addressRegion: 'Dubai',
+        addressLocality: 'Dubai',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 25.204849,
+        longitude: 55.270783,
+      },
+    },
+    areaServed: ['Dubai', 'Abu Dhabi', 'Sharjah', 'UAE', 'GCC'],
+    serviceType: service.title,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: service.faq.map((item) => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home',               item: siteUrl },
+      { '@type': 'ListItem', position: 2, name: 'Buoyant Marketing',   item: `${siteUrl}/marketing` },
+      { '@type': 'ListItem', position: 3, name: service.title,         item: `${siteUrl}/marketing/${service.slug}` },
+    ],
+  },
+]);
+---
+
+<MarketingBase
+  title={service.metaTitle}
+  description={service.metaDescription}
+  canonical={`/marketing/${service.slug}`}
+  keywords={service.keywords.join(', ')}
+  schemaJson={schemaJson}
+>
+
+  <!-- ── Service Hero ─────────────────────────────────────────── -->
+  <section
+    style={`
+      position:relative;overflow:hidden;
+      padding:5rem 1.5rem 4.5rem;
+      background:
+        radial-gradient(ellipse 65% 55% at 10% 50%, ${service.gradFrom}22 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 90% 55%, ${service.gradTo}18 0%, transparent 55%),
+        #07080F;
+    `}
+  >
+    <!-- Geometric accent line -->
+    <div style="position:absolute;inset:0;pointer-events:none;" aria-hidden="true">
+      <div style={`position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,${service.gradFrom}44,${service.gradMid}44,transparent);`}></div>
+    </div>
+
+    <div class="max-w-5xl mx-auto" style="position:relative;z-index:1;">
+
+      <!-- Breadcrumb (SEO + UX) -->
+      <nav class="flex items-center gap-2 mb-8 text-xs" style="color:rgba(255,255,255,0.25);" aria-label="Breadcrumb">
+        <a href="/marketing" class="hover:text-white/60 transition-colors">Buoyant Marketing</a>
+        <span aria-hidden="true">/</span>
+        <span style="color:rgba(255,255,255,0.5);">{service.shortTitle}</span>
+      </nav>
+
+      <!-- Overline -->
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-4" style={`color:${service.gradFrom};`}>
+        Full-Service Agency
+      </p>
+
+      <!-- Title -->
+      <h1 class="font-bold mb-5 leading-tight" style="font-size:clamp(2rem,5vw,3.75rem);letter-spacing:-0.03em;">
+        {service.title}
+      </h1>
+
+      <!-- Tagline -->
+      <p class="mb-8 leading-relaxed" style="font-size:1.125rem;color:rgba(255,255,255,0.5);max-width:40rem;">
+        {service.tagline}
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-wrap gap-4">
+        <a
+          href="/contact"
+          class="px-7 py-3.5 rounded-full font-semibold text-white transition-all hover:opacity-90 hover:scale-105"
+          style={`background:linear-gradient(90deg,${service.gradFrom},${service.gradMid},${service.gradTo});font-size:0.9375rem;`}
+        >
+          Get a Free Proposal
+        </a>
+        <a
+          href={`https://wa.me/${import.meta.env.WHATSAPP_NUMBER ?? '97152895506'}?text=${encodeURIComponent(`Hi, I\'d like to enquire about your ${service.title}.`)}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold transition-all hover:border-white/30"
+          style="border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.65);font-size:0.9375rem;"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.336-1.51A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.002-1.366l-.358-.213-3.762.896.952-3.665-.234-.377A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Overview ──────────────────────────────────────────────── -->
+  <section class="max-w-5xl mx-auto px-6 sm:px-10 py-16" style="border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="grid lg:grid-cols-5 gap-12 items-start">
+      <div class="lg:col-span-3">
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-4" style={`color:${service.gradFrom};`}>Overview</p>
+        <h2 class="font-bold mb-5" style="font-size:1.5rem;letter-spacing:-0.02em;">About Our {service.shortTitle} Services</h2>
+        <p class="leading-relaxed" style="color:rgba(255,255,255,0.5);font-size:1.0625rem;line-height:1.8;">
+          {service.overview}
+        </p>
+      </div>
+      <div class="lg:col-span-2">
+        <p class="text-[10px] font-bold uppercase tracking-[0.2em] mb-4" style="color:rgba(255,255,255,0.2);">What's Included</p>
+        <div class="flex flex-wrap gap-2">
+          {service.subServices.map(sub => (
+            <span
+              class="text-xs px-3 py-1.5 rounded-full font-medium"
+              style={`background:${service.gradFrom}18;border:1px solid ${service.gradFrom}33;color:rgba(255,255,255,0.6);`}
+            >
+              {sub}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ──────────────────────────────────────────────── -->
+  <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20">
+    <div class="text-center mb-14">
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style={`color:${service.gradFrom};`}>What We Deliver</p>
+      <h2 class="font-bold" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">Our {service.shortTitle} Capabilities</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {service.features.map((f, i) => (
+        <div
+          class="p-6 rounded-2xl"
+          style="background:#0D0F1E;border:1px solid rgba(255,255,255,0.05);"
+        >
+          <div
+            class="w-8 h-8 rounded-lg mb-4 flex items-center justify-center text-xs font-bold shrink-0"
+            style={`background:${service.gradFrom}22;color:${service.gradFrom};`}
+          >
+            {String(i + 1).padStart(2, '0')}
+          </div>
+          <h3 class="font-semibold mb-2" style="font-size:0.9375rem;color:#fff;">{f.title}</h3>
+          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.4);">{f.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── Process ───────────────────────────────────────────────── -->
+  <section style="background:#0D0F1E;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10 py-20">
+      <div class="text-center mb-14">
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style={`color:${service.gradFrom};`}>How We Work</p>
+        <h2 class="font-bold" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">Our {service.shortTitle} Process</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+        {service.process.map((p, i) => (
+          <div class="relative">
+            {i < service.process.length - 1 && (
+              <div
+                class="hidden xl:block absolute top-5 left-full w-full h-px -translate-x-1/2"
+                style={`background:linear-gradient(90deg,${service.gradFrom}44,transparent);z-index:0;`}
+                aria-hidden="true"
+              />
+            )}
+            <div class="relative" style="z-index:1;">
+              <div
+                class="inline-flex items-center justify-center w-10 h-10 rounded-xl mb-4 font-bold text-sm shrink-0"
+                style={`background:linear-gradient(135deg,${service.gradFrom},${service.gradMid});color:#fff;`}
+              >
+                {p.step}
+              </div>
+              <h3 class="font-semibold mb-1.5" style="font-size:0.875rem;color:#fff;">{p.title}</h3>
+              <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,0.4);">{p.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ (with FAQPage schema) ─────────────────────────────── -->
+  <section class="max-w-3xl mx-auto px-6 sm:px-10 py-20">
+    <div class="text-center mb-14">
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style={`color:${service.gradFrom};`}>FAQs</p>
+      <h2 class="font-bold" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">
+        Common Questions About {service.shortTitle}
+      </h2>
+    </div>
+
+    <div class="space-y-3">
+      {service.faq.map((item) => (
+        <details
+          class="group rounded-2xl overflow-hidden"
+          style="background:#0D0F1E;border:1px solid rgba(255,255,255,0.06);"
+        >
+          <summary
+            class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer select-none list-none font-semibold text-sm hover:text-white transition-colors"
+            style="color:rgba(255,255,255,0.8);"
+          >
+            <span>{item.q}</span>
+            <svg
+              class="w-4 h-4 shrink-0 transition-transform duration-200 group-open:rotate-45"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              style={`color:${service.gradFrom};`}
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+            </svg>
+          </summary>
+          <div class="px-6 pb-5">
+            <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.45);">{item.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── Related Services ──────────────────────────────────────── -->
+  <section style="border-top:1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10 py-16">
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-8 text-center" style="color:rgba(255,255,255,0.2);">
+        Explore Other Services
+      </p>
+      <div class="flex flex-wrap justify-center gap-3">
+        {MARKETING_SERVICES.filter(s => s.slug !== service.slug).map(s => (
+          <a
+            href={`/marketing/${s.slug}`}
+            class="px-4 py-2 rounded-full text-sm font-medium transition-all hover:border-white/20 hover:text-white"
+            style="border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.4);"
+          >
+            {s.shortTitle}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ─────────────────────────────────────────────── -->
+  <section style="padding:0 1.5rem 5rem;">
+    <div class="max-w-3xl mx-auto">
+      <div
+        class="rounded-3xl p-10 sm:p-14 text-center"
+        style={`background:linear-gradient(135deg,${service.gradFrom}18,${service.gradMid}14,${service.gradTo}10);border:1px solid rgba(255,255,255,0.08);`}
+      >
+        <h2 class="font-bold mb-4" style="font-size:clamp(1.5rem,3vw,2.25rem);letter-spacing:-0.02em;">
+          Ready to Get Started with {service.shortTitle}?
+        </h2>
+        <p class="mb-8" style="color:rgba(255,255,255,0.45);font-size:1rem;max-width:28rem;margin-left:auto;margin-right:auto;line-height:1.7;">
+          Tell us about your project and we'll get back to you within 24 hours with a tailored proposal.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="/contact"
+            class="px-8 py-3.5 rounded-full font-semibold text-white transition-all hover:opacity-90 hover:scale-105"
+            style={`background:linear-gradient(90deg,${service.gradFrom},${service.gradMid},${service.gradTo});font-size:0.9375rem;`}
+          >
+            Get a Free Proposal
+          </a>
+          <a
+            href="/marketing"
+            class="px-8 py-3.5 rounded-full font-semibold transition-all hover:border-white/30"
+            style="border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);font-size:0.9375rem;"
+          >
+            All Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MarketingBase>

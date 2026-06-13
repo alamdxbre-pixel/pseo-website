@@ -1,0 +1,144 @@
+---
+import Base from '@/layouts/Base.astro';
+
+const siteUrl = import.meta.env.SITE ?? '';
+const canonical = `${siteUrl}/services`;
+
+const services = [
+  {
+    id: 'it-ai',
+    title: 'IT & AI Development',
+    description: 'Custom software, web design, IT consulting, and AI solutions to power your business forward.',
+    icon: '💻',
+    href: '/services/it-ai/',
+    highlights: [
+      'Custom Software & App Development',
+      'Web Design & Development',
+      'IT Consulting & Strategy',
+      'AI Solutions & Automation',
+    ],
+  },
+  {
+    id: 'marketing',
+    title: 'Advertising & Marketing',
+    description: 'End-to-end marketing campaigns, digital strategies, and branded materials that deliver results.',
+    icon: '📢',
+    href: '/services/advertising-marketing/',
+    highlights: [
+      'Campaign Management',
+      'Digital Marketing',
+      'Print & Direct Marketing',
+      'Corporate Branding & Merchandise',
+    ],
+  },
+];
+---
+
+<Base
+  title="Services — IT, AI & Marketing Solutions"
+  description="Comprehensive IT, AI development, and marketing services for UAE businesses. Custom software, web design, digital campaigns, and branded products."
+  canonical={canonical}
+  og={{
+    title: 'Services — IT, AI & Marketing Solutions',
+    description: 'Transform your business with technology and marketing expertise from a trusted UAE partner.',
+    image: '/images/og/services.png',
+    type: 'website',
+  }}
+>
+  <!-- Hero -->
+  <section class="bg-[var(--color-brand-charcoal)] text-white">
+    <div class="max-w-5xl mx-auto px-4 py-20 sm:py-28">
+      <div class="border-l-4 border-[var(--color-brand-accent)] pl-6">
+        <p class="text-sm uppercase tracking-widest text-[var(--color-brand-accent)] mb-3 font-semibold">Our Expertise</p>
+        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-6">
+          Comprehensive<br />
+          <span class="text-[var(--color-brand-accent)]">Technology & Marketing Services</span>
+        </h1>
+        <p class="text-lg text-gray-300 max-w-2xl">
+          From custom software development and AI innovation to strategic marketing campaigns and branded products — we deliver solutions that grow your business.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Pillars -->
+  <section class="max-w-5xl mx-auto px-4 py-16 sm:py-20">
+    <div class="grid sm:grid-cols-2 gap-8">
+      {services.map((service) => (
+        <a
+          href={service.href}
+          class="group bg-white rounded-2xl border-2 border-gray-200 hover:border-[var(--color-brand-accent)] hover:shadow-lg transition-all p-8 flex flex-col"
+        >
+          <!-- Icon -->
+          <div class="text-5xl mb-6">{service.icon}</div>
+
+          <!-- Title -->
+          <h2 class="text-2xl font-bold mb-3 group-hover:text-[var(--color-brand-accent)] transition-colors">
+            {service.title}
+          </h2>
+
+          <!-- Description -->
+          <p class="text-gray-700 mb-6 flex-1">
+            {service.description}
+          </p>
+
+          <!-- Highlights -->
+          <ul class="space-y-2 mb-6">
+            {service.highlights.map((highlight) => (
+              <li class="flex items-start gap-2 text-sm">
+                <span class="text-[var(--color-brand-accent)] font-bold">✓</span>
+                <span class="text-gray-700">{highlight}</span>
+              </li>
+            ))}
+          </ul>
+
+          <!-- CTA -->
+          <div class="flex items-center gap-2 text-[var(--color-brand-accent)] font-semibold group-hover:gap-3 transition-all">
+            Explore {service.title.split(' ')[0]}
+            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Company Mission -->
+  <section class="bg-[var(--color-brand-accent)]/5 py-16 sm:py-20">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-6">Why Choose Us?</h2>
+      <p class="text-lg text-gray-700 mb-8">
+        Since 2014, we've been helping UAE businesses grow through innovative technology solutions and strategic marketing. Whether you need cutting-edge software, AI automation, or comprehensive marketing campaigns — we're your trusted partner.
+      </p>
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div>
+          <p class="text-3xl font-bold text-[var(--color-brand-accent)] mb-2">2,500+</p>
+          <p class="text-gray-700 text-sm">Happy Clients</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-[var(--color-brand-accent)] mb-2">10+</p>
+          <p class="text-gray-700 text-sm">Years in UAE</p>
+        </div>
+        <div>
+          <p class="text-3xl font-bold text-[var(--color-brand-accent)] mb-2">50K+</p>
+          <p class="text-gray-700 text-sm">Projects Delivered</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="bg-[var(--color-brand-charcoal)] text-white py-16">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-bold mb-4">Ready to Get Started?</h2>
+      <p class="text-gray-300 mb-8">Let's discuss your project requirements and create a tailored solution for your business.</p>
+      <a
+        href="/contact"
+        class="inline-block bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent)]/90 text-white font-semibold px-8 py-4 rounded-lg transition-all text-lg"
+      >
+        Contact Us →
+      </a>
+    </div>
+  </section>
+</Base>

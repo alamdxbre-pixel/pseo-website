@@ -1,0 +1,254 @@
+---
+import MarketingBase from '@/layouts/MarketingBase.astro';
+
+const siteUrl = import.meta.env.SITE ?? '';
+
+const stats = [
+  { value: '6',   label: 'Integrated Service Areas' },
+  { value: 'AR',  label: '+ EN Bilingual Capability' },
+  { value: '24h', label: 'Proposal Turnaround' },
+  { value: '1',   label: 'Dedicated Account Lead' },
+];
+
+const pillars = [
+  {
+    number: '01',
+    title: 'Strategy First',
+    desc: 'Every campaign begins with a clear understanding of your market, audience, and competitive position. We never execute without a plan — and we never mistake activity for strategy.',
+    gradFrom: '#7B2FF7',
+    gradTo: '#F72585',
+  },
+  {
+    number: '02',
+    title: 'Integrated Execution',
+    desc: 'We execute across all channels — digital, print, outdoor, direct, and event — under one accountable team. No fragmented agencies, no brief lost in translation.',
+    gradFrom: '#F72585',
+    gradTo: '#FF9F1C',
+  },
+  {
+    number: '03',
+    title: 'Measurable Results',
+    desc: 'Every campaign is tracked, reported, and optimised. We show you exactly what\'s working, what the numbers mean, and what we\'re doing to improve them.',
+    gradFrom: '#E8A030',
+    gradTo: '#C9A66B',
+  },
+];
+
+const values = [
+  { title: 'Bilingual by Default',   desc: 'Native Arabic and English creative on every project — not an afterthought.' },
+  { title: 'Dubai-Native Thinking',  desc: 'We understand UAE market dynamics, cultural nuance, and regulatory context.' },
+  { title: 'Full Transparency',       desc: 'Open access to ad accounts, performance data, and spend. No black boxes.' },
+  { title: 'One Point of Contact',    desc: 'A dedicated account lead who knows your brand, not a rotating door of handlers.' },
+  { title: 'Speed Without Compromise',desc: 'UAE markets move fast. Our production and approval processes are built to match.' },
+  { title: 'Long-Term Partnership',   desc: 'Our best client relationships span years, not campaigns. We invest in your growth.' },
+];
+
+const industries = [
+  'Restaurants and Cafes',
+  'Retail and Hospitality',
+  'Construction and Contracting',
+  'Logistics and Transport',
+  'Corporate and B2B Services',
+  'Events and Exhibitions',
+];
+
+const schemaJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About Buoyant Marketing — Advertising & Marketing Agency Dubai',
+  description: 'Buoyant Marketing is a full-service advertising and marketing agency headquartered in Dubai. We deliver integrated campaigns across advertising, digital marketing, print, corporate gifts, and brand strategy.',
+  url: `${siteUrl}/marketing/about`,
+  mainEntity: {
+    '@type': 'LocalBusiness',
+    name: 'Buoyant Marketing',
+    description: 'Dubai-based full-service marketing agency offering advertising agency services, campaign creation, brochures and leaflets, direct marketing, and digital marketing.',
+    foundingLocation: { '@type': 'Place', name: 'Dubai, UAE' },
+    areaServed: ['Dubai', 'Abu Dhabi', 'Sharjah', 'UAE', 'GCC'],
+  },
+});
+---
+
+<MarketingBase
+  title="About Buoyant Marketing | Advertising & Marketing Agency Dubai, UAE"
+  description="Buoyant Marketing is a full-service advertising and marketing agency based in Dubai, offering integrated campaign execution across advertising, digital marketing, brochures, direct marketing, and more."
+  canonical="/marketing/about"
+  keywords="marketing agency Dubai about, advertising agency UAE, Buoyant Marketing, Dubai marketing team, UAE advertising agency"
+  schemaJson={schemaJson}
+>
+
+  <!-- ── Hero ───────────────────────────────────────────────── -->
+  <section
+    style="
+      position:relative;overflow:hidden;
+      padding:5.5rem 1.5rem 4.5rem;
+      background:
+        radial-gradient(ellipse 65% 55% at 10% 45%, rgba(123,47,247,0.16) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 88% 60%, rgba(247,37,133,0.12) 0%, transparent 55%),
+        #07080F;
+    "
+  >
+    <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(123,47,247,0.35),rgba(247,37,133,0.3),transparent);" aria-hidden="true"></div>
+
+    <div class="max-w-5xl mx-auto">
+      <nav class="flex items-center gap-2 mb-8 text-xs" style="color:rgba(255,255,255,0.25);" aria-label="Breadcrumb">
+        <a href="/marketing" class="hover:text-white/60 transition-colors">Buoyant Marketing</a>
+        <span aria-hidden="true">/</span>
+        <span style="color:rgba(255,255,255,0.5);">About</span>
+      </nav>
+
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-4" style="color:rgba(167,139,250,0.8);">Who We Are</p>
+
+      <h1 class="font-bold leading-tight mb-6" style="font-size:clamp(2.25rem,5vw,3.75rem);letter-spacing:-0.03em;">
+        Dubai's Advertising &amp;<br />
+        <span style="background:linear-gradient(90deg,#A78BFA,#F472B6,#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+          Marketing Agency
+        </span>
+      </h1>
+
+      <p class="leading-relaxed max-w-2xl" style="font-size:1.125rem;color:rgba(255,255,255,0.5);">
+        Buoyant Marketing is the advertising and marketing division of Buoyant Solutions — a UAE-headquartered agency delivering integrated campaigns across advertising, print, digital, and direct marketing for businesses in Dubai and beyond.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Stats ───────────────────────────────────────────────── -->
+  <section style="background:#0D0F1E;border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10 py-14">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-0 lg:divide-x" style="divide-color:rgba(255,255,255,0.06);">
+        {stats.map(s => (
+          <div class="text-center px-4">
+            <p class="font-bold mb-1" style="font-size:clamp(1.75rem,3.5vw,2.5rem);background:linear-gradient(135deg,#A78BFA,#F472B6,#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+              {s.value}
+            </p>
+            <p class="text-sm" style="color:rgba(255,255,255,0.35);">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Who we are prose ─────────────────────────────────────── -->
+  <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" style="border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="grid lg:grid-cols-2 gap-16 items-start">
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-4" style="color:rgba(167,139,250,0.7);">Our Story</p>
+        <h2 class="font-bold mb-6" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">Built in Dubai, for Dubai</h2>
+        <div class="space-y-4" style="color:rgba(255,255,255,0.5);font-size:1rem;line-height:1.8;">
+          <p>
+            Buoyant Marketing was built to solve a specific problem: businesses in Dubai working with too many fragmented suppliers and getting inconsistent results. We bring campaign creation, brochure publishing, direct marketing, and digital performance management under one roof.
+          </p>
+          <p>
+            We serve restaurants and cafes, retail businesses, construction companies, logistics operators, corporate and B2B clients, and event organisers — each with tailored packages and a dedicated point of contact.
+          </p>
+          <p>
+            Our model is simple: clear scope, clear costs, and one account lead who owns your entire campaign from brief to delivery report.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-4" style="color:rgba(167,139,250,0.7);">Our Difference</p>
+        <h2 class="font-bold mb-6" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">One Team. All Channels.</h2>
+        <p class="mb-8" style="color:rgba(255,255,255,0.5);font-size:1rem;line-height:1.8;">
+          Most businesses in Dubai manage advertising, print, and digital through different vendors — each with a separate brief, separate invoice, and no shared accountability. The result is inconsistent messaging, wasted budget, and no single owner of the outcome.
+        </p>
+        <p style="color:rgba(255,255,255,0.5);font-size:1rem;line-height:1.8;">
+          We consolidate all of that. Advertising management, campaign creation, brochures, direct marketing, and digital performance — under one accountable team, one brief, and one contact. You focus on running your business. We take care of the rest.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Three Pillars ─────────────────────────────────────────── -->
+  <section style="background:#0D0F1E;border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10 py-20">
+      <div class="text-center mb-14">
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style="color:rgba(167,139,250,0.7);">Our Approach</p>
+        <h2 class="font-bold" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">How We Work</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-6">
+        {pillars.map(p => (
+          <div class="p-7 rounded-2xl" style="border:1px solid rgba(255,255,255,0.06);">
+            <div
+              class="w-10 h-10 rounded-xl mb-5 flex items-center justify-center font-bold text-sm text-white shrink-0"
+              style={`background:linear-gradient(135deg,${p.gradFrom},${p.gradTo});`}
+            >
+              {p.number}
+            </div>
+            <h3 class="font-bold mb-3" style="font-size:1.0625rem;color:#fff;">{p.title}</h3>
+            <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.4);">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Values ────────────────────────────────────────────────── -->
+  <section class="max-w-5xl mx-auto px-6 sm:px-10 py-20" style="border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="text-center mb-14">
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-3" style="color:rgba(167,139,250,0.7);">What We Stand For</p>
+      <h2 class="font-bold" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">Our Commitments to You</h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {values.map(v => (
+        <div class="p-6 rounded-2xl" style="background:#0D0F1E;border:1px solid rgba(255,255,255,0.05);">
+          <div class="w-1.5 h-1.5 rounded-full mb-4" style="background:linear-gradient(135deg,#A78BFA,#F472B6);"></div>
+          <h3 class="font-semibold mb-2" style="font-size:0.9375rem;color:#fff;">{v.title}</h3>
+          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.4);">{v.desc}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- ── Industries ───────────────────────────────────────────── -->
+  <section style="background:#0D0F1E;border-bottom:1px solid rgba(255,255,255,0.05);">
+    <div class="max-w-5xl mx-auto px-6 sm:px-10 py-16">
+      <div class="flex flex-col sm:flex-row gap-8 sm:gap-16 items-start">
+        <div class="shrink-0">
+          <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-1" style="color:rgba(255,255,255,0.2);">Industries</p>
+          <p class="font-bold" style="font-size:1.25rem;color:#fff;">We Serve</p>
+        </div>
+        <div class="flex flex-wrap gap-2.5">
+          {industries.map(ind => (
+            <span class="text-sm px-3.5 py-1.5 rounded-full" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);color:rgba(255,255,255,0.5);">
+              {ind}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ───────────────────────────────────────────────────── -->
+  <section style="padding:5rem 1.5rem;">
+    <div class="max-w-3xl mx-auto text-center">
+      <div class="rounded-3xl p-12 sm:p-16" style="background:linear-gradient(135deg,rgba(123,47,247,0.15),rgba(247,37,133,0.12),rgba(232,160,48,0.08));border:1px solid rgba(255,255,255,0.08);">
+        <h2 class="font-bold mb-4" style="font-size:clamp(1.75rem,4vw,2.5rem);letter-spacing:-0.02em;">
+          Let's Build Something Great Together
+        </h2>
+        <p class="mb-8" style="color:rgba(255,255,255,0.45);font-size:1.0625rem;max-width:30rem;margin-left:auto;margin-right:auto;line-height:1.7;">
+          Tell us about your brand and what you're trying to achieve. We'll respond within 24 hours with a tailored proposal.
+        </p>
+        <div class="flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="/marketing/contact"
+            class="px-8 py-3.5 rounded-full font-semibold text-white transition-all hover:opacity-90 hover:scale-105"
+            style="background:linear-gradient(90deg,#7B2FF7,#F72585,#E8A030);font-size:0.9375rem;"
+          >
+            Start a Campaign
+          </a>
+          <a
+            href="/marketing"
+            class="px-8 py-3.5 rounded-full font-semibold transition-all hover:border-white/30"
+            style="border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.6);font-size:0.9375rem;"
+          >
+            Our Services
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</MarketingBase>

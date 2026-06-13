@@ -1,0 +1,274 @@
+---
+import '../styles/global.css';
+import SeoHead from '@/components/SeoHead.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  keywords?: string;
+  schemaJson?: string;
+}
+
+const {
+  title,
+  description,
+  canonical = '/marketing',
+  keywords = '',
+  schemaJson,
+} = Astro.props;
+
+const siteUrl = import.meta.env.SITE ?? '';
+const gaId    = import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined;
+const clarityId = import.meta.env.PUBLIC_CLARITY_PROJECT_ID as string | undefined;
+
+const geo = {
+  region:    'AE-DU',
+  placename: 'Dubai, UAE',
+  position:  '25.204849;55.270783',
+  icbm:      '25.204849, 55.270783',
+};
+
+const og = {
+  title,
+  description,
+  type: 'website',
+};
+
+const navLinks = [
+  { label: 'Services', href: '/marketing#services' },
+  { label: 'About',    href: '/marketing/about' },
+  { label: 'Contact',  href: '/marketing/contact' },
+];
+
+const serviceLinks = [
+  { label: 'Advertising Services',       href: '/marketing/advertising-services' },
+  { label: 'Campaign Creation',          href: '/marketing/campaign-creation' },
+  { label: 'Brochures & Leaflets',       href: '/marketing/brochures-leaflets' },
+  { label: 'Direct Marketing',           href: '/marketing/direct-marketing' },
+  { label: 'Digital Marketing',          href: '/marketing/digital-marketing' },
+];
+
+const currentYear = new Date().getFullYear();
+const waNumber    = import.meta.env.WHATSAPP_NUMBER ?? '97152895506';
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <SeoHead
+      title={title}
+      description={description}
+      canonical={canonical}
+      geo={geo}
+      og={og}
+      siteUrl={siteUrl}
+    />
+    {schemaJson && <script type="application/ld+json" set:html={schemaJson} />}
+    <!-- GA4 via Partytown -->
+    {gaId && (
+      <>
+        <script type="text/partytown" src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+        <Fragment set:html={`<script type="text/partytown">window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${gaId}',{page_path:location.pathname});</script>`} />
+      </>
+    )}
+    {clarityId && (
+      <Fragment set:html={`<script type="text/partytown">(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","${clarityId}");</script>`} />
+    )}
+    <slot name="head" />
+  </head>
+
+  <body class="min-h-screen flex flex-col pb-20 md:pb-0" style="background:#07080F; color:#fff; font-family:var(--font-family-sans);">
+
+    <!-- ── Marketing Header ──────────────────────────────────── -->
+    <header id="mkt-header" style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(7,8,15,0.85);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.06);">
+      <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between gap-6">
+
+        <!-- Logo -->
+        <a href="/marketing" class="flex items-center gap-2.5 shrink-0" aria-label="Buoyant Marketing">
+          <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0" style="background:linear-gradient(135deg,#7B2FF7,#F72585,#E8A030);">
+            <span class="text-white text-[10px] font-bold tracking-tight">BM</span>
+          </div>
+          <div class="hidden sm:flex flex-col leading-none gap-0.5">
+            <span style="font-family:'Glacial Indifference',sans-serif;font-size:15px;font-weight:700;color:#fff;line-height:1;">
+              Buoyant <span style="font-weight:400;">solutions</span>
+            </span>
+            <span style="font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;background:linear-gradient(90deg,#A78BFA,#F472B6,#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+              Advertising &amp; Marketing
+            </span>
+          </div>
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="hidden md:flex items-center gap-7">
+          {navLinks.map(l => (
+            <a href={l.href} class="text-[13px] text-white/50 hover:text-white transition-colors">{l.label}</a>
+          ))}
+          <a href="/" class="text-[13px] text-white/25 hover:text-white/50 transition-colors">IT &amp; AI Solutions</a>
+        </nav>
+
+        <!-- CTA -->
+        <a
+          href="/marketing/contact"
+          class="hidden md:inline-flex items-center px-5 py-2 rounded-full text-[13px] font-semibold text-white shrink-0 hover:opacity-90 hover:scale-105 transition-all duration-200"
+          style="background:linear-gradient(90deg,#7B2FF7,#F72585,#E8A030);"
+        >
+          Get In Touch
+        </a>
+
+        <!-- Mobile toggle -->
+        <button id="mkt-mobile-toggle" class="md:hidden p-2 text-white/50 hover:text-white transition-colors" aria-label="Open menu">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile menu -->
+      <div id="mkt-mobile-menu" class="md:hidden hidden" style="border-top:1px solid rgba(255,255,255,0.06);background:#07080F;">
+        <div class="px-6 py-5 space-y-1">
+          {navLinks.map(l => (
+            <a href={l.href} class="block py-2.5 text-sm text-white/60 hover:text-white transition-colors">{l.label}</a>
+          ))}
+          <div class="pt-2 border-t border-white/5 mt-3">
+            <p class="text-[10px] uppercase tracking-widest text-white/20 mb-2">Services</p>
+            {serviceLinks.map(l => (
+              <a href={l.href} class="block py-1.5 text-sm text-white/40 hover:text-white transition-colors">{l.label}</a>
+            ))}
+          </div>
+          <a href="/marketing/contact" class="block text-center mt-4 px-5 py-3 rounded-full text-sm font-semibold text-white" style="background:linear-gradient(90deg,#7B2FF7,#F72585,#E8A030);">
+            Get In Touch
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Push content below fixed header -->
+    <div class="h-16 shrink-0"></div>
+
+    <main class="flex-1">
+      <slot />
+    </main>
+
+    <!-- ── Marketing Footer ──────────────────────────────────── -->
+    <footer style="background:#0A0C18;border-top:1px solid rgba(255,255,255,0.06);">
+      <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+
+          <!-- Brand -->
+          <div class="sm:col-span-2">
+            <a href="/marketing" class="flex items-center gap-2.5 mb-5" aria-label="Buoyant Marketing">
+              <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#7B2FF7,#F72585,#E8A030);">
+                <span class="text-white text-[10px] font-bold">BM</span>
+              </div>
+              <div class="flex flex-col leading-none gap-1">
+                <span style="font-family:'Glacial Indifference',sans-serif;font-size:18px;font-weight:700;color:#fff;line-height:1;">
+                  Buoyant <span style="font-weight:400;">solutions</span>
+                </span>
+                <span style="font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;background:linear-gradient(90deg,#A78BFA,#F472B6,#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+                  Advertising &amp; Marketing
+                </span>
+              </div>
+            </a>
+            <p class="text-sm text-white/30 leading-relaxed max-w-sm mb-6">
+              Creative strategy, powerful execution, measurable results. Built for brands competing at the highest level in Dubai and across the UAE.
+            </p>
+            <div class="flex flex-wrap items-center gap-4">
+              <a
+                href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Hi, I\'d like to discuss a marketing project.')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 border border-white/10 text-white/50 text-xs font-semibold rounded hover:border-white/20 hover:text-white/80 transition-colors"
+              >
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.336-1.51A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.002-1.366l-.358-.213-3.762.896.952-3.665-.234-.377A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z"/>
+                </svg>
+                WhatsApp Us
+              </a>
+              <a href="/" class="text-xs text-white/25 hover:text-white/50 transition-colors">← Main Site</a>
+            </div>
+          </div>
+
+          <!-- Services -->
+          <div>
+            <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/20 mb-5">Services</h3>
+            <ul class="space-y-3">
+              {serviceLinks.map(l => (
+                <li>
+                  <a href={l.href} class="text-sm text-white/40 hover:text-white transition-colors">{l.label}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Regions -->
+          <div>
+            <h3 class="text-[10px] font-bold uppercase tracking-[0.2em] text-white/20 mb-5">We Serve</h3>
+            <ul class="space-y-3">
+              {['Dubai','Abu Dhabi','Sharjah','Ajman','Ras Al Khaimah','GCC & Global'].map(r => (
+                <li><span class="text-sm text-white/40">{r}</span></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legal note -->
+      <div style="border-top:1px solid rgba(255,255,255,0.04);background:rgba(0,0,0,0.2);">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+          <p class="text-[11px] leading-relaxed" style="color:rgba(255,255,255,0.15);">
+            Services are provided in line with approved business activities: Advertising Agency, Campaign Creation and Realization, Publications of Brochures and Leaflets, Direct Marketing, and Digital Marketing.
+          </p>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div style="border-top:1px solid rgba(255,255,255,0.05);">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/20">
+          <p>&copy; {currentYear} Buoyant Solutions L.L.C FZ &nbsp;&middot;&nbsp; Advertising &amp; Marketing Dubai</p>
+          <div class="flex items-center gap-5">
+            <a href="/sitemap-index.xml" class="hover:text-white/40 transition-colors">Sitemap</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp floating bar (mobile) -->
+    <div class="fixed bottom-0 left-0 right-0 md:hidden z-40" style="background:#0A0C18;border-top:1px solid rgba(255,255,255,0.08);">
+      <div class="flex">
+        <a
+          href="/marketing/contact"
+          class="flex-1 py-4 text-center text-sm font-semibold text-white/70 hover:text-white transition-colors"
+        >
+          Get In Touch
+        </a>
+        <a
+          href={`https://wa.me/${waNumber}?text=${encodeURIComponent('Hi, I\'d like to discuss a marketing project.')}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex-1 py-4 text-center text-sm font-semibold text-white flex items-center justify-center gap-2"
+          style="background:linear-gradient(90deg,#7B2FF7,#F72585);"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.336-1.51A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.002-1.366l-.358-.213-3.762.896.952-3.665-.234-.377A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z"/>
+          </svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- Mobile menu toggle script -->
+    <script>
+      const toggle = document.getElementById('mkt-mobile-toggle');
+      const menu   = document.getElementById('mkt-mobile-menu');
+      toggle?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+    </script>
+  </body>
+</html>

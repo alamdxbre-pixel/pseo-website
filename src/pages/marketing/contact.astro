@@ -1,0 +1,316 @@
+---
+import MarketingBase from '@/layouts/MarketingBase.astro';
+
+const siteUrl    = import.meta.env.SITE ?? '';
+const phone      = '+971 52 895 506';
+const phoneTel   = '+97152895506';
+const waNumber   = import.meta.env.WHATSAPP_NUMBER ?? '97152895506';
+const email      = 'marketing@buoyantsolutions.ae';
+const waHref     = `https://wa.me/${waNumber}?text=${encodeURIComponent("Hi, I'd like to discuss a marketing project with Buoyant Marketing.")}`;
+
+const contactMethods = [
+  {
+    label:    'WhatsApp',
+    sublabel: 'Fastest response — usually within a few hours',
+    value:    phone,
+    href:     waHref,
+    external: true,
+    icon: 'whatsapp',
+  },
+  {
+    label:    'Phone',
+    sublabel: 'Sun – Thu, 9:00 AM – 6:00 PM GST',
+    value:    phone,
+    href:     `tel:${phoneTel}`,
+    external: false,
+    icon: 'phone',
+  },
+  {
+    label:    'Email',
+    sublabel: 'Proposal returned within 24 hours',
+    value:    email,
+    href:     `mailto:${email}`,
+    external: false,
+    icon: 'email',
+  },
+];
+
+const nextSteps = [
+  { step: '01', text: 'We review your campaign brief and ask any clarifying questions about your goals and audience.' },
+  { step: '02', text: 'Within 24 hours we return a tailored proposal — not a template, an actual strategy for your brand.' },
+  { step: '03', text: 'We schedule a call with your dedicated account lead to walk through the plan and answer questions.' },
+];
+
+const schemaJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: 'Contact Buoyant Marketing — Dubai Advertising & Marketing Agency',
+  description: 'Get in touch with Buoyant Marketing for advertising, digital marketing, print, corporate gifts, and brand strategy services in Dubai and across the UAE.',
+  url: `${siteUrl}/marketing/contact`,
+  mainEntity: {
+    '@type': 'LocalBusiness',
+    name: 'Buoyant Marketing',
+    telephone: phoneTel,
+    email: email,
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'AE',
+      addressRegion: 'Dubai',
+      addressLocality: 'Dubai',
+    },
+    openingHoursSpecification: {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Sunday','Monday','Tuesday','Wednesday','Thursday'],
+      opens: '09:00',
+      closes: '18:00',
+    },
+  },
+});
+---
+
+<MarketingBase
+  title="Contact Buoyant Marketing | Get a Free Marketing Proposal — Dubai, UAE"
+  description="Start a marketing campaign with Buoyant Marketing Dubai. WhatsApp, call, or email — we respond within 24 hours with a tailored proposal for your brand."
+  canonical="/marketing/contact"
+  keywords="contact marketing agency Dubai, marketing proposal UAE, advertising agency Dubai contact, Buoyant Marketing enquiry"
+  schemaJson={schemaJson}
+>
+
+  <!-- ── Hero ───────────────────────────────────────────────── -->
+  <section
+    style="
+      position:relative;overflow:hidden;
+      padding:5.5rem 1.5rem 4.5rem;
+      background:
+        radial-gradient(ellipse 60% 50% at 8% 45%, rgba(123,47,247,0.16) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 35% at 90% 60%, rgba(247,37,133,0.12) 0%, transparent 55%),
+        #07080F;
+    "
+  >
+    <div style="position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(123,47,247,0.35),rgba(247,37,133,0.3),transparent);" aria-hidden="true"></div>
+
+    <div class="max-w-5xl mx-auto">
+      <nav class="flex items-center gap-2 mb-8 text-xs" style="color:rgba(255,255,255,0.25);" aria-label="Breadcrumb">
+        <a href="/marketing" class="hover:text-white/60 transition-colors">Buoyant Marketing</a>
+        <span aria-hidden="true">/</span>
+        <span style="color:rgba(255,255,255,0.5);">Contact</span>
+      </nav>
+
+      <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-4" style="color:rgba(167,139,250,0.8);">Let's Talk</p>
+
+      <h1 class="font-bold leading-tight mb-6" style="font-size:clamp(2.25rem,5vw,3.75rem);letter-spacing:-0.03em;">
+        Start Your Next<br />
+        <span style="background:linear-gradient(90deg,#A78BFA,#F472B6,#FCD34D);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+          Campaign
+        </span>
+      </h1>
+
+      <p class="leading-relaxed max-w-xl" style="font-size:1.125rem;color:rgba(255,255,255,0.5);">
+        Tell us about your brand, your audience, and what you want to achieve. We respond with a tailored proposal within 24 hours — not a sales deck, a real plan.
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Contact Grid ──────────────────────────────────────────── -->
+  <section class="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+    <div class="grid lg:grid-cols-[1fr_1.5fr] gap-16 items-start">
+
+      <!-- Left: contact methods + next steps -->
+      <div>
+
+        <!-- Contact methods -->
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-6" style="color:rgba(167,139,250,0.7);">Reach Us Directly</p>
+
+        <div class="space-y-0" style="border-top:1px solid rgba(255,255,255,0.05);">
+
+          {contactMethods.map(m => (
+            <a
+              href={m.href}
+              target={m.external ? '_blank' : undefined}
+              rel={m.external ? 'noopener noreferrer' : undefined}
+              class="group flex items-start gap-5 py-6"
+              style="border-bottom:1px solid rgba(255,255,255,0.05);"
+            >
+              <!-- Icon -->
+              <div class="w-10 h-10 rounded-xl shrink-0 flex items-center justify-center transition-all group-hover:scale-110" style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);">
+                {m.icon === 'whatsapp' && (
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" style="color:#A78BFA;" aria-hidden="true">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.858L0 24l6.336-1.51A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.002-1.366l-.358-.213-3.762.896.952-3.665-.234-.377A9.818 9.818 0 012.182 12C2.182 6.573 6.573 2.182 12 2.182S21.818 6.573 21.818 12 17.427 21.818 12 21.818z"/>
+                  </svg>
+                )}
+                {m.icon === 'phone' && (
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" style="color:#A78BFA;" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/>
+                  </svg>
+                )}
+                {m.icon === 'email' && (
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.75" viewBox="0 0 24 24" style="color:#A78BFA;" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                  </svg>
+                )}
+              </div>
+
+              <div>
+                <p class="text-[10px] font-bold uppercase tracking-widest mb-1" style="color:rgba(255,255,255,0.25);">{m.label}</p>
+                <p class="font-semibold mb-0.5 transition-colors group-hover:text-white" style="color:rgba(255,255,255,0.85);font-size:0.9375rem;">{m.value}</p>
+                <p class="text-xs" style="color:rgba(255,255,255,0.3);">{m.sublabel}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+
+        <!-- What happens next -->
+        <div class="mt-10 p-7 rounded-2xl" style="background:#0D0F1E;border:1px solid rgba(255,255,255,0.06);">
+          <p class="text-[10px] font-bold uppercase tracking-[0.25em] mb-6" style="color:rgba(255,255,255,0.2);">What Happens Next</p>
+          <div class="space-y-5">
+            {nextSteps.map(s => (
+              <div class="flex items-start gap-4">
+                <span class="text-xs font-bold shrink-0 mt-0.5" style="color:#A78BFA;">{s.step}</span>
+                <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,0.4);">{s.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: campaign brief form -->
+      <div>
+        <p class="text-[11px] font-bold uppercase tracking-[0.3em] mb-6" style="color:rgba(167,139,250,0.7);">Campaign Brief</p>
+        <h2 class="font-bold mb-8" style="font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-0.02em;">Tell Us About Your Project</h2>
+
+        <form method="POST" action="/api/contact" class="space-y-5" novalidate>
+
+          <!-- Hidden field to identify marketing enquiries -->
+          <input type="hidden" name="source" value="buoyant-marketing" />
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,0.3);">
+                Full Name <span style="color:#A78BFA;">*</span>
+              </label>
+              <input
+                type="text" id="name" name="name" required autocomplete="name"
+                placeholder="Your name"
+                class="w-full px-4 py-3 rounded-xl text-sm transition-colors focus:outline-none"
+                style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;placeholder-color:rgba(255,255,255,0.2);"
+                onfocus="this.style.borderColor='rgba(167,139,250,0.5)';this.style.boxShadow='0 0 0 3px rgba(167,139,250,0.08)'"
+                onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none'"
+              />
+            </div>
+            <div>
+              <label for="company" class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,0.3);">
+                Company
+              </label>
+              <input
+                type="text" id="company" name="company" autocomplete="organization"
+                placeholder="Your company"
+                class="w-full px-4 py-3 rounded-xl text-sm transition-colors focus:outline-none"
+                style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;"
+                onfocus="this.style.borderColor='rgba(167,139,250,0.5)';this.style.boxShadow='0 0 0 3px rgba(167,139,250,0.08)'"
+                onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none'"
+              />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="email" class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,0.3);">
+                Email <span style="color:#A78BFA;">*</span>
+              </label>
+              <input
+                type="email" id="email" name="email" required autocomplete="email"
+                placeholder="you@company.ae"
+                class="w-full px-4 py-3 rounded-xl text-sm transition-colors focus:outline-none"
+                style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;"
+                onfocus="this.style.borderColor='rgba(167,139,250,0.5)';this.style.boxShadow='0 0 0 3px rgba(167,139,250,0.08)'"
+                onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none'"
+              />
+            </div>
+            <div>
+              <label for="phone" class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,0.3);">
+                Phone / WhatsApp
+              </label>
+              <input
+                type="tel" id="phone" name="phone" autocomplete="tel"
+                placeholder="+971 XX XXX XXXX"
+                class="w-full px-4 py-3 rounded-xl text-sm transition-colors focus:outline-none"
+                style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;"
+                onfocus="this.style.borderColor='rgba(167,139,250,0.5)';this.style.boxShadow='0 0 0 3px rgba(167,139,250,0.08)'"
+                onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none'"
+              />
+            </div>
+          </div>
+
+          <div>
+            <label for="service" class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,0.3);">
+              Service Area
+            </label>
+            <select
+              id="service" name="service"
+              class="w-full px-4 py-3 rounded-xl text-sm transition-colors focus:outline-none"
+              style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);"
+              onfocus="this.style.borderColor='rgba(167,139,250,0.5)'"
+              onblur="this.style.borderColor='rgba(255,255,255,0.08)'"
+            >
+              <option value="" style="background:#0D0F1E;">Select a service…</option>
+              <option value="advertising-services"  style="background:#0D0F1E;">Advertising Agency Services</option>
+              <option value="campaign-creation"     style="background:#0D0F1E;">Campaign Creation &amp; Realization</option>
+              <option value="brochures-leaflets"    style="background:#0D0F1E;">Brochures &amp; Leaflets</option>
+              <option value="direct-marketing"      style="background:#0D0F1E;">Direct Marketing</option>
+              <option value="digital-marketing"     style="background:#0D0F1E;">Digital Marketing</option>
+              <option value="not-sure"              style="background:#0D0F1E;">Not Sure — Need Advice</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="budget" class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,0.3);">
+              Approximate Budget (AED)
+            </label>
+            <select
+              id="budget" name="budget"
+              class="w-full px-4 py-3 rounded-xl text-sm transition-colors focus:outline-none"
+              style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);"
+              onfocus="this.style.borderColor='rgba(167,139,250,0.5)'"
+              onblur="this.style.borderColor='rgba(255,255,255,0.08)'"
+            >
+              <option value="" style="background:#0D0F1E;">Select a range…</option>
+              <option value="5k-15k"  style="background:#0D0F1E;">AED 5,000 – 15,000</option>
+              <option value="15k-50k" style="background:#0D0F1E;">AED 15,000 – 50,000</option>
+              <option value="50k-150k"style="background:#0D0F1E;">AED 50,000 – 150,000</option>
+              <option value="150k+"   style="background:#0D0F1E;">AED 150,000+</option>
+              <option value="tbd"     style="background:#0D0F1E;">To Be Discussed</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-[10px] font-bold uppercase tracking-widest mb-2" style="color:rgba(255,255,255,0.3);">
+              Campaign Brief <span style="color:#A78BFA;">*</span>
+            </label>
+            <textarea
+              id="message" name="message" required rows="5"
+              placeholder="Tell us about your brand, your target audience, and what you want this campaign to achieve. The more detail, the better our proposal."
+              class="w-full px-4 py-3 rounded-xl text-sm resize-none transition-colors focus:outline-none"
+              style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);color:#fff;"
+              onfocus="this.style.borderColor='rgba(167,139,250,0.5)';this.style.boxShadow='0 0 0 3px rgba(167,139,250,0.08)'"
+              onblur="this.style.borderColor='rgba(255,255,255,0.08)';this.style.boxShadow='none'"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full py-4 rounded-xl font-bold text-sm text-white tracking-wide transition-all hover:opacity-90 hover:scale-[1.01]"
+            style="background:linear-gradient(90deg,#7B2FF7,#F72585,#E8A030);"
+          >
+            Send Campaign Brief
+          </button>
+
+          <p class="text-xs text-center" style="color:rgba(255,255,255,0.25);line-height:1.6;">
+            We respond within 24 hours with a tailored proposal. Your project details are kept confidential.
+          </p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</MarketingBase>

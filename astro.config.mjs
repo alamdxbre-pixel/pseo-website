@@ -86,6 +86,12 @@ export default defineConfig({
         if (cfg) {
           item.priority   = cfg.priority;
           item.changefreq = cfg.changefreq;
+          return item;
+        }
+        // Marketing hub and service pages — high priority for PSEO
+        if (item.url.includes('/marketing')) {
+          item.priority   = item.url.endsWith('/marketing/') || item.url.endsWith('/marketing') ? 0.9 : 0.85;
+          item.changefreq = 'monthly';
         }
         return item;
       },

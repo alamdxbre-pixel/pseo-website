@@ -1,0 +1,433 @@
+---
+import Base from '@/layouts/Base.astro';
+import { buildWhatsAppLink } from '@/lib/utils';
+
+const siteUrl = import.meta.env.SITE ?? '';
+const canonical = `${siteUrl}/services/it-ai`;
+const whatsappNumber = import.meta.env.PUBLIC_WHATSAPP_NUMBER || '97152895506';
+const waHref = buildWhatsAppLink(whatsappNumber, 'Hi, I would like to discuss an enterprise technology project.');
+
+const services = [
+  {
+    id: 'it-consultancy',
+    num: '01',
+    title: 'IT Consultancy',
+    brief: 'Strategic technology advisory from engineers who build what they recommend. We map your current technology landscape, identify risk, and produce a clear, actionable roadmap — with architecture decisions grounded in real delivery experience.',
+    outcomes: [
+      'Technology strategy & roadmap',
+      'Architecture review & modernisation planning',
+      'Vendor & platform selection',
+      'IT governance & risk assessment',
+      'Digital transformation planning',
+      'Build vs. buy analysis',
+      'Cloud migration strategy',
+      'Security posture review',
+    ],
+    forWho: 'Organisations making significant technology investment decisions, preparing for a platform rebuild, or navigating a complex migration.',
+  },
+  {
+    id: 'custom-software-engineering',
+    num: '02',
+    title: 'Custom Software Engineering',
+    brief: 'Purpose-built software designed for correctness, security, and longevity. We work from architecture and threat modelling through to production deployment — and every line of code is yours.',
+    outcomes: [
+      'Web application development (.NET, Node.js)',
+      'Mobile applications (iOS & Android)',
+      'RESTful & GraphQL API design',
+      'Cloud-native architecture (AWS, Azure, GCP)',
+      'Legacy system modernisation & re-platforming',
+      'Third-party integrations & middleware',
+      'Developer portals & internal tooling',
+      'Performance optimisation & load testing',
+    ],
+    forWho: 'Enterprises replacing outdated systems, scale-ups requiring production-grade infrastructure, or teams with complex integration requirements.',
+  },
+  {
+    id: 'microservice-architecture',
+    num: '03',
+    title: 'Microservice Architecture',
+    brief: 'Domain-driven service decomposition with the infrastructure discipline to run it at scale. We design for independent deployability, fault isolation, and observability from the first sprint — not as an afterthought.',
+    outcomes: [
+      'Domain-driven design & bounded context mapping',
+      'Event streaming (Kafka, RabbitMQ, Azure Service Bus)',
+      'Containerisation with Docker & Compose',
+      'Kubernetes orchestration, Helm & GitOps',
+      'Service mesh (Istio, Linkerd)',
+      'Distributed tracing, metrics & structured logging',
+      'Circuit-breaking & resilience patterns',
+      'API gateway design & rate limiting',
+    ],
+    forWho: 'Organisations scaling beyond a monolith, teams needing independent deployment across services, or platforms approaching enterprise transaction volumes.',
+  },
+  {
+    id: 'saas-platform-engineering',
+    num: '04',
+    title: 'SaaS Platform Engineering',
+    brief: 'Multi-tenant SaaS infrastructure engineered to enterprise compliance, security, and uptime requirements from the first sprint — not retrofitted after your first enterprise sale reveals the gaps.',
+    outcomes: [
+      'Multi-tenancy models: silo, pool, and hybrid',
+      'Subscription billing (Stripe, Chargebee)',
+      'Role-based access control (RBAC) & SSO',
+      'Full audit trail & event logging',
+      'SOC 2 readiness & compliance architecture',
+      'Usage metering & analytics dashboards',
+      'White-labelling & partner portals',
+      'Automated onboarding & provisioning',
+    ],
+    forWho: 'B2B software companies preparing for enterprise sales, startups building compliance-first from day one, or platforms migrating to a multi-tenant model.',
+  },
+  {
+    id: 'rag-knowledge-systems',
+    num: '05',
+    title: 'RAG & Knowledge Systems',
+    brief: 'Enterprise-grade Retrieval-Augmented Generation grounded in your proprietary data — with source attribution at every response. Hallucination-resistant by architecture, not by prompt engineering.',
+    outcomes: [
+      'Vector database selection & setup (Pinecone, Weaviate, pgvector)',
+      'Document ingestion, chunking & metadata pipelines',
+      'LLM integration (OpenAI, Anthropic, open-source models)',
+      'Semantic search & cross-encoder re-ranking',
+      'Source citation & full traceability',
+      'Automated evaluation & accuracy benchmarking',
+      'Hybrid search (dense + sparse retrieval)',
+      'Private deployment & data residency options',
+    ],
+    forWho: 'Enterprises with large internal knowledge bases, compliance-sensitive industries needing auditable AI responses, or teams replacing keyword search with semantic understanding.',
+  },
+  {
+    id: 'ai-model-training',
+    num: '06',
+    title: 'AI Model Training & Fine-tuning',
+    brief: 'Domain-adapted models built with the evaluation rigour and MLOps tooling to deploy, monitor, and maintain at production quality over time — not just a fine-tuned checkpoint handed over in a zip file.',
+    outcomes: [
+      'Supervised fine-tuning & instruction tuning',
+      'RLHF & DPO preference optimisation',
+      'Dataset curation, cleaning & annotation',
+      'GPU cluster provisioning & training infrastructure',
+      'Model evaluation, red-teaming & A/B testing',
+      'MLOps pipelines, model registry & versioning',
+      'Quantisation, ONNX export & edge deployment',
+      'Ongoing model monitoring & drift detection',
+    ],
+    forWho: 'Organisations with proprietary data requiring domain-specific model behaviour, teams replacing general-purpose LLMs with precision-tuned alternatives, or enterprises building AI product differentiators.',
+  },
+];
+
+const industries = [
+  {
+    name: 'Financial Services & Banking',
+    desc: 'Audit-ready architecture, transaction integrity, and regulatory compliance across UAE Central Bank and international frameworks.',
+  },
+  {
+    name: 'Government & Public Sector',
+    desc: 'Secure, scalable systems aligned with Smart Government initiatives and data sovereignty requirements.',
+  },
+  {
+    name: 'Healthcare & Life Sciences',
+    desc: 'HL7 FHIR-compatible platforms, patient data security, and AI systems designed for clinical reliability.',
+  },
+  {
+    name: 'Logistics & Supply Chain',
+    desc: 'Real-time tracking systems, route optimisation, and warehouse management integrations at enterprise scale.',
+  },
+  {
+    name: 'PropTech & Real Estate',
+    desc: 'Property management platforms, digital transaction infrastructure, and AI-driven valuation and search tools.',
+  },
+  {
+    name: 'Professional Services',
+    desc: 'Client portals, document intelligence, workflow automation, and knowledge management systems for service-led organisations.',
+  },
+];
+
+const process = [
+  {
+    step: '01',
+    title: 'Initial Technical Brief',
+    desc: 'A structured conversation — not a sales call. We map your requirements, constraints, existing systems, and define measurable success criteria.',
+  },
+  {
+    step: '02',
+    title: 'Architecture Design',
+    desc: 'We produce a written technical proposal covering system design, stack decisions, security model, and a risk register before a line of code is written.',
+  },
+  {
+    step: '03',
+    title: 'Milestone Planning',
+    desc: 'Delivery is broken into fixed milestones with defined deliverables. You review and approve before we proceed to the next stage.',
+  },
+  {
+    step: '04',
+    title: 'Agile Engineering',
+    desc: 'Sprint-based development with weekly demos, continuous integration, and full decision documentation in every cycle.',
+  },
+  {
+    step: '05',
+    title: 'IP Transfer',
+    desc: 'Source code, infrastructure definitions, model weights, and runbooks are transferred to you at each milestone — not withheld until final payment.',
+  },
+  {
+    step: '06',
+    title: 'Handover or Retainer',
+    desc: 'Structured production handover with operational runbooks — or an ongoing engineering retainer for continued development and support.',
+  },
+];
+
+const faq = [
+  {
+    q: 'Do you work with companies outside the UAE?',
+    a: 'Yes. We work with clients globally. Our primary market is the UAE and wider GCC, but we deliver projects for organisations across Europe, Asia, and North America.',
+  },
+  {
+    q: 'What engagement sizes do you take on?',
+    a: 'We focus on substantive engagements — architecture-led projects, platform builds, and AI systems — rather than short-term feature work. We are best suited to clients with a serious technology investment to make.',
+  },
+  {
+    q: 'Do you sign NDAs before technical discussions?',
+    a: 'Yes, always. We sign a mutual NDA before any architecture conversation. Your systems, data, and business logic are confidential from the first meeting.',
+  },
+  {
+    q: 'What technology stacks do you work in?',
+    a: 'Our primary stack is .NET and Node.js on the backend, with cloud-native deployment across AWS, Azure, and GCP. For AI workloads we work across the major LLM providers and open-source model ecosystems.',
+  },
+  {
+    q: 'How do you handle IP and code ownership?',
+    a: 'Every deliverable — source code, infrastructure definitions, model weights, documentation — is transferred to you at each milestone. We retain no IP and have no platform lock-in.',
+  },
+];
+---
+
+<Base
+  title="IT Consultancy & Technology Engineering Services UAE | BuoyantSolutions"
+  description="Enterprise IT consultancy, custom software development, microservice architecture, SaaS platforms, RAG knowledge systems, and AI model training. Senior engineers. UAE and global."
+  canonical={canonical}
+  og={{
+    title: 'IT Consultancy & Technology Engineering Services | BuoyantSolutions',
+    description: 'End-to-end technology services for enterprises that cannot afford to fail — from IT strategy and architecture through to AI deployment.',
+    type: 'website',
+  }}
+>
+
+<!-- ════════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section class="relative bg-[#030B18] text-white overflow-hidden">
+  <div class="absolute inset-0 ob-dot-grid pointer-events-none" aria-hidden="true"></div>
+  <div class="ob-glow-right" aria-hidden="true"></div>
+
+  <div class="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 sm:py-32">
+    <div class="flex items-center gap-4 mb-12">
+      <span class="w-12 h-px bg-blue-400 shrink-0" aria-hidden="true"></span>
+      <p class="ob-overline">IT Consultancy &amp; Engineering Services</p>
+    </div>
+
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.95] tracking-[-0.04em] mb-8 max-w-4xl">
+      End-to-End Technology<br />
+      Services — From Strategy<br />
+      <span class="text-blue-400">Through to Production.</span>
+    </h1>
+
+    <p class="text-lg text-slate-400 max-w-2xl leading-relaxed mb-12">
+      We advise on your technology decisions and build the systems that follow from them. IT consultancy, custom software, microservice platforms, SaaS infrastructure, and AI — delivered by the same senior engineering team, start to finish.
+    </p>
+
+    <div class="flex flex-wrap gap-3">
+      {services.map((svc) => (
+        <a
+          href={`#${svc.id}`}
+          class="text-xs font-bold tracking-widest uppercase text-slate-400 border border-white/10 px-4 py-2 rounded hover:border-blue-400/40 hover:text-blue-300 transition-colors"
+        >
+          {svc.title}
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <div class="absolute bottom-0 inset-x-0 ob-rule" aria-hidden="true"></div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     SERVICES — DEEP DIVE
+════════════════════════════════════════════════════════ -->
+<section class="bg-white py-24 sm:py-32 px-6 sm:px-10 lg:px-16" aria-labelledby="services-heading">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex items-center gap-4 mb-14">
+      <span class="w-8 h-px bg-blue-500 shrink-0" aria-hidden="true"></span>
+      <p class="ob-overline" style="color:#3B82F6">Service Capabilities</p>
+    </div>
+
+    <h2 id="services-heading" class="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] text-slate-900 mb-4">
+      Full-Spectrum Technology Delivery
+    </h2>
+    <p class="text-slate-500 text-lg max-w-2xl mb-20 leading-relaxed">
+      Six integrated practice areas — from advisory through to production deployment — delivered under one roof by the same team.
+    </p>
+
+    <div class="space-y-0 divide-y divide-slate-100">
+      {services.map((svc) => (
+        <div id={svc.id} class="py-14 scroll-mt-24">
+          <div class="grid md:grid-cols-[72px_1fr] gap-6 md:gap-12">
+
+            <div class="pt-1">
+              <span class="font-mono text-sm font-bold text-blue-400">{svc.num}</span>
+            </div>
+
+            <div>
+              <h3 class="text-2xl font-bold text-slate-900 mb-4 leading-snug">{svc.title}</h3>
+              <p class="text-slate-500 leading-relaxed mb-8 max-w-3xl">{svc.brief}</p>
+
+              <div class="grid lg:grid-cols-[2fr_1fr] gap-12">
+                <div>
+                  <p class="text-xs font-bold tracking-widest uppercase text-slate-400 mb-5">Scope of delivery</p>
+                  <ul class="grid sm:grid-cols-2 gap-x-8 gap-y-2.5">
+                    {svc.outcomes.map((h) => (
+                      <li class="flex items-start gap-2.5 text-sm text-slate-600">
+                        <span class="w-1 h-1 rounded-full bg-blue-400 mt-2 shrink-0" aria-hidden="true"></span>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="bg-slate-50 rounded-lg p-6 self-start border border-slate-100">
+                  <p class="text-xs font-bold tracking-widest uppercase text-slate-400 mb-3">Best suited for</p>
+                  <p class="text-sm text-slate-600 leading-relaxed">{svc.forWho}</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     INDUSTRIES
+════════════════════════════════════════════════════════ -->
+<section class="bg-[#030B18] py-24 sm:py-32 px-6 sm:px-10 lg:px-16 text-white" aria-labelledby="industries-heading">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex items-center gap-4 mb-14">
+      <span class="w-8 h-px bg-blue-400 shrink-0" aria-hidden="true"></span>
+      <p class="ob-overline">Sectors</p>
+    </div>
+
+    <h2 id="industries-heading" class="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] mb-5">
+      Industries We Serve
+    </h2>
+    <p class="text-slate-400 text-lg max-w-2xl mb-20 leading-relaxed">
+      Our work spans regulated industries and high-stakes environments where technology failure has real consequences.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/5 border border-white/5 rounded-xl overflow-hidden">
+      {industries.map((ind) => (
+        <div class="bg-[#030B18] p-8 hover:bg-[#0A1628] transition-colors">
+          <h3 class="font-bold text-white text-base mb-3 leading-snug">{ind.name}</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">{ind.desc}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PROCESS
+════════════════════════════════════════════════════════ -->
+<section class="bg-white py-24 sm:py-32 px-6 sm:px-10 lg:px-16" aria-labelledby="process-heading">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex items-center gap-4 mb-14">
+      <span class="w-8 h-px bg-blue-500 shrink-0" aria-hidden="true"></span>
+      <p class="ob-overline" style="color:#3B82F6">Engagement Model</p>
+    </div>
+
+    <h2 id="process-heading" class="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] text-slate-900 mb-5">
+      How an Engagement Works
+    </h2>
+    <p class="text-slate-500 text-lg max-w-2xl mb-20 leading-relaxed">
+      A structured process designed around accountability, transparency, and clean IP transfer at every stage.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-10">
+      {process.map((p) => (
+        <div>
+          <div class="w-full h-px bg-blue-500/20 mb-8" aria-hidden="true"></div>
+          <span class="font-mono text-xs font-bold text-blue-500 block mb-5">{p.step}</span>
+          <h3 class="font-bold text-base text-slate-900 mb-3 leading-snug">{p.title}</h3>
+          <p class="text-sm text-slate-500 leading-relaxed">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     FAQ
+════════════════════════════════════════════════════════ -->
+<section class="bg-[#030B18] py-24 sm:py-32 px-6 sm:px-10 lg:px-16 text-white" aria-labelledby="faq-heading">
+  <div class="max-w-4xl mx-auto">
+
+    <div class="flex items-center gap-4 mb-14">
+      <span class="w-8 h-px bg-blue-400 shrink-0" aria-hidden="true"></span>
+      <p class="ob-overline">Common Questions</p>
+    </div>
+
+    <h2 id="faq-heading" class="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] mb-16">
+      Before You Reach Out
+    </h2>
+
+    <div class="space-y-0 divide-y divide-white/5">
+      {faq.map((item) => (
+        <div class="py-8">
+          <h3 class="font-bold text-white text-lg mb-3 leading-snug">{item.q}</h3>
+          <p class="text-slate-400 leading-relaxed">{item.a}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     CTA
+════════════════════════════════════════════════════════ -->
+<section class="relative bg-white py-28 px-6 sm:px-10 lg:px-16 text-center overflow-hidden border-t border-slate-100">
+  <div class="relative max-w-2xl mx-auto">
+    <p class="ob-overline mb-10 block" style="color:#3B82F6">Start the conversation</p>
+    <h2 class="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] text-slate-900 mb-8 leading-tight">
+      Tell Us What<br />You're Building.
+    </h2>
+    <p class="text-slate-500 text-lg mb-12 leading-relaxed">
+      We'll respond with a written technical assessment within 48 hours.<br class="hidden sm:block" />
+      No sales calls. No demos. Just engineering.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a
+        href="/contact"
+        class="inline-flex items-center justify-center gap-2 px-10 py-4 bg-blue-500 text-white font-bold text-sm tracking-wide rounded hover:bg-blue-600 transition-colors"
+      >
+        Get in Touch
+      </a>
+      <a
+        href={waHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center justify-center px-10 py-4 border border-slate-200 text-slate-500 font-medium text-sm rounded hover:border-slate-400 hover:text-slate-700 transition-colors"
+      >
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+</section>
+
+</Base>

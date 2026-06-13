@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { product, variant, city } = Astro.props;
-const phone = import.meta.env.WHATSAPP_NUMBER ?? '971500000000';
+const phone = import.meta.env.WHATSAPP_NUMBER ?? '97152895506';
 
 const href = product && city
   ? buildProductWhatsAppLink({ product, variant, city, phoneNumber: phone })

@@ -9,12 +9,14 @@
  *  1 → Bold Orange        (#E07020)  — feature/theme-update
  *  2 → Forest Green       (#3A7D40)  — feature/theme-update-2
  *  3 → Burnt Amber        (#C8693A)  — feature/theme-update-3
- *  4 → Sandy Gold         (#C9A66B)  — feature/theme-update-4  ← current
+ *  4 → Sandy Gold         (#C9A66B)  — feature/theme-update-4
+ *  5 → Navy Primary + Teal Secondary (#0B1F3B + #0D7377)  ← current
  *
  * All themes share Deep Navy (#0B1F3B) as the dark structural colour (themes 1-4).
  * Theme 0 uses the original Charcoal (#1C2028) as dark colour.
+ * Theme 5 uses Teal (#0D7377) with Navy as the primary accent.
  */
-export const ACTIVE_THEME = 1 as 0 | 1 | 2 | 3 | 4;
+export const ACTIVE_THEME = 5 as 0 | 1 | 2 | 3 | 4 | 5;
 
 /** true → photo background cards  |  false → SVG icon cards */
 export const CATEGORY_PHOTO_CARDS = true;
@@ -50,8 +52,11 @@ export const BROWSE_IN_TICKER = true;
  */
 export const HERO_PRINTER_BG = true;
 
+/** true → show Products section in navigation  |  false → hide Products */
+export const SHOW_PRODUCTS = false;
+
 /** true → show Campaigns section in navigation  |  false → hide Campaigns */
 export const SHOW_CAMPAIGNS = false;
 
 /** true → show Services section in navigation  |  false → hide Services */
-export const SHOW_SERVICES = false;
+export const SHOW_SERVICES = true;

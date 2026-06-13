@@ -5,145 +5,275 @@ const siteUrl = import.meta.env.SITE ?? '';
 const canonical = `${siteUrl}/about`;
 
 const stats = [
-  { value: '10+', label: 'Years in UAE' },
-  { value: '2,500+', label: 'Happy Clients' },
-  { value: '50,000+', label: 'Orders Delivered' },
-  { value: '7', label: 'Emirates Served' },
+  { value: '35+', label: 'Years combined experience',  sub: 'Across enterprise software, cloud, and AI' },
+  { value: '48h', label: 'To written proposal',        sub: 'From first conversation to technical brief' },
+  { value: '100%', label: 'IP transferred to you',    sub: 'At every milestone — no retention, no lock-in' },
+  { value: '1',   label: 'Point of contact',           sub: 'The engineer on your project owns it end-to-end' },
 ];
 
-const values = [
+const principles = [
   {
-    title: 'Quality First',
-    body: 'Every product leaves our facility only after passing a multi-point quality check — from colour accuracy to material finish.',
-    icon: '✔',
+    num: '01',
+    title: 'Architecture before code.',
+    body: 'We write the design document, threat model, and milestone plan before a line of code is written. Every technical decision is justified in writing — so you understand what we are building and why.',
   },
   {
-    title: 'Fast Turnaround',
-    body: 'We know deadlines matter. Our 24-hour standard turnaround and same-day express option keep your campaigns on track.',
-    icon: '⚡',
+    num: '02',
+    title: 'Senior engineers only.',
+    body: 'Every engagement is led and delivered by engineers with deep enterprise experience. There are no juniors on client work, no handoffs to a delivery team, and no bait-and-switch after the contract is signed.',
   },
   {
-    title: 'UAE-Rooted Expertise',
-    body: 'Over a decade serving Dubai, Abu Dhabi, Sharjah and beyond. We understand local markets, languages and event calendars.',
-    icon: '📍',
+    num: '03',
+    title: 'You own everything.',
+    body: 'Source code, infrastructure definitions, model weights, runbooks, and documentation are transferred to you at each milestone. We retain no IP and engineer no platform dependency.',
   },
   {
-    title: 'Full-Range Partner',
-    body: 'One supplier for print, apparel, merchandise and digital — simplifying procurement for marketing teams and agencies.',
-    icon: '🤝',
+    num: '04',
+    title: 'We build what we recommend.',
+    body: 'Our consultancy and engineering practice are the same team. When we advise on a technology choice or architecture pattern, we are the people who will deliver it — and stand behind it in production.',
+  },
+  {
+    num: '05',
+    title: 'Production is the standard.',
+    body: 'Security controls, audit logging, compliance posture, and observability are built into the architecture from the first sprint — not added before a procurement review or after the first incident.',
+  },
+  {
+    num: '06',
+    title: 'Accountability without bureaucracy.',
+    body: 'One engineer owns your project end-to-end. You have direct access to the person writing your code — not an account manager relaying messages to a team you never meet.',
   },
 ];
 
-const team = [
-  { name: 'Ahmed Al Mansoori', role: 'Founder & CEO', bio: "Built the business from a single print machine in Dubai's Al Quoz to a full-service marketing products hub." },
-  { name: 'Priya Sharma', role: 'Head of Production', bio: 'Oversees quality control and production scheduling across all product lines.' },
-  { name: 'James Okafor', role: 'Client Success Manager', bio: 'Ensures every client — from SMEs to enterprise — gets a smooth, on-time experience.' },
+const expertise = [
+  { area: '.NET & Enterprise Backend', detail: '15+ years each across financial services, government, and enterprise SaaS platforms' },
+  { area: 'Node.js & API Engineering', detail: '6+ years building high-throughput APIs, microservice meshes, and real-time data systems' },
+  { area: 'Cloud & Infrastructure', detail: 'AWS, Azure, and GCP — production deployments with Kubernetes, Terraform, and GitOps pipelines' },
+  { area: 'AI & Machine Learning', detail: 'RAG systems, LLM fine-tuning, and MLOps tooling for production AI deployment' },
+];
+
+const emirates = [
+  { name: 'Dubai', desc: 'DIFC, Dubai Internet City, and mainland enterprise clients across technology, finance, and logistics sectors.' },
+  { name: 'Abu Dhabi', desc: 'ADGM-registered entities, government technology programmes, and energy sector digital transformation.' },
+  { name: 'Sharjah', desc: 'Industrial and manufacturing sector digitisation, ERP integrations, and supply chain technology.' },
+  { name: 'Ajman & Northern Emirates', desc: 'SME technology modernisation, ERP implementations, and cloud migration for growing businesses.' },
+  { name: 'Ras Al Khaimah', dest: 'Manufacturing, logistics, and tourism sector platforms serving the emirate\'s growth agenda.' },
+  { name: 'GCC & Global', desc: 'Remote-first delivery model enables us to serve clients across Saudi Arabia, Kuwait, Bahrain, and internationally.' },
 ];
 ---
 
 <Base
-  title="About Us — Marketing Products UAE"
-  description="Learn about our 10+ year journey supplying premium customised marketing products across the UAE and GCC. Meet the team behind the quality."
+  title="About BuoyantSolutions — Enterprise IT Consultancy & Software Engineering UAE"
+  description="BuoyantSolutions is a UAE-based enterprise technology consultancy and software engineering firm. Senior engineers delivering IT strategy, custom software, AI systems, and microservice architecture across Dubai, Abu Dhabi, Sharjah, and the wider GCC."
   canonical={canonical}
   og={{
-    title: 'About Us — Marketing Products UAE',
-    description: 'Over a decade of delivering premium customised marketing products across Dubai, Abu Dhabi, Sharjah and the wider GCC.',
-    image: '/images/og/about.png',
+    title: 'About BuoyantSolutions — Enterprise IT Consultancy UAE',
+    description: 'Senior engineers delivering enterprise technology — IT consultancy, custom software, AI systems, and microservice architecture. UAE-headquartered, globally delivered.',
     type: 'website',
   }}
 >
 
-  <!-- Hero -->
-  <section class="bg-[var(--color-brand-charcoal)] text-white">
-    <div class="max-w-5xl mx-auto px-4 py-20 sm:py-28">
-      <div class="border-l-4 border-[var(--color-brand-accent)] pl-6">
-        <p class="text-sm uppercase tracking-widest text-[var(--color-brand-accent)] mb-3 font-semibold">Our Story</p>
-        <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight mb-6">
-          UAE's Trusted Partner for<br />
-          <span class="text-[var(--color-brand-accent)]">Marketing Products</span>
-        </h1>
-        <p class="text-lg text-gray-300 max-w-2xl">
-          Since 2014 we have been helping businesses across the UAE stand out — from startup visiting cards to large-scale trade show giveaways for Fortune 500 brands.
-        </p>
-      </div>
-    </div>
-  </section>
+<!-- ════════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════ -->
+<section class="relative bg-[#030B18] text-white overflow-hidden">
+  <div class="absolute inset-0 ob-dot-grid pointer-events-none" aria-hidden="true"></div>
+  <div class="ob-glow-right" aria-hidden="true"></div>
 
-  <!-- Stats bar -->
-  <section class="bg-[var(--color-brand-accent)] text-white">
-    <div class="max-w-5xl mx-auto px-4 py-8">
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
-        {stats.map((s) => (
-          <div>
-            <p class="text-3xl font-extrabold">{s.value}</p>
-            <p class="text-sm mt-1 opacity-90">{s.label}</p>
-          </div>
-        ))}
-      </div>
+  <div class="relative max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-24 sm:py-32">
+    <div class="flex items-center gap-4 mb-12">
+      <span class="w-12 h-px bg-blue-400 shrink-0" aria-hidden="true"></span>
+      <p class="ob-overline">About BuoyantSolutions</p>
     </div>
-  </section>
 
-  <!-- Story prose -->
-  <section class="max-w-3xl mx-auto px-4 py-16 sm:py-20">
-    <h2 class="text-2xl sm:text-3xl font-bold mb-6">From One Machine to a Full-Service Hub</h2>
-    <div class="prose prose-lg max-w-none text-gray-700 space-y-5">
-      <p>
-        It started in 2014 with a single digital press in Al Quoz, Dubai and a simple promise: deliver quality marketing materials faster than anyone else in the city. Within a year, word spread across the business community and we outgrew our first unit.
-      </p>
-      <p>
-        Today we operate a 12,000 sq ft production facility equipped with UV flatbed, large-format, embroidery, laser engraving and sublimation lines. Our clients include local SMEs, regional agencies, government entities and multinational corporations with offices across the GCC.
-      </p>
-      <p>
-        What has not changed is our commitment to the UAE business community. Every order — whether it is 50 visiting cards or 10,000 branded T-shirts — gets the same attention to detail we built our reputation on.
-      </p>
-    </div>
-  </section>
+    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.95] tracking-[-0.04em] mb-8 max-w-4xl">
+      Enterprise Technology,<br />
+      Delivered by the Engineers<br />
+      <span class="text-blue-400">Who Design It.</span>
+    </h1>
 
-  <!-- Values -->
-  <section class="bg-[var(--color-brand-cream)] py-16 sm:py-20">
-    <div class="max-w-5xl mx-auto px-4">
-      <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12">What Drives Us</h2>
-      <div class="grid sm:grid-cols-2 gap-8">
-        {values.map((v) => (
-          <div class="bg-white rounded-xl p-8 shadow-sm border border-gray-100 hover:border-[var(--color-brand-accent)] transition-colors">
-            <p class="text-3xl mb-4">{v.icon}</p>
-            <h3 class="text-lg font-bold mb-2">{v.title}</h3>
-            <p class="text-gray-600 text-sm leading-relaxed">{v.body}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
+    <p class="text-lg text-slate-400 max-w-2xl leading-relaxed">
+      BuoyantSolutions is a UAE-based technology consultancy and engineering firm. We advise on IT strategy, architect systems, and build production software — with the same senior team responsible for every stage of your engagement.
+    </p>
+  </div>
 
-  <!-- Team -->
-  <section class="max-w-5xl mx-auto px-4 py-16 sm:py-20">
-    <h2 class="text-2xl sm:text-3xl font-bold text-center mb-12">Meet the Team</h2>
-    <div class="grid sm:grid-cols-3 gap-8">
-      {team.map((m) => (
-        <div class="text-center">
-          <div class="w-20 h-20 rounded-full bg-[var(--color-brand-accent)] text-white flex items-center justify-center text-2xl font-extrabold mx-auto mb-4">
-            {m.name.charAt(0)}
-          </div>
-          <h3 class="font-bold text-lg">{m.name}</h3>
-          <p class="text-[var(--color-brand-accent)] text-sm font-semibold mb-2">{m.role}</p>
-          <p class="text-gray-600 text-sm leading-relaxed">{m.bio}</p>
+  <div class="absolute bottom-0 inset-x-0 ob-rule" aria-hidden="true"></div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     STATS
+════════════════════════════════════════════════════════ -->
+<section class="bg-white border-b border-slate-100" aria-label="Key metrics">
+  <div class="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-16">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-16">
+      {stats.map((s) => (
+        <div>
+          <p class="text-4xl font-extrabold text-slate-900 tracking-[-0.04em] mb-1">{s.value}</p>
+          <p class="text-sm font-semibold text-slate-700 mb-1">{s.label}</p>
+          <p class="text-xs text-slate-400 leading-relaxed">{s.sub}</p>
         </div>
       ))}
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CTA -->
-  <section class="bg-[var(--color-brand-charcoal)] text-white py-16">
-    <div class="max-w-2xl mx-auto px-4 text-center">
-      <h2 class="text-2xl sm:text-3xl font-bold mb-4">Ready to Work Together?</h2>
-      <p class="text-gray-300 mb-8">Get in touch for a free consultation and quote. We respond within the hour during business hours.</p>
+
+<!-- ════════════════════════════════════════════════════════
+     WHO WE ARE
+════════════════════════════════════════════════════════ -->
+<section class="bg-white py-24 sm:py-32 px-6 sm:px-10 lg:px-16" aria-labelledby="story-heading">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-start">
+
+    <div>
+      <div class="flex items-center gap-4 mb-10">
+        <span class="w-8 h-px bg-blue-500 shrink-0" aria-hidden="true"></span>
+        <p class="ob-overline" style="color:#3B82F6">Our Story</p>
+      </div>
+
+      <h2 id="story-heading" class="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] text-slate-900 mb-10 leading-tight">
+        Built by Engineers.<br />Run by Engineers.
+      </h2>
+
+      <div class="space-y-6 text-slate-500 leading-relaxed">
+        <p>
+          BuoyantSolutions was founded by senior engineers who spent their careers inside enterprise technology — delivering systems for banks, government entities, and scale-up platforms across the region and internationally.
+        </p>
+        <p>
+          We saw the same pattern repeatedly: large consultancies winning work on the strength of their brand, then staffing projects with junior developers while the senior partners moved to the next sale. The client pays enterprise rates; they receive graduate-level execution.
+        </p>
+        <p>
+          We built BuoyantSolutions to offer a different model. No account managers. No junior staffing. No discovery calls that produce a 60-page deck and no deliverable. Just senior engineers who advise on your technology decisions and then build what they recommend — with full IP transfer at every milestone.
+        </p>
+        <p>
+          We are headquartered in the UAE and serve clients across Dubai, Abu Dhabi, Sharjah, Ajman, Ras Al Khaimah, and internationally — operating as a remote-first team without the overhead that drives up consulting day rates.
+        </p>
+      </div>
+    </div>
+
+    <div>
+      <div class="flex items-center gap-4 mb-10">
+        <span class="w-8 h-px bg-blue-500 shrink-0" aria-hidden="true"></span>
+        <p class="ob-overline" style="color:#3B82F6">Technical Expertise</p>
+      </div>
+
+      <h2 class="text-2xl font-extrabold tracking-[-0.03em] text-slate-900 mb-10">
+        The Founding Team
+      </h2>
+
+      <div class="space-y-0 divide-y divide-slate-100">
+        {expertise.map((e) => (
+          <div class="py-7">
+            <h3 class="font-bold text-slate-900 text-base mb-2">{e.area}</h3>
+            <p class="text-sm text-slate-500 leading-relaxed">{e.detail}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-10 bg-slate-50 border border-slate-100 rounded-lg p-6">
+        <p class="text-xs font-bold tracking-widest uppercase text-slate-400 mb-3">Combined experience</p>
+        <p class="text-3xl font-extrabold text-slate-900 tracking-tight mb-1">35+ years</p>
+        <p class="text-sm text-slate-500">Across enterprise .NET, Node.js, cloud infrastructure, and AI systems — with production deployments in regulated industries.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PRINCIPLES
+════════════════════════════════════════════════════════ -->
+<section class="bg-[#030B18] py-24 sm:py-32 px-6 sm:px-10 lg:px-16 text-white" aria-labelledby="principles-heading">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex items-center gap-4 mb-14">
+      <span class="w-8 h-px bg-blue-400 shrink-0" aria-hidden="true"></span>
+      <p class="ob-overline">How We Work</p>
+    </div>
+
+    <h2 id="principles-heading" class="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] mb-5">
+      Our Engineering Principles
+    </h2>
+    <p class="text-slate-400 text-lg max-w-2xl mb-20 leading-relaxed">
+      The commitments that govern every engagement — from the first technical conversation through to production handover.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-0 divide-y divide-white/5 sm:divide-y-0">
+      {principles.map((p) => (
+        <div class="py-10 sm:py-0 sm:border-t sm:border-white/5 sm:pt-10 sm:mb-16">
+          <span class="font-mono text-xs font-bold text-blue-400 block mb-6">{p.num}</span>
+          <h3 class="font-bold text-white text-lg mb-4 leading-snug">{p.title}</h3>
+          <p class="text-slate-400 text-sm leading-relaxed">{p.body}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     UAE COVERAGE
+════════════════════════════════════════════════════════ -->
+<section class="bg-white py-24 sm:py-32 px-6 sm:px-10 lg:px-16" aria-labelledby="uae-heading">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex items-center gap-4 mb-14">
+      <span class="w-8 h-px bg-blue-500 shrink-0" aria-hidden="true"></span>
+      <p class="ob-overline" style="color:#3B82F6">UAE & GCC Coverage</p>
+    </div>
+
+    <h2 id="uae-heading" class="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] text-slate-900 mb-5">
+      Serving All Seven Emirates
+    </h2>
+    <p class="text-slate-500 text-lg max-w-2xl mb-20 leading-relaxed">
+      We work with enterprises, government entities, and scale-ups across the UAE — and internationally through our remote-first delivery model.
+    </p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-100 border border-slate-100 rounded-xl overflow-hidden">
+      {emirates.map((e) => (
+        <div class="bg-white p-8">
+          <h3 class="font-bold text-slate-900 text-base mb-3">{e.name}</h3>
+          <p class="text-slate-500 text-sm leading-relaxed">{e.desc ?? e.dest}</p>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════════════════
+     CTA
+════════════════════════════════════════════════════════ -->
+<section class="relative bg-[#030B18] py-28 px-6 sm:px-10 lg:px-16 text-center overflow-hidden">
+  <div class="ob-glow-center" aria-hidden="true"></div>
+  <div class="absolute top-0 inset-x-0 ob-rule" aria-hidden="true"></div>
+
+  <div class="relative max-w-2xl mx-auto">
+    <p class="ob-overline mb-10 block">Work with us</p>
+    <h2 class="text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] text-white mb-8 leading-tight">
+      Tell Us What<br />You're Building.
+    </h2>
+    <p class="text-slate-400 text-lg mb-12 leading-relaxed">
+      We respond with a written technical assessment within 48 hours.<br class="hidden sm:block" />
+      No sales calls. No demos. Just engineering.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
       <a
         href="/contact"
-        class="inline-block bg-[var(--color-brand-accent)] hover:bg-[var(--color-brand-accent-dark)] text-white font-semibold px-8 py-4 rounded-lg transition-colors text-lg"
+        class="inline-flex items-center justify-center gap-2 px-10 py-4 bg-blue-500 text-white font-bold text-sm tracking-wide rounded hover:bg-blue-600 transition-colors"
       >
-        Contact Us
+        Get in Touch
+      </a>
+      <a
+        href="/services/it-ai"
+        class="inline-flex items-center justify-center px-10 py-4 border border-white/10 text-slate-400 font-medium text-sm rounded hover:border-white/20 hover:text-slate-200 transition-colors"
+      >
+        View Capabilities
       </a>
     </div>
-  </section>
+  </div>
+</section>
 
 </Base>

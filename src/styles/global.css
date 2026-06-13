@@ -1,19 +1,35 @@
 /* Plus Jakarta Sans variable font */
 @import "@fontsource-variable/plus-jakarta-sans";
 
+/* Glacial Indifference — brand wordmark */
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/fonts/GlacialIndifference-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Glacial Indifference';
+  src: url('/fonts/GlacialIndifference-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Tailwind CSS v4 */
 @import "tailwindcss";
 
 /* ── Design Tokens ─────────────────────────────────────── */
 @theme {
-  /* Brand colours — Navy + Sandy Gold (Print Company) */
-  --color-brand-accent:         #C9A66B;   /* Sandy Gold — CTAs, headlines */
-  --color-brand-accent-light:   #DFC08A;   /* Warm Sand — hover fills, tints */
-  --color-brand-accent-dark:    #A0804A;   /* Deep Tan — pressed/active states */
-  --color-brand-charcoal:       #0B1F3B;   /* Deep Navy — text, dark sections */
-  --color-brand-charcoal-light: #1A3A5C;   /* Mid Navy — secondary dark */
-  --color-brand-cream:          #FBF8F0;   /* Gold-tinted ivory — alt section bg */
-  --color-brand-cream-dark:     #F5EDD8;   /* Warm parchment — deeper alt bg */
+  /* Brand colours — Obsidian: deep-space dark + electric blue */
+  --color-brand-accent:         #3B82F6;   /* Blue-500 — CTAs, overlines, hover */
+  --color-brand-accent-light:   #60A5FA;   /* Blue-400 — labels, dim accent */
+  --color-brand-accent-dark:    #2563EB;   /* Blue-600 — pressed, active */
+  --color-brand-charcoal:       #030B18;   /* Void — dark section backgrounds */
+  --color-brand-charcoal-light: #0A1628;   /* Surface — elevated dark panels */
+  --color-brand-cream:          #FFFFFF;   /* Pure white — light sections */
+  --color-brand-cream-dark:     #F8FAFC;   /* Slate-50 — subtle alt bg */
 
   /* Typography */
   --font-family-sans:    "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
@@ -207,3 +223,75 @@ html[data-theme="4"] {
   --input:               38 20% 88%;
   --ring:                38 47% 60%;
 }
+
+/* Theme 5 — Obsidian: deep-space dark + electric blue (active) */
+html[data-theme="5"] {
+  --color-brand-accent:         #3B82F6;
+  --color-brand-accent-light:   #60A5FA;
+  --color-brand-accent-dark:    #2563EB;
+  --color-brand-charcoal:       #030B18;
+  --color-brand-charcoal-light: #0A1628;
+  --color-brand-cream:          #FFFFFF;
+  --color-brand-cream-dark:     #F8FAFC;
+  /* shadcn bridge */
+  --foreground:          222 47% 11%;
+  --card-foreground:     222 47% 11%;
+  --popover-foreground:  222 47% 11%;
+  --primary:             217 91% 60%;
+  --secondary:           214 32% 91%;
+  --secondary-foreground:222 47% 11%;
+  --muted:               214 32% 91%;
+  --muted-foreground:    215 16% 47%;
+  --accent:              217 91% 60%;
+  --border:              214 20% 88%;
+  --input:               214 20% 88%;
+  --ring:                217 91% 60%;
+}
+
+/* ── Obsidian Design System Utilities ───────────────────── */
+
+/* Dot-grid background used on dark hero/section backgrounds */
+.ob-dot-grid {
+  background-image: radial-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+/* Subtle blue radial glow — placed as an absolute child */
+.ob-glow-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle at 70% 25%, rgba(59, 130, 246, 0.09) 0%, transparent 65%);
+  transform: translateX(20%);
+  pointer-events: none;
+}
+
+/* Centered glow variant for CTA sections */
+.ob-glow-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Section overline label */
+.ob-overline {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #60A5FA;
+}
+
+/* Thin horizontal rule between dark and light sections */
+.ob-rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(148, 163, 184, 0.12), transparent);
+}
+
