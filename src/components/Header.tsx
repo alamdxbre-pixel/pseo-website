@@ -187,7 +187,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
               href="/marketing"
               className="px-4 py-2 text-[11px] font-bold tracking-[0.2em] uppercase rounded-full bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 text-white shadow-lg shadow-fuchsia-500/30 hover:shadow-fuchsia-500/60 hover:scale-105 transition-all duration-200"
             >
-              Buoyant Marketing &rarr;
+              Buoyant Advertising &amp; Marketing &rarr;
             </a>
             <a
               href="/contact"
@@ -261,7 +261,7 @@ export default function Header({ currentPath = '/' }: HeaderProps) {
             onClick={() => setMobileOpen(false)}
             className="flex items-center justify-center gap-2 w-full px-4 py-3 border border-blue-500/20 text-blue-400/70 text-xs font-bold tracking-widest uppercase rounded hover:border-blue-500/40 hover:text-blue-400 transition-colors"
           >
-            Switch to Buoyant Marketing
+            Buoyant Advertising &amp; Marketing
             <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
